@@ -19,7 +19,7 @@ pipeline {
         stage('Setup Selenium Server HUB') {
             steps {
                 echo 'Setting up Selenium server HUB...'
-                bat "start /B java -jar selenium-server.jar hub"
+                bat "start /B java -jar selenium-server.jar hub --port 4445"
                 // Delay for 10 seconds
                 bat 'ping 127.0.0.1 -n 11 > nul' // Windows command to sleep for 10 seconds
             }
@@ -32,23 +32,7 @@ pipeline {
                 bat 'ping 127.0.0.1 -n 11 > nul' // Windows command to sleep for 10 seconds
             }
         }
-        stage('Check Directory and File') {
-    steps {
-        script {
-                // For Windows Batch Command
-                bat """
-                echo Checking directory...
-                dir
-                echo Checking if tests_runner.py exists...
-                if exist tests/tests_runner.py (
-                    echo tests_runner.py exists
-                ) else (
-                    echo tests_runner.py does not exist
-                )
-                """
-            }
-        }
-    }
+
 
 
         stage('Run Tests with Pytest') {
