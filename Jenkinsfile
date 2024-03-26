@@ -21,14 +21,14 @@ pipeline {
                 script {
                     parallel(
                         'web Test': {
-                            bat "docker run --name web_test_container ${IMAGE_NAME}:${TAG} python -m tests/tests_runner.py"
+                            bat "docker run --name web_test_container ${IMAGE_NAME}:${TAG} python  tests/tests_runner.py"
                             bat "docker stop web_test_container"
                             bat "docker rm web_test_container"
                         },
                         'another Test': {
                             // Placeholder for an additional test suite
                             // Update the container name and test script as necessary
-                            bat "docker run --name another_test_container ${IMAGE_NAME}:${TAG} python -m tests/another_tests_runner.py"
+                            bat "docker run --name another_test_container ${IMAGE_NAME}:${TAG} python  tests/another_tests_runner.py"
                             bat "docker stop another_test_container"
                             bat "docker rm another_test_container"
                         },
