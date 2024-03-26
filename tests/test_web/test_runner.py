@@ -31,7 +31,8 @@ class ContinueTestResult(unittest.TextTestResult):
         error_msg = str(err[1])
         self.api_wrapper.create_issue(f"{test.id()} failed at {self.current_time}", error_msg, "FAP")
 '''
-
+def test_aa():
+    print("AAA")
 def run_individual_test(test,cap=None):
     browser_wrapper.get_driver(cap)
     test.browser=browser_wrapper

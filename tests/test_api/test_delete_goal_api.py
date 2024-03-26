@@ -11,12 +11,9 @@ from logic.web_logic.welcome_page import WelcomePage
 
 class TestDeleteGoalAPI(unittest.TestCase):
     def setUp(self):
+        self.test_cases=[self.test_delete_goal_api]
         self.goals_api = GoalsAPI()
-        #self.browser = BrowserWrapper()
-        #if self.browser.config["grid"]:
-        #    self.browser.build_cap()
-        #else:
-        #    self.browser.run_single_browser()
+        self.browser = BrowserWrapper()
         #self.driver = self.browser._driver
         self.welcome_page = WelcomePage(self.driver)
         self.welcome_page.click_log_in()
@@ -30,6 +27,17 @@ class TestDeleteGoalAPI(unittest.TestCase):
         self.courses_levels = ["Professional", "Beginner", "Beginner"]
         self.hours_weekly = 8
         self.goals_web.set_goal_in_web(self.goal_name, self.chosen_skills, self.courses_levels, self.hours_weekly)
+
+    def test_run(self):
+        if self.browser.config["grid"]:
+            self.browser.build_cap()
+            if self.browser.config["grid type"]=="serial":
+                self.browser.test_grid_serial(self.test_cases)
+
+            if self.browser.config["grid type"]=="parallel":
+                self.browser.test_grid_parallel(self.test_cases)
+        else:
+            self.browser.run_single_browser(self.test_cases,self.browser.config["browser"])
 
     def test_delete_goal_api(self):
         goal_id_before_deleting=self.goals_api.get_goal_id()

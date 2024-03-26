@@ -4,7 +4,6 @@ from concurrent import futures
 from pathlib import Path
 
 from jira import JIRA
-from selenium.webdriver.chrome.options import Options
 from selenium import webdriver
 import json
 
@@ -28,20 +27,11 @@ class BrowserWrapper:
 
     def get_driver(self,caps=None,user=None):
 
-        if self.config["grid"]:
-                self._driver = webdriver.Remote(command_executor=self.hub_url, options=caps)
-        else:
-            self.run_single_browser()
+        self._driver = webdriver.Remote(command_executor=self.hub_url, options=caps)
         self._driver.get(self.config["url"])
         self._driver.maximize_window()
 
     def build_cap(self):
-        #proxy_ip = 'localhost'  # Default ZAP Proxy IP
-        #proxy_port = '8081'  # Default ZAP Proxy Port
-        #zap_proxy = f"{proxy_ip}:{proxy_port}"
-
-        #self.chrome_cap.add_argument(f'--proxy-server={zap_proxy}')
-        #self.chrome_cap.add_argument('--ignore-certificate-errors')
 
         self.firfox_cap=webdriver.FirefoxOptions()
         self.firfox_cap.capabilities['platformName'] = 'Windows'
@@ -69,6 +59,7 @@ class BrowserWrapper:
 
     def run_test_case(self,test_case, caps=None):
         self.get_driver(caps,self.user)
+        test_case.driver=self._driver
 
 
     def run_single_browser(self,test_case=None):
