@@ -7,12 +7,12 @@ import unittest
 import logging
 from infra.infra_api.api_wrapper import APIWrapper
 from infra.infra_web.browser_wrapper import BrowserWrapper
-from tests.api_tests.test_delete_goal_api import TestDeleteGoalAPI
-from tests.api_tests.test_goals_api import TestGoalsAPI
-from tests.api_tests.test_update_goal_api import TestUpdateGoalAPI
-from tests.web_tests.test_goals_web import TestGoalsWeb
-from tests.web_tests.test_delete_goal_web import TestDeleteGoalWeb
-from tests.web_tests.test_update_goal_web import TestUpdateGoalWeb
+from tests.test_api.test_delete_goal_api import TestDeleteGoalAPI
+from tests.test_api.test_goals_api import TestGoalsAPI
+from tests.test_api.test_update_goal_api import TestUpdateGoalAPI
+from tests.test_web.test_goals_web import TestGoalsWeb
+from tests.test_web.test_delete_goal_web import TestDeleteGoalWeb
+from tests.test_web.test_update_goal_web import TestUpdateGoalWeb
 
 
 class ContinueTestResult(unittest.TextTestResult):
