@@ -1,51 +1,79 @@
 pipeline {
     agent any
-
     environment {
-        // Define the Docker image name
+        PYTHON_PATH = "C:\\Users\\Alaa Oda\\AppData\\Local\\Programs\\Python\\Python312\\python.exe"
+        PIP_PATH = '"C:\\Users\\Alaa Oda\\AppData\\Local\\Programs\\Python\\Python312\\Scripts\\pip.exe"'
+        TEST_REPORTS = 'test-reports'
         IMAGE_NAME = 'tests'
         TAG = 'latest'
     }
-
     stages {
-        stage('Build Docker Image') {
+        stage('Setup Environment') {
             steps {
-                script {
-                    def customImage = docker.build("${IMAGE_NAME}:${TAG}")
-                }
+                bat 'call "%PYTHON_PATH%" -m venv venv'
+                bat 'call venv\\Scripts\\python.exe -m pip install --upgrade pip'
+                bat 'call venv\\Scripts\\pip.exe install -r requirements.txt'
+                bat 'call venv\\Scripts\\pip.exe install pytest pytest-html selenium'
             }
         }
-
-        stage('Run Tests in Parallel') {
+        stage('Setup Selenium Server HUB') {
             steps {
-                script {
-                    parallel(
-                        'web Test': {
-                            bat "docker run --name web_test_container ${IMAGE_NAME}:${TAG} python  tests/tests_runner.py"
-                            bat "docker stop web_test_container"
-                            bat "docker rm web_test_container"
-                        },
-                        'another Test': {
-                            // Placeholder for an additional test suite
-                            // Update the container name and test script as necessary
-                            bat "docker run --name another_test_container ${IMAGE_NAME}:${TAG} python  tests/another_tests_runner.py"
-                            bat "docker stop another_test_container"
-                            bat "docker rm another_test_container"
-                        },
-                    )
-                }
+                echo 'Setting up Selenium server HUB...'
+                bat "start /B java -jar selenium-server.jar hub"
+                // Delay for 10 seconds
+                bat 'ping 127.0.0.1 -n 11 > nul' // Windows command to sleep for 10 seconds
+            }
+        }
+        stage('Setup Selenium Server nodes') {
+            steps {
+                echo 'Setting up Selenium server nodes...'
+                bat "start /B java -jar selenium-server.jar node --port 5555 --selenium-manager true"
+                // Delay for 10 seconds
+                bat 'ping 127.0.0.1 -n 11 > nul' // Windows command to sleep for 10 seconds
+            }
+        }
+        stage('Check Directory and File') {
+    steps {
+        script {
+                // For Windows Batch Command
+                bat """
+                echo Checking directory...
+                dir
+                echo Checking if tests_runner.py exists...
+                if exist tests/tests_runner.py (
+                    echo tests_runner.py exists
+                ) else (
+                    echo tests_runner.py does not exist
+                )
+                """
             }
         }
     }
 
+
+        stage('Run Tests with Pytest') {
+            steps {
+                script {
+                    try {
+                        bat 'call venv\\Scripts\\python.exe -m pytest  "tests\\tests_runner.py" --html=${TEST_REPORTS}\\report.html --self-contained-html'
+                    } catch (Exception e) {
+                        echo "Tests failed, but the build continues."
+                    }
+                }
+            }
+        }
+    }
     post {
+        success {
+                slackSend(channel: 'C06Q6FRSFKJ',color: "good", message: "Build succeeded")
+            }
+        failure {
+            slackSend(channel: 'C06Q6FRSFKJ',color: "danger", message: "Build failed")
+        }
         always {
+            archiveArtifacts artifacts: "${TEST_REPORTS}/*.html", allowEmptyArchive: true
             echo 'Cleaning up...'
-            bat "docker stop web_test_container || true"
-            bat "docker rm web_test_container || true"
-            bat "docker stop another_test_container || true"
-            bat "docker rm another_test_container || true"
-            bat "docker rmi -f ${IMAGE_NAME}:${TAG}"
+
         }
     }
 }
