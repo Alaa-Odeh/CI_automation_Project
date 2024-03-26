@@ -19,7 +19,7 @@ pipeline {
         stage('Setup Selenium Server HUB') {
             steps {
                 echo 'Setting up Selenium server HUB...'
-                bat "start /B java -jar selenium-server.jar hub --port 4445"
+                bat "start /B java -jar selenium-server.jar --port 4445 hub"
                 // Delay for 10 seconds
                 bat 'ping 127.0.0.1 -n 11 > nul' // Windows command to sleep for 10 seconds
             }
