@@ -41,7 +41,7 @@ pipeline {
                     // Activate the virtual environment by adding its Scripts directory to PATH
                     withEnv(["PATH+VENV=\${VENV_PATH}"]) {
                         // Now you can run pytest directly
-                        bat "pytest tests\\test_web\\test_delete_goal_web.py --html=\${TEST_REPORTS}\\report.html"
+                        bat "pytest tests\\test_api\\test_goals_api.py --html=\${TEST_REPORTS}\\report.html"
                     }
                 }
             }

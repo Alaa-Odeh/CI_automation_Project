@@ -14,10 +14,8 @@ class TestGoalsAPI(unittest.TestCase):
     def setUp(self):
         self.goals_api = GoalsAPI()
         self.skills = SkillsAPI()
-        #self.browser = BrowserWrapper()
-
-        #self.driver = self.browser._driver
-
+        self.browser = BrowserWrapper()
+        self.driver = self.browser.get_driver('Chrome')
         self.welcome_page = WelcomePage(self.driver)
         self.welcome_page.click_log_in()
         self.login_page = LoginPage(self.driver)
