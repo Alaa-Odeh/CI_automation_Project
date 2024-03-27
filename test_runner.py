@@ -13,7 +13,7 @@ def run_pytest(parallel=False):
     reports_dir = "tests/test_web/reports"
     print(ui_tests_path)
     os.makedirs(reports_dir, exist_ok=True)
-    python_path = os.path.join("venv", "Scripts", "python.exe")
+    python_path = os.path.join(".venv", "Scripts", "python.exe")
     # Basic command with the path to UI tests
     base_cmd = [python_path,"-m", "pytest",ui_tests_path]
     html_report = os.path.join(reports_dir, "report.html")
