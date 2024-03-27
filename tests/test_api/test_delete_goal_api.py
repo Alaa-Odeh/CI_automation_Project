@@ -9,7 +9,6 @@ from logic.web_logic.home_page_pathfinder import PathfinderPage
 from logic.web_logic.login_page import LoginPage
 from logic.web_logic.welcome_page import WelcomePage
 from parameterized import parameterized_class
-
 from pytest_markers import test_decorator
 
 config_path  = Path(__file__).resolve().parents[2].joinpath("config.json")
