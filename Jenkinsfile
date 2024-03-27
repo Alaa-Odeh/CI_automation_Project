@@ -1,66 +1,77 @@
 pipeline {
     agent any
-
     environment {
-        // Define the Docker image name
+        PYTHON_PATH = "C:\\Users\\Alaa Oda\\AppData\\Local\\Programs\\Python\\Python312\\python.exe"
+        PIP_PATH = '"C:\\Users\\Alaa Oda\\AppData\\Local\\Programs\\Python\\Python312\\Scripts\\pip.exe"'
+        TEST_REPORTS = 'test-reports'
         IMAGE_NAME = 'tests'
         TAG = 'latest'
     }
-
     stages {
-        stage('Build Docker Image') {
+        stage('Setup Environment') {
             steps {
-                script {
-                    def customImage = docker.build("${IMAGE_NAME}:${TAG}")
-                }
+                bat 'call "%PYTHON_PATH%" -m venv venv'
+                bat 'call venv\\Scripts\\python.exe -m pip install --upgrade pip'
+                bat 'call venv\\Scripts\\pip.exe install -r requirements.txt'
+                bat 'call venv\\Scripts\\pip.exe install pytest pytest-html selenium'
             }
         }
-
-        stage('Run API Tests in Parallel') {
+        stage('Setup Selenium Server HUB') {
             steps {
-                script {
-                    parallel(
-                        'API Test': {
-                            // Correct the docker run command to point to the correct script file
-                            bat "docker run --name api_test_container ${IMAGE_NAME}:${TAG} python -m unittest discover -s tests/test_api -p test_log_in_page.Login_Page_Test.test_run.py"
-                            // Ensure the container is stopped before removing it
-                            bat "docker stop api_test_container"
-                            bat "docker rm api_test_container"
-                        },
-                        // Add other parallel tests here as necessary
-                    )
-                }
+                echo 'Setting up Selenium server HUB...'
+                bat "start /B java -jar selenium-server.jar hub"
+                // Delay for 10 seconds
+                bat 'ping 127.0.0.1 -n 11 > nul' // Windows command to sleep for 10 seconds
             }
         }
-        stage('Run Tests in Parallel') {
+        stage('Setup Selenium Server nodes') {
             steps {
-                script {
-                    parallel(
-                        'web Test': {
-                            // Correct the docker run command to point to the correct script file
-                            bat "docker run --name web_test_container ${IMAGE_NAME}:${TAG} python -m unittest discover -s tests/test_web -p test_log_in_page.test_run.py"
-                            // Ensure the container is stopped before removing it
-                            bat "docker stop web_test_container"
-                            bat "docker rm web_test_container"
-                        },
-                        // Add other parallel tests here as necessary
-                    )
-                }
+                echo 'Setting up Selenium server nodes...'
+                bat "start /B java -jar selenium-server.jar node --port 5555 --selenium-manager true"
+                // Delay for 10 seconds
+                bat 'ping 127.0.0.1 -n 11 > nul' // Windows command to sleep for 10 seconds
+            }
+        }
+        stage('Check Directory and File') {
+    steps {
+        script {
+                // For Windows Batch Command
+                bat """
+                echo Checking directory...
+                dir
+                echo Checking if tests_runner.py exists...
+                if exist tests/tests_runner.py (
+                    echo tests_runner.py exists
+                ) else (
+                    echo tests_runner.py does not exist
+                )
+                """
             }
         }
     }
 
+
+         stage('Run Tests with Pytest') {
+            steps {
+                script {
+                    // Here you determine the number of parallel workers, can be set to a fixed value or dynamically based on CPU cores
+                    def cpuCount = Runtime.runtime.availableProcessors()
+                    bat "call venv\\Scripts\\pytest.exe -n ${cpuCount} tests\\test_generate_tests\\ --html=${TEST_REPORTS}\\report.html --self-contained-html"
+                }
+            }
+         }
+    }
     post {
+        success {
+                slackSend(channel: 'C06Q6FRSFKJ',color: "good", message: "Build succeeded")
+            }
+        failure {
+            slackSend(channel: 'C06Q6FRSFKJ',color: "danger", message: "Build failed")
+        }
         always {
+            archiveArtifacts artifacts: "${TEST_REPORTS}/*.html", allowEmptyArchive: true
             echo 'Cleaning up...'
-            // Stop and remove any stray containers that might be using the image
-            // Use the correct container names as per the tests run
-            bat "docker stop api_test_container || true"
-            bat "docker rm api_test_container || true"
-            bat "docker stop web_test_container || true"
-            bat "docker rm web_test_container || true"
-            // Force remove the Docker image, if necessary, to clean up
-            bat "docker rmi -f ${IMAGE_NAME}:${TAG}"
+
         }
     }
 }
