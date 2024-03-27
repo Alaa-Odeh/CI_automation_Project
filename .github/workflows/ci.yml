@@ -20,7 +20,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.12'
+          python-version: '3.11'
 
       - name: Install dependencies
         run: |
@@ -54,7 +54,7 @@ jobs:
 
       - name: Run tests
         run: |
-          python tests/test_api_test_delete_goal_api.py
+          python tests/test_api/test_delete_goal_api.py
 
       - name: Upload test report
         uses: actions/upload-artifact@v2
