@@ -48,11 +48,11 @@ class BrowserWrapper:
 
     def set_up_capabilities(self, browser_type):
         options = None
-        if browser_type.lower() == 'chrome':
+        if browser_type == 'Chrome':
             options = webdriver.ChromeOptions()
-        elif browser_type.lower() == 'firefox':
+        elif browser_type == 'Firefox':
             options = webdriver.FirefoxOptions()
-        elif browser_type.lower() == 'edge':
+        elif browser_type == 'Edge':
             options = webdriver.EdgeOptions()
         return options
 
