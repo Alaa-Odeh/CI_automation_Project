@@ -27,8 +27,8 @@ class TestGoalsAPIGenerate():
 
         goals_api.delete_goal()
 
-    def setup_method(self):
+    '''def setup_method(self):
         self.goals_api = GoalsAPI()
         self.goals_api.delete_goal()
     def teardown_method(self):
-        self.goals_api.delete_goal()
+        self.goals_api.delete_goal()'''
