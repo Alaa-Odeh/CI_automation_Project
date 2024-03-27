@@ -54,6 +54,7 @@ class BrowserWrapper:
             options = webdriver.FirefoxOptions()
         elif browser_type == 'Edge':
             options = webdriver.EdgeOptions()
+        options.add_argument("--headless")
         return options
 
     def create_local_driver(self, browser_name):
