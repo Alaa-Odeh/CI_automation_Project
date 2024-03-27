@@ -42,7 +42,6 @@ jobs:
       - name: Run tests with pytest and generate report
         continue-on-error: true
         run: |
-          bat "call ${env.WORKSPACE}\\venv\\Scripts\\activate.bat"
           python -m pytest tests/test_api/test_goals_api.py --html=report_api.html --self-contained-html
 
 
