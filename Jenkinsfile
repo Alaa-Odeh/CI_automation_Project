@@ -33,7 +33,7 @@ pipeline {
         stage('Run Tests with Pytest') {
             steps {
                 // Assuming '8' is the number of workers you want to use
-                bat "call venv\\Scripts\\python.exe -m pytest -n 8 tests\\test_generate_tests\\ --html=${TEST_REPORTS}\\report.html --self-contained-html"
+                bat "call venv\\Scripts\\python.exe -m pytest tests\\test_generate_tests --html=${TEST_REPORTS}\\report.html --self-contained-html"
             }
         }
     }
