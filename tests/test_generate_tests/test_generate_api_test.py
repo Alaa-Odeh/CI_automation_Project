@@ -25,10 +25,8 @@ class TestGoalsAPIGenerate():
         assert sorted(skill_levels) == sorted(levels), "Levels do not match"
         assert updated_hours_per_week == hours_per_week, "Weekly hours not updated"
 
-        goals_api.delete_goal()
-
-    '''def setup_method(self):
+    def setup_method(self):
         self.goals_api = GoalsAPI()
         self.goals_api.delete_goal()
     def teardown_method(self):
-        self.goals_api.delete_goal()'''
+        self.goals_api.delete_goal()
