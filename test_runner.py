@@ -43,8 +43,8 @@ def run_pytest(parallel=False):
 
 
 
-def test_run():
-    cur_dir = Path(__file__).resolve().parents[1].parents[0].joinpath("config.json")
+if __name__ == "__main__":
+    cur_dir = Path(__file__).resolve().parents[2].joinpath("config.json")
     with open(cur_dir, 'r') as config_file:
         config = json.load(config_file)
 
