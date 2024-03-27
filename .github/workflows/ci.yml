@@ -28,8 +28,8 @@ jobs:
 
     - name: Run tests with pytest and generate report
       run: |
-        python -m pytest -n auto tests/test_generate_tests --html=report.html --self-contained-html
-      # The -n auto option automatically determines the number of workers
+        python -m pytest "tests/test_generate_tests"       
+        # The -n auto option automatically determines the number of workers
 
     - name: Upload Test Report
       uses: actions/upload-artifact@v2
