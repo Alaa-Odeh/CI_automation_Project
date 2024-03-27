@@ -22,7 +22,7 @@ jobs:
           pip install -r requirements.txt
 
       - name: Start Selenium Server HUB
-        run: nohup java -jar selenium-server-4.17.0.jar hub & sleep 10
+        run: nohup java -jar selenium-server-4.17.0.jar --port 4445 hub & sleep 10
         shell: bash
 
       - name: Start Selenium Server nodes

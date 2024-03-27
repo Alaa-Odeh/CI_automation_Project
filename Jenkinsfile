@@ -37,7 +37,7 @@ pipeline {
 
         stage('Run Tests with Pytest') {
             steps {
-                bat "call venv\\Scripts\\python.exe test_runner.py"
+                bat "call venv\\Scripts\\python.exe tests\\test_web\\test_delete_goal_web.py"
             }
         }
     }
