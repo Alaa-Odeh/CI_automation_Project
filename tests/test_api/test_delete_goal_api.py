@@ -11,6 +11,7 @@ from logic.web_logic.welcome_page import WelcomePage
 from parameterized import parameterized_class
 from pytest_markers import test_decorator
 
+
 config_path  = Path(__file__).resolve().parents[2].joinpath("config.json")
 with open(config_path, 'r') as config_file:
     config = json.load(config_file)
