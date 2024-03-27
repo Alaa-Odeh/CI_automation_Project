@@ -32,7 +32,8 @@ pipeline {
         }
         stage('Run Tests with Pytest') {
             steps {
-                bat "call venv\\Scripts\\python.exe -m pytest tests\\test_generate_tests --html=${env.TEST_REPORTS}\\report.html --self-contained-html"
+                //bat "call venv\\Scripts\\python.exe -m pytest tests\\test_generate_tests --html=${env.TEST_REPORTS}\\report.html --self-contained-html"
+                bat "call venv\\Scripts\\python.exe -m pytest 'tests/test_generate_tests'"
             }
         }
     }
