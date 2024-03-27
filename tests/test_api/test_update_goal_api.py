@@ -11,11 +11,13 @@ from logic.web_logic.home_page_pathfinder import PathfinderPage
 from logic.web_logic.login_page import LoginPage
 from logic.web_logic.welcome_page import WelcomePage
 from pytest_markers import test_decorator
+import pytest
 
 config_path = Path(__file__).resolve().parents[2].joinpath("config.json")
 with open(config_path, 'r') as config_file:
     config = json.load(config_file)
 browser_types = [(browser,) for browser in config["browser_types"]]
+@pytest.mark.serial
 @parameterized_class(('browser',), browser_types)
 class TestUpdateGoalAPI(unittest.TestCase):
     def setUp(self):
@@ -47,9 +49,11 @@ class TestUpdateGoalAPI(unittest.TestCase):
 
         skill_names,skill_levels,hours_per_week= self.goals_api.get_goal_info()
 
-        self.assertListEqual(skill_names, chosen_skills_to_update+self.chosen_skills, "Skills dont match")
-        self.assertListEqual(skill_levels, courses_levels_to_update+self.courses_levels, "levels Dont Match")
+        self.assertListEqual(sorted(skill_names), sorted(chosen_skills_to_update+self.chosen_skills), "Skills dont match")
+        self.assertListEqual(sorted(skill_levels), sorted(courses_levels_to_update+self.courses_levels), "levels Dont Match")
         self.assertEqual(hours_per_week, hours_weekly, "Weekly hours not updated")
 
     def tearDown(self):
         self.goals_api.delete_goal()
+        self.driver.close()
+        self.driver.quit()

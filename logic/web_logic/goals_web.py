@@ -21,6 +21,7 @@ class GoalsWeb():
     UPDATE_GOAL='//button[contains(text(),"Update")]'
     DELETE_GOAL='//button[contains(text(),"Delete")]'
     FOOTER_DELETE="//footer//button[contains(text(), 'Delete')]"
+    REMOVE_SKILLS='//button[contains(@aria-label,"Remove")]'
     def __init__(self, driver):
         self._driver =driver
         wait = WebDriverWait(driver, 20)  # Timeout of 10 seconds
@@ -39,7 +40,7 @@ class GoalsWeb():
     def click_on_goal_name_button(self):
         self.goal_name_button.click()
         self.continue_button=self._driver.find_element(By.XPATH, self.CONTINUE_BUTTON)
-
+        self.remove_skills=WebDriverWait(self._driver, 15).until(EC.presence_of_all_elements_located((By.XPATH,  self.REMOVE_SKILLS)))
     def click_on_continue_button(self):
         self.continue_button.click()
         self.add_additional_skills_button = WebDriverWait(self._driver, 15).until(EC.element_to_be_clickable((By.XPATH, self.ADD_ADDITIONAL_SKILLS_BUTTON)))
@@ -102,6 +103,8 @@ class GoalsWeb():
         self.init()
         self.click_on_add_a_goal_button(goal_name)
         self.click_on_goal_name_button()
+        for button in self.remove_skills:
+            button.click()
         self.click_on_continue_button()
         self.click_on_add_additional_skills_button()
         for skill, level in zip(chosen_skills, courses_levels):

@@ -24,5 +24,5 @@ if __name__ == "__main__":
         config = json.load(f)
 
     # Determine whether to run tests in parallel based on the config
-    is_parallel = config["grid type"] == "parallel"
+    is_parallel = config["grid type"]
     run_pytest(parallel=is_parallel)

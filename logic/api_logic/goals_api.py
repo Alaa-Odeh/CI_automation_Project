@@ -53,8 +53,15 @@ class GoalsAPI:
                 return False
             return False  # Returns false if there was no goal to delete
 
-    def get_goal_info(self):
-        goal_id = self.get_goal_id()
+    def get_goal_id_by_name(self, goal_name):
+        self.get_goals()
+        if self.result is not None:
+            for id, details in self.result.items():
+                if 'name' in details and details['name'] == goal_name:
+                    return id
+        return None
+    def get_goal_info(self,goal_name):
+        goal_id = self.get_goal_id_by_name(goal_name)
         self.new_url = self.new_url + f'/{goal_id}'
         self.result = self.api_object.api_get_request(self.new_url).json()
         self.result_skills = self.result['skills']

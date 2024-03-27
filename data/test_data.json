@@ -1,0 +1,92 @@
+[
+
+    {
+        "goal_name": "Fullstack developer",
+        "skills": [
+            "HTML",
+            "SQL",
+            "DSA",
+            "JavaScript",
+            "CSS",
+            "PHP"
+        ],
+        "levels": [
+            "Intermediate",
+            "Intermediate",
+            "Beginner",
+            "Professional",
+            "Professional",
+            "Professional"
+        ],
+        "hours_per_week": 51
+    },
+    {
+        "goal_name": "Game developer",
+        "skills": [
+            "DSA",
+            "JavaScript",
+            "C++",
+            "C#",
+            "Bootstrap 5"
+        ],
+        "levels": [
+            "Intermediate",
+            "Advanced",
+            "Beginner",
+            "Professional",
+            "Beginner"
+        ],
+        "hours_per_week": 10
+    },
+    {
+        "goal_name": "Backend developer",
+        "skills": [
+            "Python",
+            "DSA",
+            "Java",
+            "C++",
+            "Bootstrap 5"
+        ],
+        "levels": [
+            "Intermediate",
+            "Advanced",
+            "Professional",
+            "Advanced",
+            "Intermediate"
+        ],
+        "hours_per_week": 49
+    },
+    {
+        "goal_name": "Frontend developer",
+        "skills": [
+            "HTML",
+            "JavaScript",
+            "CSS",
+            "Bootstrap 5"
+        ],
+        "levels": [
+            "Intermediate",
+            "Professional",
+            "Advanced",
+            "Intermediate"
+        ],
+        "hours_per_week": 6
+    },
+    {
+        "goal_name": "Artificial Intelligence",
+        "skills": [
+            "Python",
+            "R",
+            "SQL",
+            "Bootstrap 5"
+        ],
+        "levels": [
+            "Beginner",
+            "Intermediate",
+            "Professional",
+            "Intermediate"
+        ],
+        "hours_per_week": 41
+    }
+
+]
