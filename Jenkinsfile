@@ -33,35 +33,36 @@ pipeline {
             }
         }
         stage('Check Directory and File') {
-    steps {
-        script {
-                // For Windows Batch Command
-                bat """
-                echo Checking directory...
-                dir
-                echo Checking if tests_runner.py exists...
-                if exist tests/tests_runner.py (
-                    echo tests_runner.py exists
-                ) else (
-                    echo tests_runner.py does not exist
-                )
-                """
-            }
-        }
-    }
-
-
-         stage('Run Tests with Pytest') {
             steps {
                 script {
-                    // Here you determine the number of parallel workers, can be set to a fixed value or dynamically based on CPU cores
-                    def cpuCount = Runtime.runtime.availableProcessors()
-                    bat "call venv\\Scripts\\pytest.exe -n ${cpuCount} tests\\test_generate_tests\\ --html=${TEST_REPORTS}\\report.html --self-contained-html"
+                        // For Windows Batch Command
+                        bat """
+                        echo Checking directory...
+                        dir
+                        echo Checking if tests_runner.py exists...
+                        if exist tests/tests_runner.py (
+                            echo tests_runner.py exists
+                        ) else (
+                            echo tests_runner.py does not exist
+                        )
+                        """
+                    }
+                }
+            }
+
+        stage('Run Tests with Pytest') {
+            steps {
+                script {
+                    // Here you determine the number of parallel workers
+                    // You can set it to a fixed value or dynamically based on CPU cores
+                    // Example: '8' or '${cpuCount}' if you calculate it beforehand
+                    bat "call venv\\Scripts\\python.exe -m pytest -n 8 tests\\test_generate_tests\\ --html=${TEST_REPORTS}\\report.html --self-contained-html"
                 }
             }
         }
-    }
-}
+   }
+
+
     post {
         success {
                 slackSend(channel: 'C06Q6FRSFKJ',color: "good", message: "Build succeeded")
