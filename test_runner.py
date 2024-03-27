@@ -11,7 +11,6 @@ def run_pytest(parallel=False):
     # Directory where all tests are located
     ui_tests_path = "tests/test_api/test_delete_goal_api.py"
     reports_dir = "tests/test_web/reports"
-    print(ui_tests_path)
     os.makedirs(reports_dir, exist_ok=True)
     python_path = os.path.join(".venv", "Scripts", "python.exe")
     # Basic command with the path to UI tests
@@ -44,7 +43,7 @@ def run_pytest(parallel=False):
 
 
 if __name__ == "__main__":
-    cur_dir = Path(__file__).resolve().parents[2].joinpath("config.json")
+    cur_dir = Path(__file__).resolve().parents[3].joinpath("config.json")
     with open(cur_dir, 'r') as config_file:
         config = json.load(config_file)
 
