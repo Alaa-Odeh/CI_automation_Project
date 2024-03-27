@@ -4,12 +4,12 @@ from pathlib import Path
 
 
 def run_pytest(parallel=False):
-    ui_tests_path = "tests/test_api/test_delete_goal_api.py"
+    ui_tests_path = "tests/test_api"
     reports_dir = Path("tests/test_web/reports")
     reports_dir.mkdir(parents=True, exist_ok=True)
 
     # Base command with the path to UI tests
-    base_cmd = ["pytest", ui_tests_path]
+    base_cmd = ["venv","Scripts","pytest.exe", ui_tests_path]
     html_report = str(reports_dir / "report.html")
 
     if parallel:

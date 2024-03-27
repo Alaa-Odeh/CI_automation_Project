@@ -67,5 +67,39 @@ class BrowserWrapper:
         else:
             raise ValueError("Browser type not supported")
 
+    def run_single_browser(self, test_case=None):
+        browser = self.config["browser"]
+        if browser == "Chrome":
+            # proxy_ip = 'localhost'  # Default ZAP Proxy IP
+            # proxy_port = '8081'  # Default ZAP Proxy Port
+            # zap_proxy = f"{proxy_ip}:{proxy_port}"
 
+            # self.chrome_cap = webdriver.ChromeOptions()
+            # self.chrome_cap.add_argument(f'--proxy-server={zap_proxy}')
+            # self.chrome_cap.add_argument('--ignore-certificate-errors')
+            self._driver = webdriver.Chrome()
+
+        elif browser == "FireFox":
+            self._driver = webdriver.Firefox()
+        elif browser == "Edge":
+            self._driver = webdriver.Edge()
+        self._driver.get(self.url)
+        self._driver.maximize_window()
+
+    def build_cap(self):
+        # proxy_ip = 'localhost'  # Default ZAP Proxy IP
+        # proxy_port = '8081'  # Default ZAP Proxy Port
+        # zap_proxy = f"{proxy_ip}:{proxy_port}"
+
+        # self.chrome_cap.add_argument(f'--proxy-server={zap_proxy}')
+        # self.chrome_cap.add_argument('--ignore-certificate-errors')
+
+        self.firfox_cap = webdriver.FirefoxOptions()
+        self.firfox_cap.capabilities['platformName'] = 'Windows'
+        self.chrome_cap = webdriver.ChromeOptions()
+        self.chrome_cap.capabilities['platformName'] = 'Windows'
+
+        self.edge_cap = webdriver.EdgeOptions()
+        self.edge_cap.capabilities['platformName'] = 'Windows'
+        self.caps_list = [self.chrome_cap, self.edge_cap, self.firfox_cap]
 
