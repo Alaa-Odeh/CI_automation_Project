@@ -36,11 +36,17 @@ pipeline {
 
 
         stage('Run Tests with Pytest') {
-            steps {
-                bat "call venv\\Scripts\\python.exe tests\\test_web\\test_delete_goal_web.py"
+        steps {
+            script {
+                // Activate the virtual environment by adding its Scripts directory to PATH
+                withEnv(["PATH+VENV=\${VENV_PATH}"]) {
+                    // Now you can run pytest directly
+                    bat "pytest tests\\test_web\\test_delete_goal_web.py --html=\${TEST_REPORTS}\\report.html"
+                }
             }
         }
     }
+
     post {
         success {
                 slackSend(channel: 'C06Q6FRSFKJ',color: "good", message: "Build succeeded")
