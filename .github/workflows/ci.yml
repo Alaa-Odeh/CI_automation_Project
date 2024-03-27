@@ -42,7 +42,7 @@ jobs:
       - name: Run tests with pytest and generate report
         continue-on-error: true
         run: |
-          python -m pytest tests/test_generate_tests --html=report_api.html --self-contained-html
+          python -m pytest -n auto tests/test_generate_tests --html=report_api.html --self-contained-html
 
 
       - name: Upload Test Report
