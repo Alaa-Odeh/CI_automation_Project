@@ -7,7 +7,6 @@ from logic.api_logic.goals_api import GoalsAPI
 def goals_api():
     api = GoalsAPI()
     yield api
-    api.delete_goal()  #tearDown
 
 # Use pytest.mark.parametrize to create variations
 @pytest.mark.parametrize(
@@ -23,3 +22,5 @@ def test_generate_api_test(goals_api, goal_name, skills, levels, hours_per_week)
     assert sorted(skill_names) == sorted(skills), "Skills do not match"
     assert sorted(skill_levels) == sorted(levels), "Levels do not match"
     assert updated_hours_per_week == hours_per_week, "Weekly hours not updated"
+
+    goals_api.delete_goal()
