@@ -2,7 +2,6 @@ import json
 import time
 import unittest
 from pathlib import Path
-import pytest
 from infra.infra_web.browser_wrapper import BrowserWrapper
 from logic.api_logic.goals_api import GoalsAPI
 from logic.web_logic.goals_web import GoalsWeb
@@ -18,10 +17,7 @@ with open(config_path, 'r') as config_file:
     config = json.load(config_file)
 browser_types = [(browser,) for browser in config["browser_types"]]
 
-@pytest.mark.serial
-@parameterized_class(('browser',), [
-    ('Chrome',),
-])
+@parameterized_class(('browser',), [('Chrome',),])
 class TestDeleteGoalAPI(unittest.TestCase):
     default_browser = 'Chrome'
     def setUp(self):
@@ -44,6 +40,7 @@ class TestDeleteGoalAPI(unittest.TestCase):
         self.hours_weekly = 8
         self.goals_web.set_goal_in_web(self.goal_name, self.chosen_skills, self.courses_levels, self.hours_weekly)
 
+    @test_decorator
     def test_delete_goal_api(self):
         goal_id_before_deleting=self.goals_api.get_goal_id()
         self.goals_web.delete_goals(self.goal_name)
