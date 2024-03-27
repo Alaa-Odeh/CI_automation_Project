@@ -8,7 +8,7 @@ def goals_api():
     api = GoalsAPI()
     yield api
     api.delete_goal()  #tearDown
-    ##
+
 # Use pytest.mark.parametrize to create variations
 @pytest.mark.parametrize(
     "goal_name, skills, levels, hours_per_week", [
