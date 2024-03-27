@@ -16,78 +16,56 @@ class BrowserWrapper:
         with open(config_path, 'r') as config_file:
             self.config = json.load(config_file)
         self.hub_url = self.config["hub_url"]
+        self.url = self.config["url"]
         self.cookies = self.config["user_cookies"]
-
-
-        token = 'ATATT3xFfGF09zxxyNEWZufXBZbGVJog8nRzG7_IggWzimhiYh0ZbFTfvsYNHfuCe_c1A_th5eeCINDMAvtgOWgGxLMtsNChMb-DRin7X8ip-sQxFFfuPJC-kvvwfuHeV2VATrvBPINg07GBKs9IkzwX20JpJLwKnF3uu-7tT3zIHqDo4qpyc6E=0C5BD39D'
-        auth_jira = JIRA(basic_auth=("kharbosh.computer @ gmail.com", token), options={'server': self.config['jira_url']})
         print("Test Start")
 
+    def create_options(self, browser_type):
+        if browser_type == 'Chrome':
+            options = webdriver.ChromeOptions()
+        elif browser_type == 'Firefox':
+            options = webdriver.FirefoxOptions()
+        elif browser_type == 'Edge':
+            options = webdriver.EdgeOptions()
+        else:
+            raise ValueError(f"Unsupported browser type: {browser_type}")
+        return options
+    def get_driver(self,browser_name):
+        if self.config["grid"]:
+            options = self.set_up_capabilities(browser_name)
+            self._driver = webdriver.Remote(command_executor=self.hub_url, options=options)
+        else:
+            options = self.create_options(browser_name)
+            if browser_name == 'Chrome':
+                self._driver = webdriver.Chrome(options=options)
+            elif browser_name == 'Firefox':
+                self._driver = webdriver.Firefox(options=options)
+            elif browser_name == 'Edge':
+                self._driver = webdriver.Edge(options=options)
+            self._driver.get(self.url)
+            self._driver.maximize_window()
+            return self._driver
+
+    def set_up_capabilities(self, browser_type):
+        options = None
+        if browser_type.lower() == 'chrome':
+            options = webdriver.ChromeOptions()
+        elif browser_type.lower() == 'firefox':
+            options = webdriver.FirefoxOptions()
+        elif browser_type.lower() == 'edge':
+            options = webdriver.EdgeOptions()
+        return options
+
+    def create_local_driver(self, browser_name):
+        browser_name_lower = browser_name.lower()
+        if browser_name_lower == 'Chrome':
+            return webdriver.Chrome()
+        elif browser_name_lower == 'Sirefox':
+            return webdriver.Firefox()
+        elif browser_name_lower == 'Edge':
+            return webdriver.Edge()
+        else:
+            raise ValueError("Browser type not supported")
 
 
-    def get_driver(self,caps=None,user=None):
 
-        self._driver = webdriver.Remote(command_executor=self.hub_url, options=caps)
-        self._driver.get(self.config["url"])
-        self._driver.maximize_window()
-
-    def build_cap(self):
-
-        self.firfox_cap=webdriver.FirefoxOptions()
-        self.firfox_cap.capabilities['platformName'] = 'Windows'
-        self.chrome_cap = webdriver.ChromeOptions()
-        self.chrome_cap.capabilities['platformName'] = 'Windows'
-
-        self.edge_cap = webdriver.EdgeOptions()
-        self.edge_cap.capabilities['platformName'] = 'Windows'
-        self.caps_list = [self.chrome_cap,self.edge_cap,self.firfox_cap]
-
-    def test_grid_parallel(self,test_cases,user=None):
-        self.test_cases=test_cases
-        self.user=user
-        with concurrent.futures.ThreadPoolExecutor(max_workers=len(self.caps_list)) as executor:
-
-            for test_case, cap in [(test_case, cap) for test_case in self.test_cases for cap in self.caps_list]:
-                 executor.submit(self.run_test_case, test_case, cap)
-                 time.sleep(5)
-
-    def test_grid_serial(self,test_cases,user=None):
-        self.user = user
-        for caps in self.caps_list:
-            for test_case in test_cases:
-                self.run_test_case(test_case,caps)
-
-    def run_test_case(self,test_case, caps=None):
-        self.get_driver(caps,self.user)
-        test_case.driver=self._driver
-
-
-    def run_single_browser(self,test_case=None):
-        browser=self.config["browser"]
-        if browser == "Chrome":
-            #proxy_ip = 'localhost'  # Default ZAP Proxy IP
-            #proxy_port = '8081'  # Default ZAP Proxy Port
-            #zap_proxy = f"{proxy_ip}:{proxy_port}"
-
-           # self.chrome_cap = webdriver.ChromeOptions()
-           # self.chrome_cap.add_argument(f'--proxy-server={zap_proxy}')
-           #self.chrome_cap.add_argument('--ignore-certificate-errors')
-            self._driver = webdriver.Chrome()
-
-        elif browser == "FireFox":
-            self._driver = webdriver.Firefox()
-        elif browser == "Edge":
-            self._driver = webdriver.Edge()
-        #if test_case!=None:
-         #   test_case()
-
-        #for cookie in self.cookies:
-            #print(f"Current URL: {self._driver.current_url}")
-            # Add the cookie for the current domain.
-
-        self._driver.get("https://www.w3schools.com")
-        self._driver.maximize_window()
-
-    def teardown(self):
-        self._driver.close()
-        self._driver.quit()

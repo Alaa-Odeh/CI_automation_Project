@@ -12,12 +12,8 @@ from logic.web_logic.welcome_page import WelcomePage
 class TestDeleteGoalWeb(unittest.TestCase):
     def setUp(self):
         self.goals_api = GoalsAPI()
-        #self.browser = BrowserWrapper()
-        #if self.browser.config["grid"]:
-        #    self.browser.build_cap()
-        #else:
-        #    self.browser.run_single_browser()
-        #self.driver = self.browser._driver
+        self.browser_wrapper = BrowserWrapper()
+        self.driver=self.browser_wrapper.get_driver('Chrome')
         self.welcome_page = WelcomePage(self.driver)
         self.welcome_page.click_log_in()
         self.login_page = LoginPage(self.driver)
@@ -37,5 +33,6 @@ class TestDeleteGoalWeb(unittest.TestCase):
         self.goals_web.extract_goal_skills_level(self.goal_name)
         self.assertEqual(self.goals_web.goal_name_in_my_goals,f"Goal name '{self.goal_name}' was not found on the page.","Goal was Not Deleted")
 
-    #def tearDown(self):
-     #   self.goals_api.delete_goal()
+    def tearDown(self):
+        self.goals_api.delete_goal()
+        self.driver.quit()
