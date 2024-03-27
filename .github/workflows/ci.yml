@@ -1,3 +1,3507 @@
+Chat history
+
+
+
+Open sidebar
+
+ChatGPT 4
+
+User
+PS C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project> call venv\Scripts\python.exe -m pytest tests/test_web/test_runner.py
+call : The term 'call' is not recognized as the name of a cmdlet, function, script file, or operable program. Check the spelling of the name, or if a path was included, verify
+that the path is correct and try again.
+At line:1 char:1
++ call venv\Scripts\python.exe -m pytest tests/test_web/test_runner.py
++ ~~~~
+    + CategoryInfo          : ObjectNotFound: (call:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+
+PS C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project> 
+ChatGPT
+It looks like you're trying to run a pytest command in a PowerShell environment, but you encountered an error because call is not recognized in PowerShell. The call command is typically used in Windows' Command Prompt (cmd), not in PowerShell.
+
+To run your pytest command in PowerShell, you don't need to use call. You can simply activate the virtual environment and run the pytest command directly. Here's how you can do it:
+
+First, navigate to your project directory if you're not already there:
+
+powershell
+Copy code
+cd "C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project"
+Activate the virtual environment:
+
+powershell
+Copy code
+.\venv\Scripts\Activate.ps1
+Once the virtual environment is activated, run the pytest command:
+
+powershell
+Copy code
+python -m pytest tests/test_web/test_runner.py
+This should execute your pytest tests in the specified directory. If you encounter any issues related to the virtual environment or pytest, ensure that you have the necessary dependencies installed within your virtual environment.
+
+User
+Microsoft Windows [Version 10.0.22631.3296]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\Alaa Oda>cd "C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project"
+
+C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project>.\venv\Scripts\Activate.ps1
+The system cannot find the path specified.
+
+C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project>
+
+
+
+ChatGPT
+The error message "The system cannot find the path specified" suggests that PowerShell is unable to locate the Activate.ps1 script within the specified directory. This could be due to several reasons:
+
+Virtual Environment Not Created: It's possible that the virtual environment hasn't been created yet in the expected directory. You should ensure that the virtual environment exists within the \venv\Scripts directory.
+
+Incorrect Virtual Environment Path: The path to the virtual environment might be incorrect or the virtual environment might be located in a different directory.
+
+PowerShell Execution Policy: Sometimes, the execution of scripts is disabled in PowerShell due to the execution policy. You might need to adjust this to run the activation script.
+
+Here's how you can troubleshoot and resolve these issues:
+
+Verify Virtual Environment Existence
+Check if the venv directory and the Activate.ps1 script exist in the expected path. Run the following command in PowerShell:
+
+powershell
+Copy code
+Get-ChildItem .\venv\Scripts\
+You should see Activate.ps1 listed among other files. If it's not there, the virtual environment might not have been created correctly.
+
+Create the Virtual Environment
+If the virtual environment doesn't exist, you can create it with the following command:
+
+powershell
+Copy code
+python -m venv .\venv
+After creating it, try activating it again:
+
+powershell
+Copy code
+.\venv\Scripts\Activate.ps1
+Adjust Execution Policy
+If the issue is related to the execution policy, you can temporarily change it to allow the script to run. Be cautious with this approach as it can affect system security. Run this command to allow local scripts to run:
+
+powershell
+Copy code
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process
+Then, try activating the virtual environment again:
+
+powershell
+Copy code
+.\venv\Scripts\Activate.ps1
+This command changes the execution policy for the current PowerShell session only. If you open a new session, the default policy will apply again.
+
+By following these steps, you should be able to activate your virtual environment and proceed with your Python and pytest commands.
+
+User
+Uploaded image
+
+ChatGPT
+It seems like you've successfully activated the virtual environment but received an error indicating that the pytest module isn't installed in your virtual environment.
+
+To fix this, you'll need to install pytest within your activated virtual environment. Here's how you can do it:
+
+Ensure that your virtual environment is active. You should see (venv) at the beginning of your PowerShell prompt.
+
+Install pytest by running the following command:
+
+powershell
+Copy code
+pip install pytest
+After the installation is complete, try running your test command again:
+
+powershell
+Copy code
+python -m pytest tests/test_web/test_runner.py
+Make sure you perform these steps in the PowerShell window where your virtual environment is activated. If you deactivate the virtual environment or open a new PowerShell window, you will need to activate the virtual environment again before running the pytest command.
+
+User
+Uploaded image
+
+ChatGPT
+The error message you're encountering now indicates that the path to the test file is not correct — pytest cannot find the file tests/test_web/test_runner.py.
+
+Here's how to address this:
+
+Verify the Correct File Path: Make sure that the file path you're providing matches the actual location of your test file. The path should be relative to the root directory where you are running the pytest command.
+
+Use Correct File Path: If the file path has been mistyped or is incorrect, correct the path and try running the command again.
+
+Given the error message, it seems like you may have included an extra test in the file path. If the correct path is tests/test_web/test_runner.py, make sure to use this exact path.
+
+Here's the corrected command, assuming test_runner.py is directly under tests/test_web:
+
+powershell
+Copy code
+python -m pytest tests/test_web/test_runner.py
+Please check your directory structure to ensure that you are using the correct path to your test file. If you are not sure of the path, you can list the contents of the tests directory with the following command to confirm the structure:
+
+powershell
+Copy code
+Get-ChildItem -Recurse tests\
+After confirming the correct path, execute the pytest command again.
+
+User
+Uploaded image
+ChatGPT
+The command Get-ChildItem is a PowerShell cmdlet, and it seems like you've attempted to run it directly in the Command Prompt (CMD) instead of PowerShell, which is why you're receiving an error that it is not recognized.
+
+If you're in the Command Prompt and you want to list the contents of a directory, you should use the dir command instead of Get-ChildItem. Here's the equivalent CMD command to list the contents of the .venv\Scripts directory:
+
+cmd
+Copy code
+dir .venv\Scripts\
+If you want to use PowerShell cmdlets like Get-ChildItem, you need to run them in a PowerShell window, not in the Command Prompt. To switch to PowerShell, you can simply type powershell in your Command Prompt window, and then run the PowerShell commands. Here's how you do it:
+
+Open Command Prompt.
+Type powershell and press Enter to switch to PowerShell within the same window.
+Now you can use the PowerShell cmdlet:
+powershell
+Copy code
+Get-ChildItem .venv\Scripts\
+This will list the contents of the .venv\Scripts directory if you are in the PowerShell interface. Remember that the Command Prompt and PowerShell have different sets of commands and cmdlets, and they are not interchangeable.
+
+User
+
+(venv) PS C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project> python -m pytest tests/test_web/test_runner.py                                                        
+=============================================================================== test session starts ===============================================================================
+platform win32 -- Python 3.12.0, pytest-8.1.1, pluggy-1.4.0
+rootdir: C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project
+collected 0 items                                                                                                                                                                   
+
+============================================================================== no tests ran in 0.00s ==============================================================================
+ERROR: file or directory not found: tests/test_web/test_runner.py
+
+(venv) PS C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project> python -m pytest -m tests/test_web/test_runner.py
+=============================================================================== test session starts ===============================================================================
+platform win32 -- Python 3.12.0, pytest-8.1.1, pluggy-1.4.0
+rootdir: C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project
+collected 0 items / 8 errors                                                                                                                                                       
+
+===================================================================================== ERRORS ====================================================================================== 
+_____________________________________________________________ ERROR collecting tests/test_api/test_delete_goal_api.py _____________________________________________________________ 
+ImportError while importing test module 'C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project\tests\test_api\test_delete_goal_api.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+..\..\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+tests\test_api\test_delete_goal_api.py:4: in <module>
+    from infra.infra_web.browser_wrapper import BrowserWrapper
+infra\infra_web\browser_wrapper.py:6: in <module>
+    from jira import JIRA
+E   ModuleNotFoundError: No module named 'jira'
+________________________________________________________________ ERROR collecting tests/test_api/test_goals_api.py ________________________________________________________________ 
+ImportError while importing test module 'C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project\tests\test_api\test_goals_api.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+..\..\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+tests\test_api\test_goals_api.py:4: in <module>
+    from infra.infra_web.browser_wrapper import BrowserWrapper
+infra\infra_web\browser_wrapper.py:6: in <module>
+    from jira import JIRA
+E   ModuleNotFoundError: No module named 'jira'
+_________________________________________________________________ ERROR collecting tests/test_api/test_skills.py __________________________________________________________________ 
+ImportError while importing test module 'C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project\tests\test_api\test_skills.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+..\..\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+tests\test_api\test_skills.py:4: in <module>
+    from dotenv import load_dotenv
+E   ModuleNotFoundError: No module named 'dotenv'
+_____________________________________________________________ ERROR collecting tests/test_api/test_update_goal_api.py _____________________________________________________________ 
+ImportError while importing test module 'C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project\tests\test_api\test_update_goal_api.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+..\..\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+tests\test_api\test_update_goal_api.py:3: in <module>
+    from infra.infra_web.browser_wrapper import BrowserWrapper
+infra\infra_web\browser_wrapper.py:6: in <module>
+    from jira import JIRA
+E   ModuleNotFoundError: No module named 'jira'
+_____________________________________________________________ ERROR collecting tests/test_web/test_delete_goal_web.py _____________________________________________________________ 
+ImportError while importing test module 'C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project\tests\test_web\test_delete_goal_web.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+..\..\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+tests\test_web\test_delete_goal_web.py:4: in <module>
+    from infra.infra_web.browser_wrapper import BrowserWrapper
+infra\infra_web\browser_wrapper.py:6: in <module>
+    from jira import JIRA
+E   ModuleNotFoundError: No module named 'jira'
+________________________________________________________________ ERROR collecting tests/test_web/test_goals_web.py ________________________________________________________________ 
+ImportError while importing test module 'C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project\tests\test_web\test_goals_web.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+..\..\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+tests\test_web\test_goals_web.py:3: in <module>
+    from infra.infra_web.browser_wrapper import BrowserWrapper
+infra\infra_web\browser_wrapper.py:6: in <module>
+    from jira import JIRA
+E   ModuleNotFoundError: No module named 'jira'
+_________________________________________________________________ ERROR collecting tests/test_web/test_tunner.py __________________________________________________________________ 
+ImportError while importing test module 'C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project\tests\test_web\test_tunner.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+..\..\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+tests\test_web\test_tunner.py:7: in <module>
+    from infra.infra_web.browser_wrapper import BrowserWrapper
+infra\infra_web\browser_wrapper.py:6: in <module>
+    from jira import JIRA
+E   ModuleNotFoundError: No module named 'jira'
+_____________________________________________________________ ERROR collecting tests/test_web/test_update_goal_web.py _____________________________________________________________ 
+ImportError while importing test module 'C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project\tests\test_web\test_update_goal_web.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+..\..\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+tests\test_web\test_update_goal_web.py:4: in <module>
+    from infra.infra_web.browser_wrapper import BrowserWrapper
+infra\infra_web\browser_wrapper.py:6: in <module>
+    from jira import JIRA
+E   ModuleNotFoundError: No module named 'jira'
+============================================================================= short test summary info ============================================================================= 
+ERROR tests/test_api/test_delete_goal_api.py
+ERROR tests/test_api/test_goals_api.py
+ERROR tests/test_api/test_skills.py
+ERROR tests/test_api/test_update_goal_api.py
+ERROR tests/test_web/test_delete_goal_web.py
+ERROR tests/test_web/test_goals_web.py
+ERROR tests/test_web/test_tunner.py
+ERROR tests/test_web/test_update_goal_web.py
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Interrupted: 8 errors during collection !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+================================================================================ 8 errors in 0.14s ================================================================================ 
+(venv) PS C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project> 
+ChatGPT
+The errors indicate that there are multiple issues with the test environment setup:
+
+File or Directory Not Found: The initial attempt to run pytest failed because it could not find the specified test file. This could be due to a typo or incorrect path.
+
+ModuleNotFoundError: When pytest attempted to collect test items from the other test files, it encountered ModuleNotFoundError errors. This means that required Python modules such as jira and dotenv are not installed in your virtual environment.
+
+Here are the steps to resolve these issues:
+
+Correct File Path: Ensure that the file path in the first command is correct. There seems to be a typo: you used -m instead of tests/test_web/test_runner.py. Verify that test_runner.py exists at the path you are specifying.
+
+Install Missing Modules: The errors show that your test modules are trying to import jira and dotenv packages, which are not found. You need to install these modules within your virtual environment using pip.
+
+Here's how you can install these modules:
+
+powershell
+Copy code
+pip install jira python-dotenv
+After installing the required modules, try running the pytest command again.
+
+Keep in mind that any external module used in your tests needs to be installed in the virtual environment where you are running the tests. If there are more missing modules, you will need to install each of them using pip install <module-name>.
+
+User
+python -m pytest -m tests/test_web/test_runner.py
+when i remove the -m i get file not found
+ChatGPT
+It appears you have a couple of issues:
+
+When you removed the -m option, pytest could not find the file tests/test_web/test_runner.py. This is likely because of a path issue. Ensure the path is correct and that the file exists at that location.
+
+With the -m option included, pytest is interpreting it as a request to run tests with a specific marker, but then it encounters multiple import errors from the files it does find. This means that the -m option should not be used here, as you are not specifying a marker but rather the path to the test file.
+
+The import errors indicate that the modules jira and dotenv are not installed in your virtual environment. These modules need to be installed for your tests to run.
+
+Here’s what you can do to resolve these issues:
+
+1
+
+User
+how can i locate the specific folder and from their locate the file i want to run (i dont have impoert error)
+ChatGPT
+The -m flag in the pytest command is actually used for running tests with a specific marker, not for specifying the path to the test files. If you want to run a specific test file, you should provide the path to the file directly without any flags.
+
+To locate a specific folder and file, you can use the following steps:
+
+Open PowerShell in the root of your project.
+
+Use the Get-ChildItem cmdlet to list directories and find the folder you are looking for. For example, to list all the folders in your current directory:
+
+powershell
+Copy code
+Get-ChildItem -Directory
+Once you've found the folder, you can navigate into it using the cd (Change Directory) command. For example:
+
+powershell
+Copy code
+cd tests\test_web
+Then list the contents of this directory to find the file:
+
+powershell
+Copy code
+Get-ChildItem
+When you have confirmed the location of your test file, run it with pytest. If the file test_runner.py is in tests\test_web, then your command (executed from the project root) should be:
+
+powershell
+Copy code
+python -m pytest tests\test_web\test_runner.py
+Make sure you are using the correct path separators for PowerShell (backslashes \) and ensure you are running this command from the root directory of your project where the tests directory is located.
+
+If you've verified that you're in the correct directory and the file is present, but pytest still cannot find the file, make sure that:
+
+The file name is spelled correctly, including the correct casing (test_runner.py is not the same as Test_Runner.py on case-sensitive file systems).
+The file has the .py extension and is a valid Python file.
+Remember, to list and navigate directories, you must be in PowerShell, not the Command Prompt, as the Command Prompt uses different commands (e.g., dir) for directory listing.
+
+User
+how can i do that in python
+ChatGPT
+To resolve these issues in Python, follow these steps:
+
+Correctly specify the file path for pytest:
+
+Remove the -m option when running pytest as it's used to run tests with a specific marker, not to specify test files or directories.
+Ensure you are in the project root directory (which seems to be the case from your prompt).
+Run the pytest command with the correct path to the file:
+powershell
+Copy code
+python -m pytest tests/test_web/test_runner.py
+Install the required Python modules:
+
+To install the jira and dotenv modules, you need
+User
+can i use discover?
+ChatGPT
+Yes, pytest automatically discovers test files and functions according to a naming convention. By default, it recognizes files that start with test_ or end with _test.py, and within those files, it runs functions that start with test_.
+
+If you simply want to run all tests within a directory, you can just specify the directory name, and pytest will discover all test files within it. For example:
+
+powershell
+Copy code
+python -m pytest tests/test_web/
+This command tells pytest to discover and run all tests in the tests/test_web/ directory.
+
+If you want to discover and run all tests across the entire project, and if your tests are structured correctly according to pytest’s conventions, you can run pytest without any arguments:
+
+powershell
+Copy code
+python -m pytest
+This command will search for all test files in the current directory and its subdirectories.
+
+To summarize, if you want pytest to discover and run all your tests, you don't need to specify a particular file—just make sure all your test files and functions are named according to the conventions that pytest expects. If there is a specific directory you want to test, point pytest to that directory.
+
+User
+i still get file not found
+ChatGPT
+If you're still getting a "file not found" error when running pytest, it means that pytest is unable to locate the test file you're specifying. Here are the steps to troubleshoot and resolve this issue:
+
+Check File Path:
+Make sure the file test_runner.py exists in the tests/test_web directory. If you're not sure, navigate to that directory and check manually:
+
+powershell
+Copy code
+dir tests\test_web\
+This will list all files in the test_web directory. Look for test_runner.py in the output.
+
+Use Correct Command:
+If the file exists, make sure you're using the correct command to run pytest. The command should be as follows, without any additional flags, if you want to run a specific file:
+
+powershell
+Copy code
+python -m pytest tests\test_web\test_runner.py
+Ensure you're using backslashes (\) for the path, as this is the correct directory separator on Windows.
+
+Check for Typos:
+Ensure there are no typos in your command or file name. Even a small typo can cause the file to not be found.
+
+Run Pytest from Project Root:
+Ensure you're running the command from the root directory of your project where pytest can find the tests directory. From the outputs you've shown earlier, you are in the correct directory.
+
+Check Python Environment:
+Ensure that your Python environment is the one you expect. Sometimes you may have multiple Python installations, and the one that's running might not have pytest installed. Since you're using a virtual environment, make sure it is activated, which it appears to be from the (venv) prefix in your prompt.
+
+Install Missing Modules:
+The error logs you showed indicate missing Python modules such as jira and dotenv. You should install them using pip within your activated virtual environment:
+
+powershell
+Copy code
+pip install jira python-dotenv
+If you've verified the existence of the file and the correct path and are still encountering issues, it might be worth checking if there are any permission issues or if the file is accessible. It is also possible that an anti-virus program or other security software could be preventing access to the file.
+
+After performing these checks and ensuring the necessary modules are installed, try running pytest again. If the problem persists, please provide any updated error messages or outputs.
+
+User
+platform win32 -- Python 3.12.0, pytest-8.1.1, pluggy-1.4.0 -- C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project\venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project
+collected 0 items                                                                                                                                                                   
+
+============================================================================== no tests ran in 0.00s ==============================================================================
+ERROR: file or directory not found: tests/test_web/test_runner.py
+
+ChatGPT
+If you're still encountering a "file or directory not found" error for tests/test_web/test_runner.py, let's take a more systematic approach to troubleshoot:
+
+Confirm the File Exists: Use the command prompt or PowerShell to list the contents of the tests/test_web directory to make sure that test_runner.py actually exists. Use the dir command:
+
+powershell
+Copy code
+dir tests\test_web\
+Look for test_runner.py in the list of files output by this command.
+
+Check for Correct Activation of Virtual Environment: Make sure your virtual environment is activated when you run the tests, although the (venv) prefix in your prompt suggests it is.
+
+Run Pytest from the Correct Location: It's important that you run pytest from the root directory of your project where it can access the tests directory properly. It looks like you are in the correct directory, but it's good to verify this.
+
+Try Absolute Path: If relative paths are causing trouble, specify the absolute path to the test file:
+
+powershell
+Copy code
+python -m pytest C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project\tests\test_web\test_runner.py
+Replace C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project with the actual path to your project if it’s different.
+
+Check Permissions: Make sure that your user account has the correct permissions to access and read the file in question.
+
+Check for Special Characters or Spaces: If your file or folder names contain special characters or spaces, it might be causing issues with pytest's file discovery.
+
+Check Pytest Version: Make sure you are using a version of pytest that is compatible with your Python version and your project configuration.
+
+If you have verified the existence of the file and its correct path, you've installed all the required dependencies, you're running the command from the right location, and the problem persists, there might be an issue with your pytest installation or configuration.
+
+Please go through these steps carefully to ensure that all conditions are correct. If the problem still isn't resolved, you may want to try recreating the virtual environment or consulting the documentation for both pytest and your IDE to ensure there are no additional configuration steps you need to take.
+
+User
+with what to replace the empgty space
+ChatGPT
+If the filename or directory path contains spaces, you should enclose the entire path in quotes. This tells the command-line interpreter to treat the whole enclosed string as a single item rather than breaking it up into separate parts at each space.
+
+Here is an example using quotes around a path with spaces:
+
+powershell
+Copy code
+python -m pytest "tests/test_web/test_runner.py"
+If the path to your project contains spaces, you would also enclose that path in quotes:
+
+powershell
+Copy code
+python -m pytest "C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project\tests\test_web\test_runner.py"
+Using quotes should allow the command-line interpreter to correctly handle paths with spaces in them. Make sure to use straight double quotes ("), not curly or other types of quotation marks.
+
+User
+C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project\tests\test_web>python -m pytest  "C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project\tests\test_web\test_runner.py"
+================================================= test session starts =================================================
+platform win32 -- Python 3.12.0, pytest-8.1.1, pluggy-1.4.0
+rootdir: C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project\tests\test_web
+plugins: html-4.1.1, metadata-3.1.1
+collected 0 items
+
+================================================ no tests ran in 0.01s ================================================
+ERROR: file or directory not found: C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project\tests\test_web\test_runner.py
+
+ChatGPT
+Given that the error persists even with the absolute path correctly enclosed in quotes, let's go through a series of steps to ensure everything is set up correctly:
+
+Verify the File’s Existence: Use the command line to ensure the test_runner.py file actually exists at the given path. You can do this by running:
+
+cmd
+Copy code
+dir "C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project\tests\test_web\test_runner.py"
+Make sure the command doesn't return an error and that it lists test_runner.py.
+
+Check for Hidden Extensions: Windows sometimes hides known file extensions, so what appears as test_runner.py might actually be test_runner.py.txt or something similar. Ensure file extensions are shown in your file explorer.
+
+Check for Special Characters: Special characters in the path or file name could cause issues. Verify there are no non-standard characters.
+
+Use the Correct Command Prompt: Ensure you are using the command prompt or PowerShell where your Python and pytest are accessible, typically where Python was added to the system's PATH during installation.
+
+Check for Typos: Ensure that there are no typos in the file name in the file explorer versus what you've typed in the command line.
+
+Run pytest Without Specifying a File: Sometimes it's useful to run pytest without specifying a file to see if it can discover any test cases:
+
+cmd
+Copy code
+cd "C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project"
+python -m pytest
+This will tell you if pytest can automatically find any tests.
+
+Check Python and Pytest: Make sure pytest is installed in the same Python environment that you're calling. Since you're not activating the virtual environment in this command, use where python to see which Python you're actually running. It's possible that it's a different Python installation than you expect.
+
+After checking these details, if you're certain the file exists and is correctly named, but you're still facing issues, it might be an issue with pytest itself or a very specific environmental issue on your machine. At that point, you might want to try re-installing pytest, or even Python, to see if that resolves the problem.
+
+User
+C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project\tests\test_web>dir "C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project\tests\test_web\test_runner.py"
+ Volume in drive C has no label.
+ Volume Serial Number is 60A0-99A7
+
+ Directory of C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project\tests\test_web
+
+File Not Found
+
+C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project\tests\test_web>
+ChatGPT
+The dir command output stating "File Not Found" confirms that the test_runner.py file does not exist in the C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project\tests\test_web directory.
+
+To resolve this, do the following:
+
+Verify the correct filename. Ensure that the file you're trying to run actually exists with the name test_runner.py. Is it possible that there might be a typo in the filename?
+
+Check if the file is in a different directory. The file might be located elsewhere, or you might have mistyped the directory name. Look through your project's directories to locate where test_runner.py might be.
+
+If you're not sure of the file's location, you can search for it using the following command in the command prompt:
+
+cmd
+Copy code
+cd C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project
+dir test_runner.py /s /p
+This command will search through all directories under your project folder for a file named test_runner.py.
+
+If you discover that the file is in a different location, use that path in your pytest command.
+
+If the file does not exist at all, you may need to check your version control system or backup to retrieve it, or there might be a misunderstanding about the expected test file name.
+
+Please carefully verify the presence and the correct location of your test file before attempting to run pytest again.
+
+User
+import os
+import subprocess
+from Utils.configurations import ConfigurationManager
+
+import os
+import subprocess
+from Utils.configurations import ConfigurationManager
+
+
+def run_pytest(parallel=False):
+    # Load configuration
+    config_manager = ConfigurationManager()
+    settings = config_manager.load_settings()
+
+    ui_tests_path = "tests/api"
+    reports_dir = "reports"
+    os.makedirs(reports_dir, exist_ok=True)
+
+    python_path = os.path.join("venv", "Scripts", "python.exe")
+
+    # Base command using the virtual environment's Python
+    base_cmd = [python_path, "-m", "pytest", ui_tests_path]
+
+    html_report = os.path.join(reports_dir, "report.html")
+
+    if parallel:
+        parallel_cmd = base_cmd + ["-n", "3", "-m", "not serial", f"--html={html_report}"]
+        try:
+            subprocess.run(parallel_cmd, check=True)
+        except subprocess.CalledProcessError as e:
+            print(e.returncode)
+
+    try:
+        serial_html_report = os.path.join(reports_dir, "report_serial.html")
+        serial_cmd = base_cmd + ["-m", "serial", f"--html={serial_html_report}"]
+        subprocess.run(serial_cmd, check=True)
+    except subprocess.CalledProcessError as e:
+        if e.returncode == 5:  # No tests were collected
+            print("No serial tests were found.")
+        else:
+            print(e.returncode)
+    else:
+        non_parallel_cmd = base_cmd + [f"--html={html_report}"]
+        try:
+            subprocess.run(non_parallel_cmd, check=True)
+        except subprocess.CalledProcessError as e:
+            print(e.returncode)
+
+
+if __name__ == "__main__":
+    config_manager = ConfigurationManager()
+    settings = config_manager.load_settings()
+    is_parallel = settings['parallel']
+    run_pytest(parallel=is_parallel)
+ChatGPT
+The Python script you've provided is designed to programmatically run pytest to execute tests either in parallel or serially, depending on the configuration. It dynamically generates pytest commands based on the specified settings and executes them, handling potential errors and creating HTML reports for the test results. Here's a breakdown of what the script does:
+
+Imports and Configuration Loading:
+
+It imports necessary modules and loads test configuration settings using a ConfigurationManager.
+Function Definition (run_pytest):
+
+Defines a function run_pytest that accepts a boolean argument parallel to determine whether tests should be run in parallel.
+It sets paths for test directories and report directories.
+Command Construction:
+
+Constructs a base pytest command using Python from the virtual environment.
+Depending on the parallel flag, it appends different options to the base command:
+If parallel is True, it adds options to run tests in parallel (not marked with 'serial') and generates an HTML report.
+If parallel is False, it constructs a command to run tests marked as 'serial' and generates a separate HTML report.
+Execution:
+
+Executes the constructed command using subprocess.run.
+Catches exceptions to handle cases where tests fail or no tests are collected.
+Main Execution Block:
+
+The script checks if it is the main program being executed and, if so, retrieves the parallel setting from the configuration and calls run_pytest.
+To Utilize This Script:
+
+Ensure that your project's structure matches the paths defined in the script (tests/api, reports, etc.).
+The script expects a configuration management system (ConfigurationManager) to provide settings, particularly for parallel execution.
+The script assumes the Python executable is located in venv/Scripts/python.exe, relative to the script's directory.
+Note: Before running the script, make sure your environment is correctly set up with all necessary Python packages installed (pytest, pytest-html for HTML reports, and pytest-xdist for parallel execution if needed).
+
+If you plan to use this script, ensure the necessary modules (pytest, pytest-xdist, pytest-html) are installed in your virtual environment and your configuration management system is properly set up to provide the necessary settings.
+
+User
+import json
+import time
+import unittest
+from pathlib import Path
+import pytest
+from infra.infra_web.browser_wrapper import BrowserWrapper
+from logic.api_logic.goals_api import GoalsAPI
+from logic.web_logic.goals_web import GoalsWeb
+from logic.web_logic.home_page_pathfinder import PathfinderPage
+from logic.web_logic.login_page import LoginPage
+from logic.web_logic.welcome_page import WelcomePage
+from parameterized import parameterized_class
+
+from pytest_markers import test_decorator
+
+config_path  = Path(__file__).resolve().parents[2].joinpath("config.json")
+with open(config_path, 'r') as config_file:
+    config = json.load(config_file)
+browser_types = [(browser,) for browser in config["browser_types"]]
+
+
+@parameterized_class(('browser',), browser_types)
+class TestDeleteGoalAPI(unittest.TestCase):
+    def setUp(self):
+        self.browser = BrowserWrapper()
+        default_browser = 'Chrome'
+        self.browser = getattr(self.__class__, 'browser', default_browser)
+        self.driver = self.browser.get_driver(self.browser)
+
+        self.welcome_page = WelcomePage(self.driver)
+        self.test_cases=[self.test_delete_goal_api]
+        self.goals_api = GoalsAPI()
+        self.welcome_page.click_log_in()
+        self.login_page = LoginPage(self.driver)
+        self.login_page.login_flow("friendola15@gmail.com", "AutomationTester2024")
+        self.pathfinder_page = PathfinderPage(self.driver)
+        self.pathfinder_page.click_on_Goals_page()
+        self.goals_web = GoalsWeb(self.driver)
+        self.goal_name = "Fullstack developer"
+        self.chosen_skills = ["Go", "Java", "CSS"]
+        self.courses_levels = ["Professional", "Beginner", "Beginner"]
+        self.hours_weekly = 8
+        self.goals_web.set_goal_in_web(self.goal_name, self.chosen_skills, self.courses_levels, self.hours_weekly)
+
+    @test_decorator
+    def test_delete_goal_api(self):
+        goal_id_before_deleting=self.goals_api.get_goal_id()
+        self.goals_web.delete_goals(self.goal_name)
+        time.sleep(3)
+        goal_id_after_deleting=self.goals_api.get_goal_id()
+        self.assertEqual(len(goal_id_before_deleting), 36, "Goal was not created")
+        self.assertEqual(goal_id_after_deleting, None, "Goal was not Deleted")
+
+    def tearDown(self):
+        self.goals_api.delete_goal()
+        self.driver.quit()
+
+"C:\Users\Alaa Oda\AppData\Local\Programs\Python\Python312\python.exe" "C:/Program Files/JetBrains/PyCharm 2023.3.3/plugins/python/helpers/pycharm/_jb_pytest_runner.py" --target test_delete_goal_api.py::TestDeleteGoalAPI.test_delete_goal_api 
+Testing started at 4:13 ...
+Launching pytest with arguments test_delete_goal_api.py::TestDeleteGoalAPI::test_delete_goal_api --no-header --no-summary -q in C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project\tests\test_api
+
+============================= test session starts =============================
+collecting ... collected 0 items
+ERROR: not found: C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project\tests\test_api\test_delete_goal_api.py::TestDeleteGoalAPI::test_delete_goal_api
+(no match in any of [<UnitTestCase TestDeleteGoalAPI>])
+
+
+============================ no tests ran in 0.30s ============================
+
+Process finished with exit code 4
+
+Empty suite
+ChatGPT
+The output indicates that pytest is unable to locate the test method test_delete_goal_api within the TestDeleteGoalAPI class. This issue arises because you're mixing unittest and pytest frameworks, which have differing test discovery mechanisms. Here's a detailed breakdown and how you can address it:
+
+1. Unittest vs Pytest Test Discovery
+unittest: This framework identifies test methods by scanning for methods that start with test in classes that inherit from unittest.TestCase.
+pytest: While pytest can run unittest-style test cases, its discovery mechanism is more flexible. However, specifying a test method directly in a unittest.TestCase subclass can sometimes cause issues.
+2. Using Parameterization with Unittest
+You're using parameterized_class from the parameterized package to dynamically create test classes for each browser type. This can complicate test discovery for pytest when you specify a single test method in the command.
+3. Fixing the Test Discovery Issue
+Direct Pytest Approach: Consider rewriting your tests using pytest's style and fixtures instead of unittest. Pytest's fixtures provide a more flexible and powerful mechanism for setup and teardown operations.
+Unittest Compatibility Mode: If you prefer to stick with the unittest style, ensure you're running the tests through a command that supports unittest discovery, or simply run the entire file without specifying a particular method.
+4. Example of Pytest-Style Test Refactoring
+Here's a simplified example of how you might refactor your test to use pytest fixtures:
+
+python
+Copy code
+import pytest
+from infra.infra_web.browser_wrapper import BrowserWrapper
+from logic.api_logic.goals_api import GoalsAPI
+
+# Assuming config loading and browser_types setup is done above...
+
+@pytest.fixture(params=browser_types)
+def browser(request):
+    return BrowserWrapper(request.param)
+
+@pytest.fixture
+def goals_api():
+    return GoalsAPI()
+
+def test_delete_goal_api(browser, goals_api):
+    driver = browser.get_driver()
+    # Setup operations with driver...
+    goal_id_before_deleting = goals_api.get_goal_id()
+    # Delete operations...
+    goal_id_after_deleting = goals_api.get_goal_id()
+    assert len(goal_id_before_deleting) == 36, "Goal was not created"
+    assert goal_id_after_deleting is None, "Goal was not Deleted"
+This refactoring uses pytest's parameterization and fixture capabilities, providing a more integrated approach consistent with pytest's design principles.
+
+5. Execution Command
+After refactoring, you would run your pytest without specifying the method:
+
+shell
+Copy code
+"C:\Users\Alaa Oda\AppData\Local\Programs\Python\Python312\python.exe" -m pytest "C:/Users/Alaa Oda/PycharmProjects/CI_automation_Project/tests/test_api/test_delete_goal_api.py"
+This command should correctly discover and execute your test. If you continue to use the unittest structure, you might consider running the whole test class without pinpointing a specific method or switch to using pytest's conventions for more seamless integration.
+
+User
+import json
+import time
+import unittest
+from pathlib import Path
+import pytest
+from infra.infra_web.browser_wrapper import BrowserWrapper
+from logic.api_logic.goals_api import GoalsAPI
+from logic.web_logic.goals_web import GoalsWeb
+from logic.web_logic.home_page_pathfinder import PathfinderPage
+from logic.web_logic.login_page import LoginPage
+from logic.web_logic.welcome_page import WelcomePage
+from parameterized import parameterized_class
+
+from pytest_markers import test_decorator
+
+config_path  = Path(__file__).resolve().parents[2].joinpath("config.json")
+with open(config_path, 'r') as config_file:
+    config = json.load(config_file)
+browser_types = [(browser,) for browser in config["browser_types"]]
+
+
+@parameterized_class(('browser',), browser_types)
+class TestDeleteGoalAPI(unittest.TestCase):
+    def setUp(self):
+        self.browser_wrapper = BrowserWrapper()
+        default_browser = 'Chrome'
+        self.browser = getattr(self.__class__, 'browser', default_browser)
+        self.driver = self.browser_wrapper.get_driver(self.browser)
+
+        self.welcome_page = WelcomePage(self.driver)
+        self.test_cases=[self.test_delete_goal_api]
+        self.goals_api = GoalsAPI()
+        self.welcome_page.click_log_in()
+        self.login_page = LoginPage(self.driver)
+        self.login_page.login_flow("friendola15@gmail.com", "AutomationTester2024")
+        self.pathfinder_page = PathfinderPage(self.driver)
+        self.pathfinder_page.click_on_Goals_page()
+        self.goals_web = GoalsWeb(self.driver)
+        self.goal_name = "Fullstack developer"
+        self.chosen_skills = ["Go", "Java", "CSS"]
+        self.courses_levels = ["Professional", "Beginner", "Beginner"]
+        self.hours_weekly = 8
+        self.goals_web.set_goal_in_web(self.goal_name, self.chosen_skills, self.courses_levels, self.hours_weekly)
+
+    @test_decorator
+    def test_delete_goal_api(self):
+        goal_id_before_deleting=self.goals_api.get_goal_id()
+        self.goals_web.delete_goals(self.goal_name)
+        time.sleep(3)
+        goal_id_after_deleting=self.goals_api.get_goal_id()
+        self.assertEqual(len(goal_id_before_deleting), 36, "Goal was not created")
+        self.assertEqual(goal_id_after_deleting, None, "Goal was not Deleted")
+
+    def tearDown(self):
+        self.goals_api.delete_goal()
+        self.driver.quit()
+
+"C:\Users\Alaa Oda\AppData\Local\Programs\Python\Python312\python.exe" "C:/Program Files/JetBrains/PyCharm 2023.3.3/plugins/python/helpers/pycharm/_jb_pytest_runner.py" --target test_delete_goal_api.py::TestDeleteGoalAPI 
+Testing started at 4:15 ...
+Launching pytest with arguments test_delete_goal_api.py::TestDeleteGoalAPI --no-header --no-summary -q in C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project\tests\test_api
+
+============================= test session starts =============================
+collecting ... collected 0 items
+
+============================ no tests ran in 0.29s ============================
+
+Process finished with exit code 5
+
+Empty suite
+ChatGPT
+The message you're seeing indicates that pytest is not finding any tests to run in the specified target. This issue often arises due to a mix-up between unittest and pytest methodologies, especially when unittest style tests are used in conjunction with pytest's execution. Given that your tests are written in the unittest style but you're trying to run them with pytest, here are a few steps to help resolve the issue:
+
+Pytest and Unittest Compatibility: Pytest supports running unittest style tests but expects a certain structure. Ensure your test methods within TestDeleteGoalAPI are named correctly, starting with test_. It seems they are, but pytest might be having trouble with the parameterized class.
+
+Parameterization: The use of parameterized_class may be causing issues with pytest's discovery mechanism. While pytest has its own parameterization features, they differ from the parameterized package's approach, especially within the context of unittest.TestCase subclasses.
+
+Running the Test Without Pytest: As a check, you can try running the tests using Python's built-in unittest discovery mechanism to see if the tests are recognized and executed correctly:
+
+shell
+Copy code
+python -m unittest discover -s tests/test_api -p test_delete_goal_api.py
+This command will use Python's built-in unittest module to discover and run tests in test_delete_goal_api.py.
+
+Pytest Execution: If you want to stick with pytest, consider refactoring your tests to use pytest's native fixture and parameterization system, which might resolve the discovery issues you're encountering.
+
+Debugging Discovery Issues: If you're set on using pytest with your current setup, try running pytest with increased verbosity to get more insights into the discovery process:
+
+shell
+Copy code
+pytest -vv -k TestDeleteGoalAPI tests/test_api
+This command will increase the verbosity and attempt to run tests specifically in the TestDeleteGoalAPI class.
+
+Check for Configuration Files: Ensure there are no configuration files like pytest.ini, pyproject.toml, or tox.ini that might be altering pytest's default behavior or test discovery process.
+
+If after trying the above you're still facing issues, you might need to delve deeper into the interaction between the parameterization you're using and pytest's discovery mechanisms, or consider aligning your test structure more closely with pytest's conventions for a smoother experience.
+
+
+2 / 2
+
+User
+ModuleNotFoundError: No module named 'parameterized'
+ChatGPT
+The error ModuleNotFoundError: No module named 'parameterized' indicates that the Python module parameterized is not installed in your current Python environment. The parameterized library is used for parameterizing tests, allowing you to run the same test with different data inputs.
+
+To resolve this issue, you need to install the parameterized module. You can do this using pip, Python's package installer. Since you're using a virtual environment (as indicated by your earlier use of venv), you should ensure that your virtual environment is activated before installing the package.
+
+Here's how you can install the parameterized module:
+
+Activate your virtual environment. You've previously done this, but as a reminder, the command is typically:
+
+bash
+Copy code
+.\venv\Scripts\Activate
+This command might vary slightly depending on your shell (PowerShell, CMD, etc.).
+
+Once the virtual environment is activated (you'll see (venv) at the start of your command line), install the parameterized package:
+
+bash
+Copy code
+pip install parameterized
+This command will download and install the parameterized module and any of its dependencies into your virtual environment, making it available for your Python scripts.
+
+After installation, you should be able to import and use the parameterized module in your tests without encountering the ModuleNotFoundError.
+
+User
+{
+  "value": {
+    "stacktrace": "",
+    "error": "unknown command",
+    "message": "Unable to find handler for (GET) \u002fwd\u002fhub"
+  }
+}
+ChatGPT
+The error message you're encountering indicates that the HTTP request made to the WebDriver server is not recognized or supported. The message "Unable to find handler for (GET) /wd/hub" suggests there's an issue with the endpoint or the way the WebDriver server is set up or being accessed. Here are a few things to check and try:
+
+Correct Endpoint: Ensure that you're using the correct URL for your WebDriver server. The endpoint /wd/hub is commonly used with Selenium Grid or when connecting to remote WebDriver instances. If you're running a local WebDriver, you might not need to include /wd/hub in your URL.
+
+WebDriver Server Running: Verify that the WebDriver server (e.g., Chromedriver, Geckodriver) is up and running. If it's not running, your requests will not be processed.
+
+Compatibility: Ensure that the version of your WebDriver (e.g., Chromedriver) is compatible with the version of the browser you are trying to control. Incompatibility can lead to unexpected errors.
+
+Proper Initialization: When using Selenium with a remote driver, make sure you're initializing the driver with the correct command executor URL. For a remote Selenium Grid, it might look something like this in Python:
+
+python
+Copy code
+from selenium import webdriver
+
+driver = webdriver.Remote(
+    command_executor='http://localhost:4444/wd/hub',
+    desired_capabilities={'browserName': 'chrome'}
+)
+Adjust the command_executor URL according to your setup.
+
+Driver Logs: Check the logs of your WebDriver server. These logs can provide more context about why the request is unrecognized.
+
+Request Method: The error indicates a GET request. If you're manually crafting HTTP requests to the WebDriver, ensure you're using the correct HTTP method (GET, POST, DELETE, etc.) as required by the WebDriver API for the specific command you're trying to execute.
+
+If you're using a standard Selenium setup, usually, you don't need to worry about these endpoints directly. If you're facing this issue in a more advanced setup (like a custom network configuration or a Selenium Grid), you'll need to ensure that the URL and ports are correctly configured and accessible.
+
+User
+what if i want to run a test from a class with pytest
+ChatGPT
+If you want to run a specific test from a test class using pytest, you can specify the test class and the test method in your command. This is particularly useful when you have multiple tests in a file and you want to focus on a single test or a group of tests within a specific class.
+
+Here's the general syntax for running a specific test method within a class using pytest:
+
+arduino
+Copy code
+pytest path/to/test_file.py::TestClass::test_method
+path/to/test_file.py should be replaced with the actual path to your Python test file.
+TestClass should be replaced with the name of your test class.
+test_method should be replaced with the name of the test method you want to run.
+For example, if you have a test file named test_example.py, with a class TestExample, and a method test_case, you would run it like this:
+
+arduino
+Copy code
+pytest test_example.py::TestExample::test_case
+This command tells pytest to only run the test_case method inside the TestExample class.
+
+Additionally, if you want to run all tests within a specific class but not the entire file, you can omit the test method name:
+
+arduino
+Copy code
+pytest path/to/test_file.py::TestClass
+This will run all test methods within TestClass.
+
+Remember, if you're running this command from a different directory than where your test file is located, you'll need to provide the correct path to the file, or navigate to the directory where the test file is located before running the command.
+
+User
+Uploaded image
+although its their
+ChatGPT
+The error you've encountered indicates that pytest cannot find the test you are trying to run. This could be due to several reasons:
+
+Typo in the Test Name: Ensure there are no typos in the test file name, class name, or test method name.
+
+Incorrect Test Discovery: If the test method does not follow pytest's naming conventions (test_ prefix), pytest will not discover it.
+
+Test Location: Make sure that the test you are trying to run is in the correct location as specified in your command. The test file should be in tests/test_api directory and the file name should be test_delete_goal_api.py.
+
+Unittest Compatibility: Pytest has the ability to run unittest.TestCase tests, but there can be compatibility issues, especially if you are trying to run a single test from a unittest.TestCase subclass.
+
+Parameterized Tests: If the test is parameterized (as it appears to be from the code snippets you've provided previously), pytest might not be able to recognize the test method name directly due to the way parameterized tests are represented internally.
+
+File Structure: Make sure there isn't an __init__.py file missing from the test directories, which could affect the test discovery.
+
+Here’s what you can try to resolve the issue:
+
+Make sure the class and method names are correctly specified.
+
+Verify that the test method starts with test_.
+
+Use the -k option to run tests that match a particular expression, which can be part of the test name:
+
+shell
+Copy code
+pytest -k TestDeleteGoalAPI
+Ensure the test method is not being skipped or deselected by custom markers or configurations.
+
+If the test class is parameterized, try running all tests in the file or all tests in the class without specifying a particular method:
+
+shell
+Copy code
+pytest path/to/test_file.py::TestClass
+Look into the pytest documentation regarding unittest.TestCase support for more nuanced scenarios like parameterized tests.
+
+If the test class or method name is very long, ensure that the command prompt isn't breaking the command into two lines, which could cause it to be read incorrectly.
+
+If you continue to face issues, please check the test file and ensure the test method indeed exists and that pytest is called with the correct path and test method name. If the method is dynamically generated or modified in some way at runtime, that could also lead to discovery issues.
+
+User
+Uploaded image
+ChatGPT
+The image you've uploaded indicates that you've attempted to run a pytest command for a specific test class, but pytest has collected 0 items, which generally means that it didn't find any tests to run in the specified class. There are several reasons why this might happen:
+
+Naming Convention: Pytest follows a naming convention where test files must start with test_ and test functions must also start with test_. If your class or method names do not follow this convention, pytest won't recognize them as tests.
+
+Test Discovery Issue: Pytest may not recognize the tests if the methods within your TestDeleteGoalAPI class are not structured or named in a way that pytest expects. Ensure all test methods within the class start with test_.
+
+Inheritance from unittest.TestCase: If TestDeleteGoalAPI inherits from unittest.TestCase, it may cause issues with pytest's discovery mechanism when run in combination with certain plugins or configurations.
+
+Parameterization: Since the class seems to be parameterized, there may be an issue with how pytest is interpreting those parameters. Pytest has its own parameterization mechanisms which may conflict with other libraries if they are not integrated properly.
+
+Configuration Files: Configuration files like pytest.ini, tox.ini, or pyproject.toml might include settings that alter how tests are collected and which tests are included or excluded.
+
+Plugins: Sometimes plugins can interfere with test collection. If you're using any plugins, consider whether they might be affecting the test discovery process.
+
+Given that you're getting an error and not simply a message about collected items, there might be additional information further down in the pytest output that could give more clues about what's going wrong. Review the full pytest output for any errors or warnings that might indicate the source of the problem.
+
+You can also run pytest in verbose mode to get more detailed information about the collection process:
+
+shell
+Copy code
+python -m pytest -vv tests\test_api\test_delete_goal_api.py::TestDeleteGoalAPI
+This command will give you a more verbose output, which might include useful information about why the tests are not being collected. If there are any specific errors in the output, addressing
+
+User
+"C:\Users\Alaa Oda\AppData\Local\Programs\Python\Python312\python.exe" "C:/Program Files/JetBrains/PyCharm 2023.3.3/plugins/python/helpers/pycharm/_jb_pytest_runner.py" --target test_delete_goal_api.py::TestDeleteGoalAPI.test_delete_goal_api 
+Testing started at 4:55 ...
+Launching pytest with arguments test_delete_goal_api.py::TestDeleteGoalAPI::test_delete_goal_api --no-header --no-summary -q in C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project\tests\test_api
+
+============================= test session starts =============================
+collecting ... collected 0 items
+
+============================ no tests ran in 0.23s ============================
+ERROR: not found: C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project\tests\test_api\test_delete_goal_api.py::TestDeleteGoalAPI::test_delete_goal_api
+(no match in any of [<UnitTestCase TestDeleteGoalAPI>])
+
+
+Process finished with exit code 4
+
+Empty suite
+ChatGPT
+The error message indicates that pytest is not recognizing TestDeleteGoalAPI.test_delete_goal_api as a test to run. This might be due to a few reasons:
+
+Inheritance Issue: Pytest can run tests from classes that inherit from unittest.TestCase, but there can be some nuances. If TestDeleteGoalAPI inherits from unittest.TestCase, pytest may not recognize individual tests if not correctly configured to do so.
+
+Test Naming Convention: Make sure your test method follows pytest's naming convention, which requires test function names to start with test_.
+
+Parameterized Tests: If TestDeleteGoalAPI is using a parameterization decorator from a library that pytest does not natively support, pytest may not be able to recognize the test cases. Pytest does support its own parameterization, which is done with @pytest.mark.parametrize.
+
+Plugin Interference: If you are using additional plugins with pytest, there could be compatibility issues or additional configuration required for the tests to be discovered correctly.
+
+PyCharm Integration: Since it looks like you are using PyCharm's pytest runner, there might be issues specific to how PyCharm integrates with pytest. Make sure your PyCharm project is correctly set up for pytest, and that PyCharm recognizes your test structure.
+
+Here are a few troubleshooting steps:
+
+Run without PyCharm: Try running the test directly from the command line without using PyCharm's runner to rule out PyCharm-related issues.
+
+shell
+Copy code
+pytest tests\test_api\test_delete_goal_api.py::TestDeleteGoalAPI::test_delete_goal_api
+Run the Entire Test File: Attempt to run the entire test file without specifying a particular test method to see if pytest can pick up any tests in the file.
+
+shell
+Copy code
+pytest tests\test_api\test_delete_goal_api.py
+Verbose Output: Use the -vv flag to get a verbose output which might provide more insight into what is happening during the collection phase.
+
+shell
+Copy code
+pytest -vv tests\test_api\test_delete_goal_api.py
+Check for Configuration Files: Look for any pytest.ini, pyproject.toml, or tox.ini files that could contain configurations affecting test discovery.
+
+Review the Class and Method: Open the test_delete_goal_api.py file and verify that TestDeleteGoalAPI is a class that does not inherit from unittest.TestCase and that test_delete_goal_api is a method within that class with the correct naming convention.
+
+If you continue to experience issues, you may need to reevaluate how you are structuring your tests or configuring pytest and PyCharm to ensure compatibility.
+
+User
+venv) PS C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project> pytest tests\test_api\test_delete_goal_api.py
+=========================================================== test session starts ============================================================
+platform win32 -- Python 3.12.0, pytest-8.1.1, pluggy-1.4.0
+rootdir: C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project
+collected 0 items / 1 error                                                                                                                 
+
+================================================================== ERRORS ================================================================== 
+_________________________________________ ERROR collecting tests/test_api/test_delete_goal_api.py __________________________________________ 
+ImportError while importing test module 'C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project\tests\test_api\test_delete_goal_api.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+..\..\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+tests\test_api\test_delete_goal_api.py:6: in <module>
+    from infra.infra_web.browser_wrapper import BrowserWrapper
+E   ModuleNotFoundError: No module named 'infra'
+========================================================= short test summary info ========================================================== 
+ERROR tests/test_api/test_delete_goal_api.py
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+============================================================= 1 error in 0.07s ============================================================= 
+(venv) PS C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project> 
+ChatGPT
+The error message you're seeing is an ImportError, and it's specifically saying that the module infra could not be found. This indicates that Python is not able to import the infra package, which is expected to contain the infra_web.browser_wrapper module.
+
+Here are the steps to troubleshoot this issue:
+
+Check if the infra Module Exists: Verify that there is a directory named infra within your project and that it contains an __init__.py file to be recognized as a package.
+
+Check the infra_web Subpackage: Inside the infra directory, there should be a subdirectory named infra_web, also with an __init__.py file. Within infra_web, there should be a file named browser_wrapper.py.
+
+Python Path: Ensure that the root directory of your project (which should be C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project) is in the Python path so that modules can be resolved correctly. If you're running the script from within the root directory and the package is correctly structured, it should be able to resolve.
+
+Virtual Environment: Make sure your virtual environment is activated when you're running the tests. Your command prompt indicates that you have activated your virtual environment, but double-check it's the correct environment where all your dependencies are installed.
+
+Install Any Missing Dependencies: If infra is a third-party package you installed via pip, ensure it's installed within your active virtual environment with pip install infra.
+
+Relative Imports: If infra is part of your project, ensure that you're using relative imports if the module is importing from within the same package, or adjust your PYTHONPATH environment variable to include the directory where infra resides.
+
+Directory Structure and Names: Make sure the directory structure is as follows and that there are no typos in the names:
+
+markdown
+Copy code
+CI_automation_Project/
+├─ tests/
+│  ├─ test_api/
+│  │  ├─ test_delete_goal_api.py
+├─ infra/
+│  ├─ __init__.py
+│  ├─ infra_web/
+│  │  ├─ __init__.py
+│  │  ├─ browser_wrapper.py
+No Overlapping Names: Ensure that there are no conflicts with other installed packages named infra. If you have a folder named infra that's not meant to be a Python package, it could be conflicting with an actual Python package named infra.
+After verifying these points, try running the tests again. If you still encounter issues, you might need to check the imports in your test file and within browser_wrapper.py to ensure they are correct and follow the expected Python module/package structure.
+
+User
+how can i check what files in path
+ChatGPT
+To check which files and directories are included in Python's path, you can print the contents of sys.path. The sys.path variable is a list of strings that specifies the search path for modules. Here's how you can view it:
+
+Activate your virtual environment.
+Open Python in interactive mode or run a Python script with the following content:
+python
+Copy code
+import sys
+
+# Print each entry in sys.path on a new line for better readability
+for path in sys.path:
+    print(path)
+This will print out all the locations that Python is currently searching for modules. By default, it includes the directory where the script is run and the standard library directories.
+
+To check for specific files within these paths, you could extend the script to search each directory in sys.path for the files you're interested in. Here's an example of how you could check for a specific file (e.g., browser_wrapper.py) within the directories listed in sys.path:
+
+python
+Copy code
+import sys
+from pathlib import Path
+
+file_to_find = 'browser_wrapper.py'
+
+for path in sys.path:
+    # Check if the path is a directory
+    if Path(path).is_dir():
+        # Iterate through all files in the directory
+        for filepath in Path(path).rglob(file_to
+User
+in pycharm terminal
+ChatGPT
+In PyCharm's terminal, you can check the files in the current directory (which is typically the root of your project) by using the dir command if you're using Windows, or ls if you're on macOS or Linux.
+
+Here's how you can list the files and directories in your current path using PyCharm's terminal:
+
+Open PyCharm Terminal: There's usually a terminal window at the bottom of PyCharm's interface. Click on it to start typing commands.
+
+List Files and Directories:
+
+On Windows, type:
+bash
+Copy code
+dir
+On macOS or Linux, type:
+bash
+Copy code
+ls -l
+Check for Specific Directory:
+
+If you want to check for the presence of the infra directory, you would type:
+bash
+Copy code
+dir infra
+Or on macOS or Linux:
+bash
+Copy code
+ls -l infra
+Check Python Path:
+
+To see what directories Python is searching for modules, you can list the contents of sys.path with the following commands:
+python
+Copy code
+python -c "import sys; print(sys.path)"
+Search Recursively:
+
+If you want to search for a particular file or directory name recursively in your project, you could use the find command on macOS or Linux, or a more complex dir command with the /s flag on Windows.
+On Windows:
+bash
+Copy code
+dir /s infra
+On macOS or Linux:
+arduino
+Copy code
+find . -name infra
+Please note, PyCharm's terminal is just like any other system terminal, it just starts in the root directory of your project. The commands you use in PyCharm's terminal are the same commands you would use in your system's command prompt or shell.
+
+User
+ImportError while importing test module 'C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project\tests\test_api\test_delete_goal_api.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+..\..\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+tests\test_api\test_delete_goal_api.py:7: in <module>
+    from infra.infra_web.browser_wrapper import BrowserWrapper
+E   ModuleNotFoundError: No module named 'infra'
+========================================================= short test summary info ========================================================== 
+ERROR tests/test_api/test_delete_goal_api.py
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+============================================================= 1 error in 0.07s ============================================================= 
+(venv) PS C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project> pytest "tests\test_api\test_delete_goal_api.py"
+=========================================================== test session starts ============================================================
+platform win32 -- Python 3.12.0, pytest-8.1.1, pluggy-1.4.0
+rootdir: C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project
+collected 0 items / 1 error                                                                                                                 
+
+================================================================== ERRORS ================================================================== 
+_________________________________________ ERROR collecting tests/test_api/test_delete_goal_api.py __________________________________________ 
+ImportError while importing test module 'C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project\tests\test_api\test_delete_goal_api.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+..\..\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+tests\test_api\test_delete_goal_api.py:6: in <module>
+    from infra.infra_web.browser_wrapper import BrowserWrapper
+E   ModuleNotFoundError: No module named 'infra'
+========================================================= short test summary info ========================================================== 
+ERROR tests/test_api/test_delete_goal_api.py
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+============================================================= 1 error in 0.08s ============================================================= 
+(venv) PS C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project> dir
+
+
+    Directory: C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----         3/27/2024   5:00 AM                .idea
+d-----         3/26/2024   4:12 PM                .pytest_cache
+d-----         3/26/2024   2:40 PM                .venv
+d-----         3/26/2024   2:48 PM                infra
+d-----         3/26/2024   2:48 PM                logic
+d-----         3/26/2024   3:53 PM                tests
+d-----         3/26/2024   7:27 PM                venv
+d-----         3/27/2024   4:10 AM                __pycache__
+-a----         3/26/2024   7:27 PM            208 .env                                                                                      
+-a----         3/27/2024   4:38 AM           3415 config.json                                                                               
+-a----         3/27/2024   4:44 AM           1314 config_api.json
+-a----         3/26/2024   3:32 PM            622 Dockerfile
+-a----         3/26/2024   2:11 PM            993 Firefox.lnk
+-a----         3/26/2024   5:14 PM           2412 Jenkinsfile
+-a----         3/27/2024   4:10 AM           1515 pytest_markers.py
+-a----         3/26/2024   3:01 PM            602 requirements.txt
+-a----         3/26/2024   2:11 PM       38836136 selenium-server-4.17.0.jar
+
+ChatGPT
+The ModuleNotFoundError for 'infra' suggests that Python can't find the infra module in your project when running pytest. However, based on the directory listing you've provided, there is an infra directory at the root of your project. This directory should be a Python package (which it is considered to be if it contains an __init__.py file).
+
+Here are a few steps to help diagnose and fix the issue:
+
+Check for __init__.py:
+Confirm that there is an __init__.py file in the infra directory and also in the `infra_web
+User
+ ERROR collecting tests/test_api/test_delete_goal_api.py __________________________________________ 
+ImportError while importing test module 'C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project\tests\test_api\test_delete_goal_api.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+..\..\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+tests\test_api\test_delete_goal_api.py:6: in <module>
+    from infra.infra_web.browser_wrapper import BrowserWrapper
+E   ModuleNotFoundError: No module named 'infra'
+========================================================= short test summary info ========================================================== 
+ERROR tests/test_api/test_delete_goal_api.py
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+============================================================= 1 error in 0.10s ============================================================= 
+(venv) PS C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project> 
+ChatGPT
+The ModuleNotFoundError indicates that Python cannot find the infra module when trying to import BrowserWrapper. Here are some steps to troubleshoot this issue:
+
+Verify the Directory Structure: Ensure that the infra directory has an __init__.py file. This file can be empty, but its presence indicates to Python that infra is a package from which modules can be imported. Your directory should look something like this:
+
+markdown
+Copy code
+CI_automation_Project/
+├─ infra/
+│  ├─ __init__.py
+│  ├─ infra_web/
+│  │  ├─ __init__.py
+│  │  ├─ browser_wrapper.py
+Check the Current Working Directory: Python needs to be run from the root directory of your project (where the infra directory is located) to import modules from infra correctly. It seems like you're in the correct directory, but it's always good to double-check with:
+
+shell
+Copy code
+(venv) PS C:\Users\
+User
+"C:\Users\Alaa Oda\AppData\Local\Programs\Python\Python312\python.exe" "C:/Program Files/JetBrains/PyCharm 2023.3.3/plugins/python/helpers/pycharm/_jb_pytest_runner.py" --path "C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project\tests\test_web\test_runner.py" 
+Testing started at 5:18 ...
+Launching pytest with arguments C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project\tests\test_web\test_runner.py --no-header --no-summary -q in C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project\tests\test_web
+
+============================= test session starts =============================
+collecting ... collected 0 items
+
+============================ no tests ran in 0.22s ============================
+
+Process finished with exit code 5
+
+import json
+from concurrent.futures import ThreadPoolExecutor
+from pathlib import Path
+import time
+import unittest
+from infra.infra_web.browser_wrapper import BrowserWrapper
+from tests.test_api.test_delete_goal_api import TestDeleteGoalAPI
+
+
+all_test_groups = [TestDeleteGoalAPI]
+
+
+def run_individual_test(browser_name,test):
+    test.browser=browser_name
+    test_suite = unittest.TestLoader().loadTestsFromTestCase(test)
+    runner = unittest.TextTestRunner()
+    runner.run(test_suite)
+
+def run_tests_for_browser_serial(caps_list,all_test_groups):
+    for test in all_test_groups:
+        for browser in caps_list:
+            run_individual_test(browser, test)
+
+def run_tests_for_browser_parallel(caps_list, all_test_groups):
+    test_list = [(browser, test_case) for browser in caps_list for test_case in all_test_groups]
+
+    with ThreadPoolExecutor(max_workers=len(all_test_groups)) as executor:
+        [executor.submit(run_individual_test, browser, test) for browser, test in test_list]
+
+
+
+if __name__ == '__main__':
+    browser_wrapper = BrowserWrapper()
+    start_time = time.time()
+
+    cur_dir = Path(__file__).resolve().parents[1].joinpath("config.json")
+    with open(cur_dir, 'r') as config_file:
+        config = json.load(config_file)
+
+    if config["grid"] :
+        if config["grid type"] == "parallel":
+            run_tests_for_browser_parallel(config['browser_types'], all_test_groups)
+
+        elif config["grid type"] == "serial":
+            run_tests_for_browser_serial(config['browser_types'], all_test_groups)
+
+
+
+
+    end_time = time.time()
+    total_time = end_time - start_time
+    print(f"Total time to run all tests: {total_time:.2f} seconds")
+
+
+Empty suite
+ChatGPT
+It seems that when you attempt to run your test suite using PyCharm's _jb_pytest_runner.py, no tests are discovered, and the suite is reported as empty. There are a couple of reasons why this might be happening:
+
+Mixing Unittest and Pytest: Your test_runner.py script seems to utilize unittest rather than pytest. unittest is Python's standard testing framework, while pytest is a third-party testing framework that provides additional features. Pytest does have the ability to run unittest test cases, but it's usually more straightforward to use one framework or the other.
+
+Test Discovery: Pytest's discovery mechanism looks for test_*.py or *_test.py files by default, which contain test_ prefixed functions. Since your script is likely intended to be run as a standalone script (using unittest discovery and running mechanisms), pytest may not recognize the tests structured within it.
+
+Test Loading in test_runner.py: The test cases are loaded and run through unittest.TestLoader() and unittest.TextTestRunner() within your script. This method is specific to unittest, not pytest. If you intend to use PyCharm's pytest runner, you might need to refactor your tests to use pytest's test discovery and execution mechanisms.
+
+Here's what you can do:
+
+Refactor for Pytest: Adjust your test cases to follow pytest conventions, removing unittest references, and using pytest fixtures if necessary.
+
+Running Unittest Directly: If you want to stick with unittest, you can run your tests using the unittest command-line interface, rather than through pytest. In PyCharm, configure your test runner to use unittest instead of pytest.
+
+Run Script Directly: Since your test_runner.py is a script designed to execute tests itself, you can run it directly with Python instead of using PyCharm's pytest runner. From the command line, you would simply execute:
+
+shell
+Copy code
+python tests\test_web\test_runner.py
+Ensure Correct Configuration: If you want to run this through PyCharm's test configuration, make sure your PyCharm configuration is set to use the correct interpreter, working directory, and test framework.
+
+Pytest Compatibility: If you want to keep using PyCharm's pytest runner, you'll need to ensure that your test classes and methods are compatible with pytest. This includes using the correct naming conventions and possibly refactoring your tests to avoid using unittest-specific classes and methods. You might also need to remove the main block in test_runner.py as pytest handles test execution differently.
+
+To continue with pytest, you might have to restructure your tests so that they're recognized by pytest without relying on the custom runner logic in your test_runner.py. This would involve using pytest fixtures for setup and teardown and following pytest's test discovery conventions.
+
+User
+venv) PS C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project> python tests\test_web\test_runner.py
+Traceback (most recent call last):
+  File "C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project\tests\test_web\test_runner.py", line 7, in <module>
+    from infra.infra_web.browser_wrapper import BrowserWrapper
+ModuleNotFoundError: No module named 'infra'
+(venv) PS C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project> 
+although it exist
+ChatGPT
+The ModuleNotFoundError indicates that the infra package cannot be found by Python. This error can happen even if the infra directory exists in your project structure. Here's what you should check:
+
+__init__.py Files: Make sure that both the infra directory and its subdirectories, such as infra_web, contain an __init__.py file. These files can be empty, but their presence is required for Python to recognize a directory as a package.
+
+Current Working Directory: Verify that you're running the script from the root directory of your project, where the infra package is located. It seems you are already in the correct directory based on the command prompt output.
+
+Python Path: Ensure that the root directory of your project is in the Python path. Python uses the list of directories in sys.path to determine where to look for modules to import.
+
+Virtual Environment: Confirm that your virtual environment is active and that you haven't installed the infra package globally or in a different environment. The (venv) prompt suggests the virtual environment is active, so this is likely not the issue.
+
+Correct Installation: If infra is a third-party package you installed with pip, make sure it's installed in your current virtual environment. If it's part of your project, ensure that there is no name conflict with another installed package named infra.
+
+Relative Imports: If you are running the test_runner.py as a script, Python might not set up import paths as you expect. In such cases, you might have to adjust your import statements or modify the way you're running the script to ensure Python can find the infra package.
+
+Here's a quick check you can do to debug the issue further:
+
+Open a Python interactive shell within your virtual environment and try to import infra:
+python
+Copy code
+(venv) PS C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project> python
+>>> import sys
+>>> sys.path.append('C:\\Users\\Alaa Oda\\PycharmProjects\\CI_automation_Project')
+>>> from infra.infra_web.browser_wrapper import BrowserWrapper
+If you can import BrowserWrapper without an error, it suggests that the issue may be with how you're running your script. If you still get an error, it means that Python genuinely can't find the infra package, and you should double-check your project structure and the presence of __init__.py files.
+
+Remember, Python must be able to find an infra directory with an __init__.py file in one of the directories listed in sys.path to import from it successfully.
+
+User
+''''
+import json
+from concurrent.futures import ThreadPoolExecutor
+from pathlib import Path
+import time
+import unittest
+from infra.infra_web.browser_wrapper import BrowserWrapper
+from tests.test_api.test_delete_goal_api import TestDeleteGoalAPI
+
+
+all_test_groups = [TestDeleteGoalAPI]
+
+
+def run_individual_test(browser_name,test):
+    test.browser=browser_name
+    test_suite = unittest.TestLoader().loadTestsFromTestCase(test)
+    runner = unittest.TextTestRunner()
+    runner.run(test_suite)
+
+def run_tests_for_browser_serial(caps_list,all_test_groups):
+    for test in all_test_groups:
+        for browser in caps_list:
+            run_individual_test(browser, test)
+
+def run_tests_for_browser_parallel(caps_list, all_test_groups):
+    test_list = [(browser, test_case) for browser in caps_list for test_case in all_test_groups]
+
+    with ThreadPoolExecutor(max_workers=len(all_test_groups)) as executor:
+        [executor.submit(run_individual_test, browser, test) for browser, test in test_list]
+
+
+
+if __name__ == '__main__':
+    browser_wrapper = BrowserWrapper()
+    start_time = time.time()
+
+    cur_dir = Path(__file__).resolve().parents[1].joinpath("config.json")
+    with open(cur_dir, 'r') as config_file:
+        config = json.load(config_file)
+
+    if config["grid"] :
+        if config["grid type"] == "parallel":
+            run_tests_for_browser_parallel(config['browser_types'], all_test_groups)
+
+        elif config["grid type"] == "serial":
+            run_tests_for_browser_serial(config['browser_types'], all_test_groups)
+
+
+
+
+    end_time = time.time()
+    total_time = end_time - start_time
+    print(f"Total time to run all tests: {total_time:.2f} seconds")
+'''
+import json
+import subprocess
+from pathlib import Path
+
+
+def run_pytest(parallel=False):
+    # Directory where all tests are located
+    ui_tests_path = "tests\test_api\test_delete_goal_api"
+
+    # Basic command with the path to UI tests
+    cmd = ["pytest", ui_tests_path, "--html=report.html"]
+
+    # If parallel execution is enabled, modify the command to run with xdist
+    if parallel:
+        # Runs all tests except those marked as 'serial'
+        cmd.extend(["-n", "8", "-m", "not serial"])
+        subprocess.run(cmd)
+
+        # Now run the serial tests without xdist
+        cmd = ["pytest", ui_tests_path, "-m", "serial", "--html=report_serial.html"]
+    else:
+        # Optionally, use a different report name for serial tests
+        cmd.extend(["--html=report_serial.html"])
+
+    # Execute the pytest command
+    subprocess.run(cmd)
+
+
+if __name__ == "__main__":
+    cur_dir = Path(__file__).resolve().parents[1].joinpath("config.json")
+    with open(cur_dir, 'r') as config_file:
+        config = json.load(config_file)
+
+    is_parallel=config["grid_type"]
+
+    run_pytest(parallel=is_parallel)"C:\Users\Alaa Oda\AppData\Local\Programs\Python\Python312\python.exe" "C:/Program Files/JetBrains/PyCharm 2023.3.3/plugins/python/helpers/pycharm/_jb_pytest_runner.py" --path "C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project\tests\test_web\test_runner.py"
+Testing started at 5:27 ...
+Launching pytest with arguments C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project\tests\test_web\test_runner.py --no-header --no-summary -q in C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project\tests\test_web
+
+============================= test session starts =============================
+collecting ... collected 0 items
+
+============================ no tests ran in 0.01s ============================
+
+Process finished with exit code 5
+
+Empty suite
+ChatGPT
+It looks like you have two separate scripts here. The first script is set up to run unittest test cases, potentially in parallel, using Python's ThreadPoolExecutor. The second script is configured to run pytest commands, potentially in parallel using the xdist plugin for pytest.
+
+The message at the end indicates that PyCharm is trying to run a file test_runner.py with pytest, but it is unable to find any tests to run. This is likely because test_runner.py doesn't contain pytest-style test functions or classes, but instead contains code to run unittest tests, which doesn't follow pytest's discovery rules.
+
+Here are a few things you can do:
+
+Standardize Your Testing Framework: Decide whether you want to use unittest or pytest. If you opt for pytest, rewrite your tests to use pytest's fixtures and style. If you choose unittest, then you don't need pytest and should configure your environment to run unittest tests directly.
+
+Run unittest Directly: If you're using the unittest framework, you can run your test suite directly with the python -m unittest discover command, instead of using pytest.
+
+Adjust PyCharm Configuration: If you're using PyCharm, you can configure your project's testing settings to run tests using either unittest or pytest. Ensure that the configuration matches the framework you're using.
+
+Run the run_pytest Function Directly: You have a function run_pytest which looks like it's intended to be run directly. If you want to use that, make sure the command line arguments you pass to subprocess.run are correct, and that the pytest invocation is working when you run it from the command line.
+
+Refactor for pytest: If you want to refactor your tests to use pytest and take advantage of features like fixtures and parameterization, you will need to rewrite your tests to conform to pytest's conventions.
+
+Review pytest Discovery Rules: Make sure your test files, classes, and methods follow the naming conventions that pytest expects (files starting with test_, test methods starting with test_, etc.).
+
+If you continue to have problems with PyCharm's pytest runner, try running the tests from the command line to ensure your environment is set up correctly and the tests are discoverable. Here's an example of how to run pytest directly in your terminal:
+
+shell
+Copy code
+(venv) PS C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project> pytest tests\test_api\
+This should collect and run all tests in the specified directory, assuming they follow pytest's conventions. If it works from the command line but not within PyCharm, the issue may be with PyCharm's configuration.
+
+User
+(venv) PS C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project> python -m pytest "tests\test_web\test_runner.py"
+=========================================================== test session starts ============================================================
+platform win32 -- Python 3.12.0, pytest-8.1.1, pluggy-1.4.0
+rootdir: C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project
+collected 1 item                                                                                                                             
+
+tests\test_web\test_runner.py .                                                                                                       [100%]
+
+============================================================ 1 passed in 0.25s ============================================================= 
+(venv) PS C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project> 
+but i didnt see any test run
+ChatGPT
+It appears that pytest did discover and run a test from your test_runner.py file, as indicated by the [100%] and 1 passed in the output. However, if you didn't observe any expected test behavior, such as browser actions or API calls, there are a few possibilities to consider:
+
+Test Is Not Doing What It's Supposed To: The test might be passing without actually performing the intended actions due to logic issues within the test itself. It could be that the test setup is incorrect, or the assertions are not accurately capturing the test requirements.
+
+Verbose Output: To get more information about what pytest is doing, you can run the command with the -v flag for more verbose output. This will show you the names of each test run and more details about the steps within them:
+
+shell
+Copy code
+(venv) PS C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project> python -m pytest -v "tests\test_web\test_runner.py"
+Logging: If you're not seeing the expected output, it might be helpful to add logging statements within your test to confirm that it's being executed as expected.
+
+Print Statements: Similarly, you could add print statements to the test to see output in the console when the test is run. Note that pytest captures output by default, so you might need to pass -s to see print statements:
+
+shell
+Copy code
+(venv) PS C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project> python -m pytest -s -v "tests\test_web\test_runner.py"
+Check Test Content: Open the test_runner.py file and review the test to ensure it contains the correct code to perform the test. Sometimes, a test might pass if it doesn't have any assertions or the assertions are not being hit due to conditional logic.
+
+Check for Mocks or Stubs: If your test uses mock objects or stubs, make sure they're configured to simulate the appropriate behavior. If mocks are not set up correctly, the test might not be testing the real functionality.
+
+Review Assertions: Ensure that your test contains assertions that check the expected outcomes of the test. A test without assertions or with incorrect assertions might pass even if the functionality is not working as intended.
+
+Pytest Configuration: If you have a pytest.ini file or other configuration files, ensure that they're not causing pytest to alter its default behavior in a way that affects your test execution.
+
+If you go through these steps and still can't see any test actions, there might be a more subtle issue with how your tests are structured or how your environment is set up.
+
+User
+(venv) PS C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project> python -m pytest -v "tests\test_web\test_runner.py"
+=========================================================== test session starts ============================================================
+platform win32 -- Python 3.12.0, pytest-8.1.1, pluggy-1.4.0 -- C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project\venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project
+collected 1 item                                                                                                                             
+
+tests/test_web/test_runner.py::test_pytest PASSED                                                                                     [100%]
+
+============================================================ 1 passed in 0.30s ============================================================= 
+(venv) PS C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project> 
+but nothing happened
+ChatGPT
+The output shows that pytest has executed a test named test_pytest in the test_runner.py file, and it passed successfully. However, if you expected some visible actions or outputs and didn't observe any, here are a few things to consider:
+
+Inspect the Test Code: Open tests\test_web\test_runner.py and look at the test_pytest function. What does it do? If it's a web test, it should be interacting with a browser. If it's an API test, it should be making HTTP requests.
+
+Assertions: Check if there are any assertions in the test. A test without assertions might pass by default if no exceptions are thrown during its execution.
+
+Logging and Print Statements: Add some logging or print statements inside the test method to confirm it's being executed as expected. For example:
+
+python
+Copy code
+def test_pytest():
+    print("Running test_pytest...")
+    # Your test code here
+    print("Finished test_pytest.")
+When you run pytest with the -s flag (python -m pytest -s -v "tests\test_web\test_runner.py"), these print statements should appear in the output.
+
+Side Effects: Consider what side effects you expect from the test. For instance, if it's a test that interacts with a web page, you should see browser activity. If you don't see the expected side effects, the test might not be set up correctly.
+
+Debugging: You can add a breakpoint in the test (using import pdb; pdb.set_trace() in Python 3.6+ or breakpoint() in Python 3.7+) to step through the test and see where it might be failing to perform the expected actions.
+
+Review Test Environment: Ensure your test environment is set up correctly. For example, if it's a web test, check if the browser driver is correctly configured and working.
+
+Check for Conditional Logic: If the test contains any conditional logic, ensure that the conditions are being met for the test actions to execute.
+
+Dependencies: If the test depends on external factors or configurations, verify that these are set up correctly and accessible during the test run.
+
+By following these steps, you should be able to identify why the test isn't producing the expected behavior or output.
+
+User
+  C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project\venv\Lib\site-packages\_pytest\config\__init__.py:1439: PytestConfigWarning: Unknown config option: render_collapsed
+
+    self._warn_or_fail_if_strict(f"Unknown config option: {key}\n")
+
+tests\test_api\test_delete_goal_api.py:21
+  C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project\tests\test_api\test_delete_goal_api.py:21: PytestUnknownMarkWarning: Unknown pytest
+.mark.serial - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.serial
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+========================================================= short test summary info ==========================================================
+FAILED tests/test_api/test_delete_goal_api.py::TestDeleteGoalAPI_0_Chrome::test_delete_goal_api - AssertionError: 14 != 36 : Goal was not created
+=========================================== 1 failed, 1 skipped, 2 warnings in 70.41s (0:01:10) ============================================ 
+(venv) PS C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project> python -m "tests\test_api\test_delete_goal_api.py"
+C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project\venv\Scripts\python.exe: Error while finding module specification for 'tests\\test_ap
+i\\test_delete_goal_api.py' (ModuleNotFoundError: No module named 'tests\\test_api\\test_delete_goal_api'). Try using 'tests\test_api\test_delete_goal_api' instead of 'tests\test_api\test_delete_goal_api.py' as the module name.
+(venv) PS C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project> python -m tests/test_api/test_delete_goal_api.py
+C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project\venv\Scripts\python.exe: Error while finding module specification for 'tests/test_api
+/test_delete_goal_api.py' (ModuleNotFoundError: No module named 'tests/test_api/test_delete_goal_api'). Try using 'tests/test_api/test_delete_goal_api' instead of 'tests/test_api/test_delete_goal_api.py' as the module name.
+(venv) PS C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project> python -m tests\test_api\test_delete_goal_api.py
+C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project\venv\Scripts\python.exe: Error while finding module specification for 'tests\\test_ap
+i\\test_delete_goal_api.py' (ModuleNotFoundError: No module named 'tests\\test_api\\test_delete_goal_api'). Try using 'tests\test_api\test_delete_goal_api' instead of 'tests\test_api\test_delete_goal_api.py' as the module name.
+(venv) PS C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project> python -m tests\test_api\test_delete_goal_api
+C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project\venv\Scripts\python.exe: No module named tests\test_api\test_delete_goal_api
+(venv) PS C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project> python -m pytest "tests\test_web\test_delete_goal_web.py"
+=========================================================== test session starts ============================================================
+platform win32 -- Python 3.12.0, pytest-8.1.1, pluggy-1.4.0
+rootdir: C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project
+configfile: pytest.ini
+collected 1 item
+
+tests\test_web\test_delete_goal_web.py 
+DevTools listening on ws://127.0.0.1:60879/devtools/browser/8b12d164-780d-4c4e-9f98-3aa513a1abbe
+[9028:76264:0327/062302.980:ERROR:interface_endpoint_client.cc(707)] Message 1 rejected by interface blink.mojom.WidgetHost
+[9028:48668:0327/062324.665:ERROR:cert_verify_proc_builtin.cc(878)] CertVerifyProcBuiltin for ssbsync.smartadserver.com failed:
+----- Certificate i=0 (CN=ingress-haproxy-public-l4.ingress-haproxy-public-l4) -----
+ERROR: No matching issuer found
+
+
+[66960:64840:0327/062324.665:ERROR:ssl_client_socket_impl.cc(970)] handshake failed; returned -1, SSL error code 1, net_error -202
+[66960:64840:0327/062329.513:ERROR:ssl_client_socket_impl.cc(970)] handshake failed; returned -1, SSL error code 1, net_error -202
+.                                                                                              [100%]
+
+============================================================= warnings summary ============================================================= 
+venv\Lib\site-packages\_pytest\config\__init__.py:1439
+  C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project\venv\Lib\site-packages\_pytest\config\__init__.py:1439: PytestConfigWarning: Unknown config option: render_collapsed
+============================================================= warnings summary ============================================================= 
+venv\Lib\site-packages\_pytest\config\__init__.py:1439
+  C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project\venv\Lib\site-packages\_pytest\config\__init__.py:1439: PytestConfigWarning: Unknown config option: render_collapsed
+
+    self._warn_or_fail_if_strict(f"Unknown config option: {key}\n")
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+================================================= 1 passed, 1 warning in 62.74s (0:01:02) ================================================== 
+(venv) PS C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project>
+
+i just want to get the test result without all of the rest
+ChatGPT
+To run your tests with pytest and get a concise output without the extra noise from warnings and other information, you can use the -q (quiet) option. Additionally, to suppress warnings, you can use the -p no:warnings option. Here's how you can modify your pytest command:
+
+shell
+Copy code
+(venv) PS C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project> python -m pytest -q -p no:warnings "tests\test_web\test_delete_goal_web.py"
+This command will run the tests quietly and suppress the warnings, giving you a cleaner output focused only on the test results.
+
+However, the warnings and extra information can sometimes be crucial for debugging. If you're seeing a PytestConfigWarning about an unknown config option (render_collapsed), this indicates that there is a setting in your pytest.ini file that pytest doesn't recognize. You might want to check your pytest.ini configuration file and remove or correct any unknown or misspelled options.
+
+Regarding the PytestUnknownMarkWarning about the serial marker, if you're using custom markers like @pytest.mark.serial, you need to define them in your pytest.ini file to avoid warnings:
+
+ini
+Copy code
+[pytest]
+markers =
+    serial: marks tests as serial to run them separately from parallel tests.
+If you're seeing SSL errors or other browser-related errors, and these are not relevant to your test outcomes, the above command should help suppress them in your output. However, if those errors are significant to the functionality being tested, you'll need to address them directly in your test setup or environment configuration.
+
+User
+"C:\Users\Alaa Oda\AppData\Local\Programs\Python\Python312\python.exe" "C:/Program Files/JetBrains/PyCharm 2023.3.3/plugins/python/helpers/pycharm/_jb_pytest_runner.py" --path "C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project\tests\test_web\test_runner.py" 
+Testing started at 6:25 ...
+Launching pytest with arguments C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project\tests\test_web\test_runner.py --no-header --no-summary -q in C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project\tests\test_web
+
+============================= test session starts =============================
+collecting ... collected 0 items
+
+============================ no tests ran in 0.01s ============================
+
+Process finished with exit code 5
+
+Empty suite
+'''
+import json
+from concurrent.futures import ThreadPoolExecutor
+from pathlib import Path
+import time
+import unittest
+from infra.infra_web.browser_wrapper import BrowserWrapper
+from tests.test_api.test_delete_goal_api import TestDeleteGoalAPI
+
+
+all_test_groups = [TestDeleteGoalAPI]
+
+
+def individual_test(browser_name,test):
+    test.browser=browser_name
+    test_suite = unittest.TestLoader().loadTestsFromTestCase(test)
+    runner = unittest.TextTestRunner()
+    runner.run(test_suite)
+
+def run_test_for_browser_serial(caps_list,all_test_groups):
+    for test in all_test_groups:
+        for browser in caps_list:
+            individual_test(browser, test)
+
+def run_test_for_browser_parallel(caps_list, all_test_groups):
+    test_list = [(browser, test_case) for browser in caps_list for test_case in all_test_groups]
+
+    with ThreadPoolExecutor(max_workers=len(all_test_groups)) as executor:
+        [executor.submit(individual_test, browser, test) for browser, test in test_list]
+
+
+
+def test_run():
+    browser_wrapper = BrowserWrapper()
+    start_time = time.time()
+
+    cur_dir = Path(__file__).resolve().parents[1].parents[0].joinpath("config.json")
+    with open(cur_dir, 'r') as config_file:
+        config = json.load(config_file)
+    if config["grid"] :
+        if config["grid type"] == "parallel":
+            run_test_for_browser_parallel(config['browser_types'], all_test_groups)
+
+        elif config["grid type"] == "serial":
+            run_test_for_browser_serial(config['browser_types'], all_test_groups)
+
+
+
+
+    end_time = time.time()
+    total_time = end_time - start_time
+    print(f"Total time to run all tests: {total_time:.2f} seconds")
+'''
+import json
+import os
+import subprocess
+from pathlib import Path
+
+
+def run_pytest(parallel=False):
+    cur_dir = Path(__file__).resolve().parents[1].parents[0].joinpath("config.json")
+    with open(cur_dir, 'r') as config_file:
+        config = json.load(config_file)
+    # Directory where all tests are located
+    ui_tests_path = "tests\test_web\test_delete_goal_web.py"
+    reports_dir = "reports"
+    os.makedirs(reports_dir, exist_ok=True)
+    python_path = os.path.join(".venv", "Scripts", "python.exe")
+    # Basic command with the path to UI tests
+    base_cmd = [python_path,"-m", "pytest",ui_tests_path]
+    html_report = os.path.join(reports_dir, "report.html")
+    # If parallel execution is enabled, modify the command to run with xdist
+    if parallel:
+        parallel_cmd = base_cmd + ["-n", "3", "-m", "not serial", f"--html={html_report}"]
+        try:
+            subprocess.run(parallel_cmd, check=True)
+        except subprocess.CalledProcessError as e:
+            print(f"Tests failed with return code {e.returncode}. Continuing the build...")
+    try:
+        serial_html_report = os.path.join(reports_dir, "report_serial.html")
+        serial_cmd = base_cmd + ["-m", "serial", f"--html={serial_html_report}"]
+        subprocess.run(serial_cmd, check=True)
+    except subprocess.CalledProcessError as e:
+        if e.returncode == 5:  # No tests were collected
+            print("No serial tests were found.")
+        else:
+            print(e.returncode)
+    else:
+        non_parallel_cmd = base_cmd + [f"--html={html_report}"]
+        try:
+            subprocess.run(non_parallel_cmd, check=True)
+        except subprocess.CalledProcessError as e:
+            print(e.returncode)
+
+
+
+
+if __name__ == "__main__":
+    cur_dir = Path(__file__).resolve().parents[1].parents[0].joinpath("config.json")
+    with open(cur_dir, 'r') as config_file:
+        config = json.load(config_file)
+
+    is_parallel=config["grid type"]
+
+    run_pytest(parallel=is_parallel)
+ChatGPT
+It looks like you're attempting to run a pytest command from within PyCharm, which is not finding any tests to run in test_runner.py. This could be because test_runner.py is structured to use unittest and doesn't have any test cases defined in a way that pytest recognizes. The script seems to be designed more as an executor for other tests rather than a container for tests itself.
+
+Your Python script also includes code for running tests either serially or in parallel using unittest or pytest. Here's what you can do to ensure your tests run correctly:
+
+Direct Test Execution: If test_runner.py is intended to run tests from other modules (like test_delete_goal_api.py), you should execute it directly instead of through pytest. Just run it as a standard Python script:
+
+shell
+Copy code
+(venv) PS C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project> python tests\test_web\test_runner.py
+Refactor for Pytest: If you want to use pytest to discover and run tests in test_runner.py, you'll need to refactor it to define test cases in a pytest-compatible manner. This means using functions prefixed with test_ or classes with methods prefixed with test_, without inheriting from unittest.TestCase.
+
+Ensure Test Discovery: If you're using pytest, ensure your test files and test functions or methods are named according to pytest's discovery conventions (test_*.py for files and test_* for function and method names).
+
+Configuration File: Make sure your pytest.ini file doesn't have any unrecognized configuration options that might cause warnings or errors.
+
+Running Pytest Programmatically: Your second script snippet seems to be set up to run pytest programmatically. Ensure the paths and parameters you pass to subprocess.run are correct. Remember that when running pytest this way, your working directory should be the root of your project, or you should adjust paths accordingly.
+
+Parallel Testing: If you're running tests in parallel using pytest-xdist, ensure that your tests are designed to be run in parallel, which means they should not interfere with each other.
+
+By following these steps, you should be able to execute your tests successfully, whether through direct execution of test_runner.py or by configuring it to be compatible with pytest.
+
+User
+ PS C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project> python tests\test_web\test_runner.py
+C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project\.venv\Scripts\python.exe: No module named pytest
+Tests failed with return code 1. Continuing the build...
+C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project\.venv\Scripts\python.exe: No module named pytest
+1
+(venv) PS C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project> 
+ChatGPT
+The error message No module named pytest suggests that pytest is not installed in your virtual environment. To resolve this, you need to install pytest within the virtual environment you're using. Here's how you can do it:
+
+Activate your virtual environment: It seems like your virtual environment is already activated since your prompt starts with (venv). If you need to activate it, you would typically run:
+
+powershell
+Copy code
+.\.venv\Scripts\Activate
+Install pytest: With your virtual environment activated, install pytest using pip:
+
+powershell
+Copy code
+(venv) PS C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project> pip install pytest
+This command will install pytest and its dependencies in your virtual environment.
+
+Verify Installation: After the installation, you can verify that pytest is installed by running:
+
+powershell
+Copy code
+(venv) PS C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project> pytest --version
+This should return the version of pytest that is installed.
+
+Rerun your script: Once pytest is installed, try running your test_runner.py script again:
+
+powershell
+Copy code
+(venv) PS C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project> python tests\test_web\test_runner.py
+This should solve the No module named pytest error. If you're still encountering issues, make sure that the script test_runner.py is correctly set up to find and run your tests, and that the path to your tests is correctly specified in the script.
+
+User
+1
+(venv) PS C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project> pytest --version
+pytest 8.1.1
+(venv) PS C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project> python tests\test_web\test_runner.py
+C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project\.venv\Scripts\python.exe: No module named pytest
+Tests failed with return code 1. Continuing the build...
+C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project\.venv\Scripts\python.exe: No module named pytest
+1
+(venv) PS C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project> 
+ChatGPT
+The error message indicates that when you run test_runner.py, it's unable to find the pytest module, despite the fact that pytest appears to be correctly installed in your virtual environment (as confirmed by pytest --version). This situation could be due to a few reasons:
+
+Environment Mismatch: Ensure that the Python interpreter used in the command python tests\test_web\test_runner.py is indeed the one from your virtual environment. Sometimes, scripts or configurations might inadvertently call a different Python interpreter.
+
+Python Executable in Script: If your test_runner.py script specifies a Python executable (like invoking pytest with a specific Python path), ensure it's using the one from the virtual environment. It should use the python executable without a full path, or it should dynamically determine the path to ensure it uses the same interpreter.
+
+Shebang Line: If test_runner.py starts with a shebang line (e.g., #!/usr/bin/env python), it might not use the correct Python interpreter. Although more common in Unix-based systems, this could also be a factor if your script is intended to be executable directly.
+
+Python Path: Verify that the PYTHONPATH environment variable (if set) includes the virtual environment's site-packages directory where pytest is installed.
+
+To debug further, modify your test_runner.py script to print the Python executable being used. Add these lines at the beginning of the script:
+
+python
+Copy code
+import sys
+print("Python executable:", sys.executable)
+print("sys.path:", sys.path)
+Then run the script again. This will show you which Python executable is being used and the sys.path value, which should include paths within your virtual environment.
+
+If sys.executable doesn't point to the Python interpreter inside your virtual environment, or if the paths in sys.path don't include the virtual environment's site-packages directory, there's an environment mismatch.
+
+To ensure you're using the virtual environment's Python interpreter, you can run the script like this:
+
+shell
+Copy code
+(venv) PS C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project> .\.venv\Scripts\python.exe tests\test_web\test_runner.py
+This command explicitly uses the Python interpreter from the virtual environment to execute your script.
+
+User
+Uploaded image
+ChatGPT
+The error you’re encountering, where Python cannot find the pytest module even though it's confirmed to be installed, suggests there might be a problem with the environment from which the script is executed.
+
+Here are a few steps you can take to troubleshoot:
+
+Check Python Executable: Confirm that the Python executable in the virtual environment is the one running the script. Sometimes, scripts or tools might use a different Python executable inadvertently.
+
+Explicit Python Path: Modify your script to use the explicit path to the Python executable within your virtual environment. For example, you can replace calls to python in your script with something like C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project\venv\Scripts\python.exe.
+
+Script Environment: Ensure that the script itself activates the virtual environment before trying to import pytest, or that it’s run under the correct active environment where pytest is installed.
+
+Command Line Execution: Try running pytest directly from the command line in the project root directory to ensure that it works outside of any scripts:
+
+shell
+Copy code
+(venv) PS C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project> pytest
+Check the PATH Environment Variable: Sometimes, the PATH environment variable can cause conflicts between different Python installations. Ensure that your virtual environment's Scripts directory is at the start of the PATH.
+
+Shebang Line in the Script: If your test_runner.py script is meant to be executable, make sure the shebang line (first line in the file) is set to use the virtual environment’s Python interpreter:
+
+python
+Copy code
+#!C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project\venv\Scripts\python.exe
+This only applies if you're on a Unix-like system or using a Unix-like terminal on Windows.
+
+Python -m Module Execution: If you’re using python -m to run a module, ensure you’re not including the .py extension and use dots for path separation:
+
+shell
+Copy code
+(venv) PS C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project> python -m pytest
+Remember to replace the paths with the correct ones if they are different. If you continue to encounter issues, provide more details or the content of the test_runner.py so that I can give you more targeted advice.
+
+User
+Check Python Executable: Confirm that the Python executable in the virtual environment is the one running the script. Sometimes, scripts or tools might use a different Python executable inadvertently. how?
+ChatGPT
+You can check which Python executable is being used in your virtual environment and in your script with the following methods:
+
+Check Python Executable in the Virtual Environment:
+Open a terminal and activate your virtual environment. Then execute the following command:
+
+shell
+Copy code
+(venv) PS C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project> Get-Command python
+This command will show you the path to the Python executable that is currently being used in your active shell session.
+
+Check Python Version and Executable Path:
+Still in the terminal with your virtual environment activated, you can also run:
+
+shell
+Copy code
+(venv) PS C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project> python -c "import sys; print(sys.executable)"
+This will print out the exact path to the Python interpreter that will be used to execute scripts in the current session.
+
+Check Inside the Script:
+At the beginning of your test_runner.py script, add the following lines:
+
+python
+Copy code
+import sys
+print("Python executable:", sys.executable)
+When you run the script, it will print out the path to the Python executable that the script is using.
+
+Correct the Script if Necessary:
+If the script is using a different Python executable, you may need to adjust the PATH environment variable or modify the script to point to the correct executable. If the script is being run by some tool or IDE (like PyCharm), you'll need to check the configuration of that tool to make sure it's set to use the Python executable from your virtual environment.
+
+Check the Shebang:
+If you're on Unix-like systems, scripts can be run with a shebang line, which tells the system what interpreter to use. Windows doesn't natively use shebang lines, but some environments like Git Bash or Cygwin do. If your script starts with a line like #!/usr/bin/env python, it will use whichever Python interpreter is found first in the system's PATH.
+
+By ensuring that both your command-line environment and your script are using the Python executable from the same virtual environment, you can avoid conflicts and issues with missing modules.
+
+User
+Uploaded image
+def run_pytest(parallel=False):
+    cur_dir = Path(__file__).resolve().parents[1].parents[0].joinpath("config.json")
+    with open(cur_dir, 'r') as config_file:
+        config = json.load(config_file)
+    # Directory where all tests are located
+    ui_tests_path = "tests\test_web\test_delete_goal_web.py"
+    reports_dir = "reports"
+    os.makedirs(reports_dir, exist_ok=True)
+    python_path = os.path.join(".venv", "Scripts", "python.exe")
+    # Basic command with the path to UI tests
+    base_cmd = [python_path,"-m", "pytest",ui_tests_path]
+    html_report = os.path.join(reports_dir, "report.html")
+    # If parallel execution is enabled, modify the command to run with xdist
+    if parallel:
+        parallel_cmd = base_cmd + ["-n", "3", "-m", "not serial", f"--html={html_report}"]
+        try:
+            subprocess.run(parallel_cmd, check=True)
+        except subprocess.CalledProcessError as e:
+            print(f"Tests failed with return code {e.returncode}. Continuing the build...")
+    try:
+        serial_html_report = os.path.join(reports_dir, "report_serial.html")
+        serial_cmd = base_cmd + ["-m", "serial", f"--html={serial_html_report}"]
+        subprocess.run(serial_cmd, check=True)
+    except subprocess.CalledProcessError as e:
+        if e.returncode == 5:  # No tests were collected
+            print("No serial tests were found.")
+        else:
+            print(e.returncode)
+    else:
+        non_parallel_cmd = base_cmd + [f"--html={html_report}"]
+        try:
+            subprocess.run(non_parallel_cmd, check=True)
+        except subprocess.CalledProcessError as e:
+            print(e.returncode)
+
+
+ChatGPT
+It looks like you’ve run a command to print out the Python executable path and confirmed it points to the Python executable in your virtual environment. The output C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project\venv\Scripts\python.exe confirms that you are indeed using the Python interpreter from your virtual environment.
+
+Now, looking at the code snippet you've posted, there seems to be a potential issue with the path to the Python executable in your run_pytest function:
+
+python
+Copy code
+python_path = os.path.join(".venv", "Scripts", "python.exe")
+Given that the venv folder's name appears to be .venv (with a dot at the beginning) based on the error message, but in your system it seems to be venv (without the dot), you should update this line to use the correct folder name. It should match the actual name of your virtual environment's directory.
+
+Here's the corrected line:
+
+python
+Copy code
+python_path = os.path.join("venv", "Scripts", "python.exe")
+Make sure to use this correct path when constructing the command to run your tests.
+
+After fixing the path, you should try running your test_runner.py script again. If the pytest module is correctly installed in your virtual environment, it should now be able to import pytest without any issues. If the problem persists, ensure that no other environment variables are interfering with Python's module lookup process and that you're not inadvertently using a different Python interpreter.
+
+User
+ C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project\venv\Lib\site-packages\_pytest\config\__init__.py:1439: PytestConfigWarning: Unknown config option: render_collapsed
+
+    self._warn_or_fail_if_strict(f"Unknown config option: {key}\n")
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+============================================================ 1 warning in 0.01s ============================================================ 
+(venv) PS C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project> 
+ChatGPT
+The warning you're seeing is related to a configuration option (render_collapsed) that is specified in your pytest configuration file (pytest.ini, tox.ini, or pyproject.toml) which pytest does not recognize.
+
+To resolve this warning, you should do the following:
+
+Locate the Configuration File: Find the pytest configuration file in your project directory. This file is usually named pytest.ini, tox.ini, or pyproject.toml.
+
+Edit the Configuration File: Open the file and look for an entry under a [pytest] or [tool.pytest.ini_options] section that says render_collapsed. It will look something like this:
+
+ini
+Copy code
+# pytest.ini or tox.ini
+[pytest]
+render_collapsed = some_value
+Or like this for pyproject.toml:
+
+toml
+Copy code
+# pyproject.toml
+[tool.pytest.ini_options]
+render_collapsed = "some_value"
+Remove or Comment Out the Option: Remove or comment out the render_collapsed line. To comment it out, simply add a # at the beginning of the line in an ini file, or for toml files, you can use # or """ to comment out blocks.
+
+Save and Rerun: Save the file and rerun your pytest command to see if the warning disappears.
+
+If you find that you need the render_collapsed option for a plugin or some custom feature and that the warning is benign, you can also suppress warnings about unknown config options using the -W ignore flag when running pytest, like so:
+
+shell
+Copy code
+(venv) PS C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project> pytest -W ignore::pytest.PytestConfigWarning
+This will ignore warnings about unknown configuration options. However, it's generally a good idea to only use recognized configuration options to avoid unexpected behavior.
+
+User
+Uploaded image
+ChatGPT
+From the image you've shared, it looks like when you tried to run your tests with pytest, no tests were discovered and therefore none were run. Here are a few reasons why this might happen:
+
+Naming Conventions: Ensure your test files are named correctly (e.g., test_*.py) and your test functions or methods within those files start with test_.
+
+Directory Structure: Confirm that your tests are placed in the correct directory structure that pytest expects. Typically, test files should be in a directory named tests or similarly, and each test file should be a Python file starting with test_.
+
+Python Path: Check that the pytest is running from the correct directory, which should be the root of your project where the tests directory is located.
+
+Test Markers: If you're using custom markers in your tests, ensure that they're registered in your pytest.ini or other configuration files.
+
+Initialization Code: If there's code outside of functions or classes that pytest might run upon importing the test file, ensure that it's not causing any errors which could prevent further test discovery.
+
+Check for __init__.py: If your tests are within a sub-package, make sure that each directory has an __init__.py file so that Python recognizes the directories as packages.
+
+Pytest Configuration: Review your pytest.ini, tox.ini, or pyproject.toml files for configurations that might be excluding tests from being run.
+
+Verbose Output: Run pytest with the -vv flag to get verbose output, which might give you more information on why no tests were collected.
+
+Here’s a command you can run in your PowerShell to see more detailed output from pytest:
+
+shell
+Copy code
+(venv) PS C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project> pytest -vv
+This will provide you with verbose output during the test collection phase and might give you hints on why pytest isn't collecting any tests.
+
+User
+Uploaded image
+why is the test runner showing?
+ChatGPT
+If your test runner is showing errors during the collection phase, it's typically because pytest encountered an issue when trying to import the test modules. Here are the most common reasons for import errors during test collection:
+
+Syntax Errors: There might be syntax errors in your test files that prevent pytest from importing them.
+
+Dependency Issues: Your test files might be trying to import modules or packages that are not installed or not found in your environment.
+
+Incorrect Imports: There may be errors in how the imports are structured in your test files.
+
+Path Issues: The way you're referencing the files in the command might be causing path resolution issues. When running pytest, you typically don't need to include the filename, and you should use the correct path separators for your operating system.
+
+Misconfigured Python Environment: The Python environment where pytest is running might not have all the required packages installed, or there may be a mismatch between the environment and the one your project needs.
+
+To
+
+User
+Uploaded image
+its in the dir
+ChatGPT
+The directory structure you've shown in the image appears correct for a typical pytest setup, with separate directories for different test categories like test_api and test_web. The presence of __init__.py files also suggests that these directories should be recognized as Python packages, which is necessary for pytest to discover tests within them.
+
+Given this structure, you should be able to run tests with a command like the following from the root directory of your project:
+
+shell
+Copy code
+(venv) PS C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project> pytest
+This will automatically discover and run tests in all files named according to the pattern test_*.py or *_test.py.
+
+If pytest is showing a specific test_runner.py file, it could be for a few reasons:
+
+Custom Test Runner: Your test_runner.py might be a custom test runner designed to run unittest test cases in a specific way, and it may not be compatible with pytest's automatic test discovery.
+
+Pytest Invocation: If you're trying to run tests with pytest and it's indicating test_runner.py, it could be that pytest is recognizing it as a test file because of its name. If test_runner.py doesn't contain any test functions or classes following pytest's naming conventions (test_ prefix), then it won't have any tests to run.
+
+Errors in Other Test Files: If there are errors during the import or execution of test code in other test files, pytest will stop collecting tests and report these errors.
+
+To resolve any issues with running your tests:
+
+Ensure pytest is installed in your virtual environment and is the same environment where all required packages for your tests are installed.
+Confirm that there are no syntax errors or broken imports in your test files.
+If test_runner.py is not intended for use with pytest, do not run pytest against it. Instead, use it as intended, possibly with Python's unittest if that's what it's designed for.
+If pytest is not recognizing tests in other files, make sure they follow pytest's conventions: functions prefixed with test_ and no classes inheriting from unittest.TestCase (unless you're intentionally mixing the two frameworks).
+Remember that pytest will execute test functions and methods that start with test_ directly and will not execute scripts like test_runner.py unless they also follow these conventions.
+
+User
+how to run virtual env 
+ChatGPT
+To run and use a Python virtual environment, you typically follow these steps:
+
+Create a Virtual Environment (if you haven't already):
+You can create a virtual environment using the following command in your terminal. Replace myenv with whatever name you wish to give to your virtual environment.
+
+Copy code
+python -m venv myenv
+This command will create a new folder named myenv in your current directory, which will contain the Python executable and a copy of the pip library.
+
+Activate the Virtual Environment:
+Activating the virtual environment will change your shell’s environment to use the Python and pip executables from the virtual environment instead of the system-wide Python installation.
+
+On Windows, use:
+
+mathematica
+Copy code
+.\myenv\Scripts\Activate
+On Unix or MacOS, use:
+
+bash
+Copy code
+source myenv/bin/activate
+Install Packages:
+Once the virtual environment is activated, you can use pip to install packages. They will be installed in the virtual environment, and won't affect the system-wide Python installation.
+
+Copy code
+pip install package_name
+Run Python Code:
+With the virtual environment activated, you can run Python scripts using the Python executable or any tools installed in the environment.
+
+Copy code
+python your_script.py
+Or if you're running an interactive session:
+
+Copy code
+python
+Deactivate the Virtual Environment:
+When you're done working in the virtual environment, you can deactivate it by simply running:
+
+Copy code
+deactivate
+This will revert your shell to use the system-wide Python installation again.
+
+Remember, you must activate the virtual environment in each new shell session where you wish to use it. If the virtual environment is properly activated, you should see its name in the prompt, indicating that it's currently active.
+
+User
+Uploaded image
+after runnin pytest command i see that the test_runner dose not show up '''
+import json
+from concurrent.futures import ThreadPoolExecutor
+from pathlib import Path
+import time
+import unittest
+from infra.infra_web.browser_wrapper import BrowserWrapper
+from tests.test_api.test_delete_goal_api import TestDeleteGoalAPI
+
+
+all_test_groups = [TestDeleteGoalAPI]
+
+
+def individual_test(browser_name,test):
+    test.browser=browser_name
+    test_suite = unittest.TestLoader().loadTestsFromTestCase(test)
+    runner = unittest.TextTestRunner()
+    runner.run(test_suite)
+
+def run_test_for_browser_serial(caps_list,all_test_groups):
+    for test in all_test_groups:
+        for browser in caps_list:
+            individual_test(browser, test)
+
+def run_test_for_browser_parallel(caps_list, all_test_groups):
+    test_list = [(browser, test_case) for browser in caps_list for test_case in all_test_groups]
+
+    with ThreadPoolExecutor(max_workers=len(all_test_groups)) as executor:
+        [executor.submit(individual_test, browser, test) for browser, test in test_list]
+
+
+
+def test_run():
+    browser_wrapper = BrowserWrapper()
+    start_time = time.time()
+
+    cur_dir = Path(__file__).resolve().parents[1].parents[0].joinpath("config.json")
+    with open(cur_dir, 'r') as config_file:
+        config = json.load(config_file)
+    if config["grid"] :
+        if config["grid type"] == "parallel":
+            run_test_for_browser_parallel(config['browser_types'], all_test_groups)
+
+        elif config["grid type"] == "serial":
+            run_test_for_browser_serial(config['browser_types'], all_test_groups)
+
+
+
+
+    end_time = time.time()
+    total_time = end_time - start_time
+    print(f"Total time to run all tests: {total_time:.2f} seconds")
+'''
+import json
+import os
+import subprocess
+from pathlib import Path
+
+
+def run_pytest(parallel=False):
+    cur_dir = Path(__file__).resolve().parents[1].parents[0].joinpath("config.json")
+    with open(cur_dir, 'r') as config_file:
+        config = json.load(config_file)
+    # Directory where all tests are located
+    ui_tests_path = "tests\test_api\test_delete_goal_api.py"
+    reports_dir = "test_web/reports"
+    print(ui_tests_path)
+    os.makedirs(reports_dir, exist_ok=True)
+    python_path = os.path.join("../venv", "Scripts", "python.exe")
+    # Basic command with the path to UI tests
+    base_cmd = [python_path,"-m", "pytest",ui_tests_path]
+    html_report = os.path.join(reports_dir, "report.html")
+    # If parallel execution is enabled, modify the command to run with xdist
+    if parallel:
+        parallel_cmd = base_cmd + ["-n", "3", "-m", "not serial", f"--html={html_report}"]
+        try:
+            subprocess.run(parallel_cmd, check=True)
+        except subprocess.CalledProcessError as e:
+            print(f"Tests failed with return code {e.returncode}. Continuing the build...")
+    try:
+        serial_html_report = os.path.join(reports_dir, "report_serial.html")
+        serial_cmd = base_cmd + ["-m", "serial", f"--html={serial_html_report}"]
+        subprocess.run(serial_cmd, check=True)
+    except subprocess.CalledProcessError as e:
+        if e.returncode == 5:  # No tests were collected
+            print("No serial tests were found.")
+        else:
+            print(e.returncode)
+    else:
+        non_parallel_cmd = base_cmd + [f"--html={html_report}"]
+        try:
+            subprocess.run(non_parallel_cmd, check=True)
+        except subprocess.CalledProcessError as e:
+            print(e.returncode)
+
+
+
+
+if __name__ == "__main__":
+    cur_dir = Path(__file__).resolve().parents[1].parents[0].joinpath("config.json")
+    with open(cur_dir, 'r') as config_file:
+        config = json.load(config_file)
+
+    is_parallel=config["grid type"]
+
+    run_pytest(parallel=is_parallel)
+why is that
+ChatGPT
+The pytest command you're running is likely not detecting test_runner.py as a test file due to one of the following reasons:
+
+Naming Convention: By default, pytest only collects files that match the test discovery pattern, which is typically test_*.py or *_test.py. Since test_runner.py doesn't match this pattern, pytest won't recognize it as a test file.
+
+Test Functions or Classes: Inside test_runner.py, you must have functions that start with test_ or classes that start with Test with methods that start with test_ for pytest to recognize them as tests.
+
+unittest Compatibility: If test_runner.py contains a script meant to run unittest.TestCase classes using unittest's own test runner (unittest.TextTestRunner()), pytest might not execute it as part of its collection process, especially if the script is meant to be executed directly rather than collected by pytest.
+
+From the contents of test_runner.py that you've shared, it looks like the script is intended to be executed directly and is not set up to be collected by pytest. The script uses unittest to load test cases and doesn't contain pytest-compatible test functions or classes.
+
+To run unittest tests using pytest, you can reformat them to be compatible with pytest:
+
+Define test cases as classes that inherit from object (or nothing at all), not unittest.TestCase.
+Use functions with test_ prefix for tests, not methods inside unittest.TestCase subclasses.
+Use pytest fixtures for setup and teardown if needed.
+Make sure your test files match the pattern that pytest uses for test discovery.
+Alternatively, you can execute your unittest tests outside of pytest by running python -m unittest:
+
+shell
+Copy code
+(venv) PS C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project> python -m unittest discover
+This command will discover and run all unittest-style tests. If you specifically want to run the test_runner.py as a script, you should execute it directly:
+
+shell
+Copy code
+(venv) PS C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project> python tests\test_web\test_runner.py
+This will invoke the test_run() function within the script and execute the tests as you've defined them using unittest.
+
+User
+Naming Convention: By default, pytest only collects files that match the test discovery pattern, which is typically test_*.py or *_test.py. Since test_runner.py doesn't match this pattern, pytest won't recognize it as a test file.??
+ChatGPT
+pytest has certain conventions for discovering test files and test methods:
+
+Test files should be named test_*.py or *_test.py. This means that a file should start with test_ and end with .py, or end with _test.py.
+Test methods inside classes should start with test_, and the classes themselves should start with Test.
+Given the naming convention, if you have a file named test_runner.py, pytest may not recognize it as a file containing tests unless there are functions or classes inside that follow the test_ naming convention.
+
+However, pytest can collect tests from any file if it contains correctly named test functions or methods. The file name test_runner.py doesn't strictly follow the test_*.py convention, but as long as there are test functions or classes named according to the convention, pytest should collect them.
+
+For example, inside test_runner.py, you should have:
+
+python
+Copy code
+def test_something():
+    assert True
+
+class TestExample:
+    def test_method(self):
+        assert True
+Both test_something and TestExample.test_method will be collected by pytest even if they are in a file named test_runner.py, because they follow the correct naming pattern for the test function and test method.
+
+If pytest isn't collecting tests from test_runner.py, and you want it to, make sure:
+
+The test functions or classes inside test_runner.py follow the correct naming conventions.
+There is no configuration in pytest.ini, tox.ini, or pyproject.toml that changes the default test discovery patterns in a way that would exclude test_runner.py.
+User
+import json
+import os
+import subprocess
+from pathlib import Path
+
+
+class TestRunner:
+    def run_pytest(self,parallel=False):
+        cur_dir = Path(__file__).resolve().parents[1].parents[0].joinpath("config.json")
+        with open(cur_dir, 'r') as config_file:
+            config = json.load(config_file)
+        # Directory where all tests are located
+        ui_tests_path = "tests\test_api\test_delete_goal_api.py"
+        reports_dir = "test_web/reports"
+        print(ui_tests_path)
+        os.makedirs(reports_dir, exist_ok=True)
+        python_path = os.path.join("../venv", "Scripts", "python.exe")
+        # Basic command with the path to UI tests
+        base_cmd = [python_path,"-m", "pytest",ui_tests_path]
+        html_report = os.path.join(reports_dir, "report.html")
+        # If parallel execution is enabled, modify the command to run with xdist
+        if parallel:
+            parallel_cmd = base_cmd + ["-n", "3", "-m", "not serial", f"--html={html_report}"]
+            try:
+                subprocess.run(parallel_cmd, check=True)
+            except subprocess.CalledProcessError as e:
+                print(f"Tests failed with return code {e.returncode}. Continuing the build...")
+        try:
+            serial_html_report = os.path.join(reports_dir, "report_serial.html")
+            serial_cmd = base_cmd + ["-m", "serial", f"--html={serial_html_report}"]
+            subprocess.run(serial_cmd, check=True)
+        except subprocess.CalledProcessError as e:
+            if e.returncode == 5:  # No tests were collected
+                print("No serial tests were found.")
+            else:
+                print(e.returncode)
+        else:
+            non_parallel_cmd = base_cmd + [f"--html={html_report}"]
+            try:
+                subprocess.run(non_parallel_cmd, check=True)
+            except subprocess.CalledProcessError as e:
+                print(e.returncode)
+
+
+
+
+    def test_run(self):
+        cur_dir = Path(__file__).resolve().parents[1].parents[0].joinpath("config.json")
+        with open(cur_dir, 'r') as config_file:
+            config = json.load(config_file)
+
+        is_parallel=config["grid type"]
+
+        self.run_pytest(parallel=is_parallel)
+i changed it to this and it still cant find it
+ChatGPT
+In your revised TestRunner class, you've encapsulated the run_pytest method and a test_run method that calls it. If you're trying to use this setup with pytest, there are still a few issues to address:
+
+pytest and unittest: Your TestRunner class seems to be using a unittest-like structure, which is not directly compatible with pytest. pytest can run unittest.TestCase tests, but your TestRunner doesn't inherit from unittest.TestCase, nor does it define test methods with test_ prefixes.
+
+Class Methods: If you want to run TestRunner using pytest, you need to define test methods within it that start with test_. However, your class methods seem designed to execute independently, which is more like a script or a command-line tool rather than a test suite.
+
+Method Invocation: pytest doesn't automatically invoke class methods that are not prefixed with test_. Even if test_run was named test_something, pytest would not know to pass the parallel argument automatically.
+
+To use this class with pytest, you need to modify it further:
+
+You might want to inherit from unittest.TestCase if you want to keep a unittest structure and use pytest to run it. However, your current methods don't match the typical unittest patterns either.
+If you are trying to create a test suite to be run by pytest, you should define functions or methods that start with test_ and perform assertions.
+Here is a simplified example of how a pytest compatible test method could look:
+
+python
+Copy code
+import pytest
+
+class TestExample:
+    def test_example(self):
+        assert True  # Replace with actual test code
+If your intention is to create a script that runs pytest programmatically, you shouldn't need pytest to run the script itself. Instead, you execute it with Python:
+
+shell
+Copy code
+(venv) PS C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project> python -m tests.test_web.test_runner
+Note that when running modules with python -m, you should use dot notation for the path (replace backslashes with dots), and you shouldn't include the .py extension.
+
+Lastly, ensure your config.json has the correct "grid type" setting, and that your working directory and Python environment are set up correctly when you execute the script.
+
+User
+pipeline {
+    agent any
+    environment {
+        PYTHON_PATH = "C:\\Users\\Alaa Oda\\AppData\\Local\\Programs\\Python\\Python312\\python.exe"
+        PIP_PATH = '"C:\\Users\\Alaa Oda\\AppData\\Local\\Programs\\Python\\Python312\\Scripts\\pip.exe"'
+        TEST_REPORTS = 'test-reports'
+        IMAGE_NAME = 'tests'
+        TAG = 'latest'
+    }
+    stages {
+        stage('Setup Environment') {
+            steps {
+                bat 'call "%PYTHON_PATH%" -m venv venv'
+                bat 'call venv\\Scripts\\python.exe -m pip install --upgrade pip'
+                bat 'call venv\\Scripts\\pip.exe install -r requirements.txt'
+                bat 'call venv\\Scripts\\pip.exe install pytest pytest-html selenium'
+            }
+        }
+        stage('Setup Selenium Server HUB') {
+            steps {
+                echo 'Setting up Selenium server HUB...'
+                bat "start /B java -jar selenium-server.jar --port 4445 hub"
+                // Delay for 10 seconds
+                bat 'ping 127.0.0.1 -n 11 > nul' // Windows command to sleep for 10 seconds
+            }
+        }
+        stage('Setup Selenium Server nodes') {
+            steps {
+                echo 'Setting up Selenium server nodes...'
+                bat "start /B java -jar selenium-server.jar node --port 5555 --selenium-manager true"
+                // Delay for 10 seconds
+                bat 'ping 127.0.0.1 -n 11 > nul' // Windows command to sleep for 10 seconds
+            }
+        }
+
+
+
+        stage('Run Tests with Pytest') {
+            steps {
+                bat 'call venv\\Scripts\\python.exe test_runner.py"
+            }
+        }
+    }
+    post {
+        success {
+                slackSend(channel: 'C06Q6FRSFKJ',color: "good", message: "Build succeeded")
+            }
+        failure {
+            slackSend(channel: 'C06Q6FRSFKJ',color: "danger", message: "Build failed")
+        }
+        always {
+            archiveArtifacts artifacts: "${TEST_REPORTS}/*.html", allowEmptyArchive: true
+            echo 'Cleaning up...'
+
+        }
+    }
+}what is the problem
+ChatGPT
+The Jenkins pipeline script you've provided is meant to set up a Python virtual environment, install dependencies, and run tests with pytest. There are a couple of issues and points of clarification that might be causing problems:
+
+Python Executable Path: Ensure that the PYTHON_PATH you've defined is correct and points to the Python interpreter you intend to use.
+
+Quotes in Environment Variables: The PIP_PATH variable has nested quotes ("'"), which might not be necessary. You can define the path with just double quotes like you did for PYTHON_PATH.
+
+Python Virtual Environment: When you create a virtual environment with venv, it should create its own python.exe and pip.exe inside the venv/Scripts directory. You should use those for subsequent commands to ensure you're working within the virtual environment.
+
+Starting Selenium Server: You are starting the Selenium server hub and nodes asynchronously using start /B. This is generally fine, but make sure that the Selenium server is ready to accept connections before the tests run. The ping command for delay is a clever hack, but it might be more robust to use a script that checks for the server's readiness.
+
+Test Runner Call: In the Run Tests with Pytest stage, there's a syntax error due to an unbalanced quote:
+
+groovy
+Copy code
+bat 'call venv\\Scripts\\python.exe test_runner.py"
+This should be corrected to:
+
+groovy
+Copy code
+bat 'call venv\\Scripts\\python.exe test_runner.py'
+Test Runner Script: Make sure test_runner.py is indeed at the root of the Jenkins workspace and that it is executable with the provided command line.
+
+Artifacts and Test Reports: You're archiving HTML artifacts at the end of the build. Make sure test_runner.py is generating HTML reports in the test-reports directory, which is what you've specified in the TEST_REPORTS environment variable.
+
+Slack Integration: Ensure that the slackSend steps are correctly configured with your Slack channel and credentials.
+
+Clean-up Procedure: You're echoing 'Cleaning up...' at the end in the always block, but there
+
+User
+how to open config file in the same directory
+ChatGPT
+To open a configuration file that is located in the same directory as your Python script, you can use the following code pattern:
+
+python
+Copy code
+import json
+from pathlib import Path
+
+# Determine the path to the directory containing this script
+current_directory = Path(__file__).parent
+
+# Construct the path to the config file
+config_file_path = current_directory / "config.json"
+
+# Open the config file
+with open(config_file_path, 'r') as config_file:
+    config = json.load(config_file)
+    # Now you can use the 'config' dictionary as needed
+This code uses Path from the pathlib module, which is available in Python 3.4 and later. __file__ is a special variable that holds the path to the current script; Path(__file__).parent gets the directory containing the script.
+
+The / operator provided by pathlib is used to construct the path by joining directory and filename components, and it's automatically correct for the operating system's path syntax.
+
+Remember that if you're running this code from a different directory (for instance, as a module), __file__ will refer to the location of the script, not the current working directory.
+
+User
+
+(venv) PS C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project> python test_runner.py
+Traceback (most recent call last):
+  File "C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project\test_runner.py", line 47, in <module>
+    config_file_path = current_directory / "config.json"
+                       ~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for /: '_PathParents' and 'str'
+(venv) PS C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project> 
+ChatGPT
+The error you're encountering is because Path(__file__).parents[1] returns an object representing the parent directories, which cannot be directly combined with a string using the / operator. If you are trying to access the config.json in the same directory as the script, you do not need to use .parents[1]. Here is the corrected code:
+
+python
+Copy code
+import json
+from pathlib import Path
+
+# Determine the path to the directory containing this script
+current_directory = Path(__file__).parent
+
+# Construct the path to the config file
+config_file_path = current_directory / "config.json"
+
+# Open the config file
+with open(config_file_path, 'r') as config_file:
+    config = json.load(config_file)
+    # Now you can use the 'config' dictionary as needed
+With this code, config_file_path will correctly point to config.json in the same directory as your test_runner.py script. If config.json is actually in the parent directory or another directory, you would need to adjust the path accordingly. For example, if it's in the parent directory:
+
+python
+Copy code
+config_file_path = current_directory.parent / "config.json"
+Make sure you use the correct path relative to your script's location. If you are still unsure about the file's location, you can print out current_directory before you try to access the config.json to verify that you're in the right place:
+
+python
+Copy code
+print(current_directory)
+User
+import json
+import os
+import subprocess
+import unittest
+from pathlib import Path
+
+def run_pytest(parallel=False):
+    ui_tests_path = "tests/test_api"
+    reports_dir = "tests/test_web/reports"
+    os.makedirs(reports_dir, exist_ok=True)
+
+    python_path = os.path.join("venv", "Scripts", "python.exe")
+    # Basic command with the path to UI tests
+    base_cmd = [python_path,"-m", "pytest",ui_tests_path]
+    html_report = os.path.join(reports_dir, "report.html")
+    # If parallel execution is enabled, modify the command to run with xdist
+    if parallel:
+        parallel_cmd = base_cmd + ["-n", "3", "-m", "not serial", f"--html={html_report}"]
+        try:
+            subprocess.run(parallel_cmd, check=True)
+        except subprocess.CalledProcessError as e:
+            print(f"Tests failed with return code {e.returncode}. Continuing the build...")
+    try:
+        serial_html_report = os.path.join(reports_dir, "report_serial.html")
+        serial_cmd = base_cmd + ["-m", "serial", f"--html={serial_html_report}"]
+        subprocess.run(serial_cmd, check=True)
+    except subprocess.CalledProcessError as e:
+        if e.returncode == 5:  # No tests were collected
+            print("No serial tests were found.")
+        else:
+            print(e.returncode)
+    else:
+        non_parallel_cmd = base_cmd + [f"--html={html_report}"]
+        try:
+            subprocess.run(non_parallel_cmd, check=True)
+        except subprocess.CalledProcessError as e:
+            print(e.returncode)
+
+
+
+
+if __name__ == "__main__":
+    f = open('config.json')
+    config = json.load(f)
+    f.close()
+    is_parallel=config["grid type"]
+
+    run_pytest(parallel=is_parallel)
+ recreate this with pytest-xdist lib
+ChatGPT
+To recreate your script using the pytest-xdist library for parallel execution, you don't need to construct the commands for parallel and serial test runs manually. The pytest-xdist plugin extends pytest with a new command-line option (-n) that allows you to execute tests in parallel. Here’s a refactored version of your script that utilizes pytest-xdist:
+
+python
+Copy code
+import json
+import subprocess
+from pathlib import Path
+
+def run_pytest(parallel=False):
+    ui_tests_path = "tests/test_api"
+    reports_dir = Path("tests/test_web/reports")
+    reports_dir.mkdir(parents=True, exist_ok=True)
+
+    # Base command with the path to UI tests
+    base_cmd = ["pytest", ui_tests_path]
+    html_report = str(reports_dir / "report.html")
+
+    if parallel:
+        # Run tests in parallel except those marked as 'serial'
+        parallel_cmd = base_cmd + ["-n", "3", "-m", "not serial", f"--html={html_report}"]
+    else:
+        # Run all tests serially
+        parallel_cmd = base_cmd + [f"--html={html_report}"]
+
+    try:
+        # Run the pytest command with subprocess
+        subprocess.run(parallel_cmd, check=True)
+    except subprocess.CalledProcessError as e:
+        print(f"Tests failed with return code {e.returncode}. Continuing the build...")
+
+if __name__ == "__main__":
+    with open('config.json') as f:
+        config = json.load(f)
+
+    # Determine whether to run tests in parallel based on the config
+    is_parallel = config["grid_type"] == "parallel"
+    run_pytest(parallel=is_parallel)
+Before running the script, make sure that pytest-xdist is installed in your environment. You can install it with pip:
+
+shell
+Copy code
+pip install pytest-xdist
+This script assumes that you have your Python environment already set up and the pytest and pytest-xdist packages are installed.
+
+Please note:
+
+The reports_dir is a Path object, which makes it easier to manage paths.
+The --html option is used to generate an HTML report. Make sure you have the pytest-html plugin installed if you want to use this feature.
+The is_parallel variable now directly controls whether tests run in parallel or not. The "-n", "3" part of parallel_cmd tells pytest-xdist to run the tests using 3 CPUs.
+In the if __name__ == "__main__": block, the configuration file is loaded to check if tests should run in parallel based on the grid_type setting.
+It’s good practice to use a context manager (with statement) when opening files to ensure they are properly closed after loading the contents.
+User
+and what about: import json
+import time
+import unittest
+from pathlib import Path
+from infra.infra_web.browser_wrapper import BrowserWrapper
+from logic.api_logic.goals_api import GoalsAPI
+from logic.web_logic.goals_web import GoalsWeb
+from logic.web_logic.home_page_pathfinder import PathfinderPage
+from logic.web_logic.login_page import LoginPage
+from logic.web_logic.welcome_page import WelcomePage
+from parameterized import parameterized_class
+from pytest_markers import test_decorator
+
+config_path  = Path(__file__).resolve().parents[2].joinpath("config.json")
+with open(config_path, 'r') as config_file:
+    config = json.load(config_file)
+browser_types = [(browser,) for browser in config["browser_types"]]
+
+@parameterized_class(('browser',), browser_types)
+class TestDeleteGoalAPI(unittest.TestCase):
+    default_browser = 'Chrome'
+    def setUp(self):
+        self.browser_wrapper = BrowserWrapper()
+        self.browser = getattr(self.__class__, 'browser', self.default_browser)
+        self.driver = self.browser_wrapper.get_driver(self.browser)
+
+        self.welcome_page = WelcomePage(self.driver)
+        self.test_cases=[self.test_delete_goal_api]
+        self.goals_api = GoalsAPI()
+        self.welcome_page.click_log_in()
+        self.login_page = LoginPage(self.driver)
+        self.login_page.login_flow("friendola15@gmail.com", "AutomationTester2024")
+        self.pathfinder_page = PathfinderPage(self.driver)
+        self.pathfinder_page.click_on_Goals_page()
+        self.goals_web = GoalsWeb(self.driver)
+        self.goal_name = "Fullstack developer"
+        self.chosen_skills = ["Go", "Java", "CSS"]
+        self.courses_levels = ["Professional", "Beginner", "Beginner"]
+        self.hours_weekly = 8
+        self.goals_web.set_goal_in_web(self.goal_name, self.chosen_skills, self.courses_levels, self.hours_weekly)
+
+    @test_decorator
+    def test_delete_goal_api(self):
+        goal_id_before_deleting=self.goals_api.get_goal_id()
+        self.goals_web.delete_goals(self.goal_name)
+        time.sleep(3)
+        goal_id_after_deleting=self.goals_api.get_goal_id()
+        print(goal_id_before_deleting)
+        self.assertEqual(len(goal_id_before_deleting), 36, "Goal was not created")
+        self.assertEqual(goal_id_after_deleting, None, "Goal was not Deleted")
+
+    def tearDown(self):
+        self.goals_api.delete_goal()
+        self.driver.quit()
+
+what do i need to cange
+ChatGPT
+To ensure compatibility with pytest, you'll need to make several changes, because pytest has its own fixtures for setup and teardown and uses a different style for parameterization compared to unittest. Here are the adjustments you'd need:
+
+Remove unittest Inheritance: Instead of inheriting from unittest.TestCase, simply create a class without any inheritance. pytest can use plain assert statements for checks.
+
+Parameterization: Use pytest's own parameterization decorators. The parameterized_class from the parameterized package is typically used with unittest. pytest has a pytest.mark.parametrize decorator which you can use directly on test functions.
+
+Fixtures for Setup and Teardown: Replace the setUp and tearDown methods with pytest fixtures. A fixture for setup can be function-scoped for something that should be run before each test, or class/module/session-scoped for broader setup. Teardown is handled automatically if you use the yield statement in the fixture or add a finalizer.
+
+Assertions: Continue using plain assert statements for checks; these work natively with pytest.
+
+Here is a refactored example to illustrate how your TestDeleteGoalAPI might look after being rewritten for pytest:
+
+python
+Copy code
+import pytest
+from infra.infra_web.browser_wrapper import BrowserWrapper
+from logic.api_logic.goals_api import GoalsAPI
+from logic.web_logic.goals_web import GoalsWeb
+from logic.web_logic.home_page_pathfinder import PathfinderPage
+from logic.web_logic.login_page import LoginPage
+from logic.web_logic.welcome_page import WelcomePage
+
+# Load configuration outside the test class
+config_path = Path(__file__).resolve().parents[2] / "config.json"
+with open(config_path, 'r') as config_file:
+    config = json.load(config_file)
+
+# Define a fixture for setting up the browser
+@pytest.fixture(scope="function", params=config["browser_types"], ids=str)
+def browser(request):
+    browser_wrapper = BrowserWrapper()
+    driver = browser_wrapper.get_driver(request.param)
+    welcome_page = WelcomePage(driver)
+    login_page = LoginPage(driver)
+    pathfinder_page = PathfinderPage(driver)
+    goals_web = GoalsWeb(driver)
+    
+    welcome_page.click_log_in()
+    login_page.login_flow("friendola15@gmail.com", "AutomationTester2024")
+    pathfinder_page.click_on_Goals_page()
+    goals_web.set_goal_in_web("Fullstack developer", ["Go", "Java", "CSS"], ["Professional", "Beginner", "Beginner"], 8)
+
+    yield driver, goals_web  # This allows us to return more than one value
+
+    # Teardown code
+    goals_api = GoalsAPI()
+    goals_api.delete_goal()
+    driver.quit()
+
+# Use the fixture in the test
+def test_delete_goal_api(browser):
+    driver, goals_web = browser
+    goals_api = GoalsAPI()
+
+    goal_id_before_deleting = goals_api.get_goal_id()
+    goals_web.delete_goals("Fullstack developer")
+    time.sleep(3)
+    goal_id_after_deleting = goals_api.get_goal_id()
+
+    assert len(goal_id_before_deleting) == 36, "Goal was not created"
+    assert goal_id_after_deleting is None, "Goal was not Deleted"
+Make sure you install pytest and pytest-xdist if you want to run tests in parallel. You can do so with pip:
+
+shell
+Copy code
+pip install pytest pytest-xdist
+Remember that this is just a guideline; you'll have to adapt the code to fit your specific application logic and structure.
+
+User
+can i still use unitest??
+ChatGPT
+Yes, you can still use unittest with pytest. pytest is compatible with unittest test cases, so you can run your unittest-style tests with the pytest runner without having to rewrite them. This means you can write your tests using unittest.TestCase classes and test methods, and still benefit from the additional features and plugins that pytest offers.
+
+Here are a few reasons you might want to use pytest to run your unittest tests:
+
+Richer Output: pytest provides a more informative and readable output compared to the standard unittest runner, especially when tests fail.
+Powerful Fixtures: pytest fixtures offer advanced setup and teardown capabilities with more granularity and control.
+Parametrization: Although you can parameterize tests with unittest, pytest provides a more powerful and flexible approach to parameterization.
+Markers: pytest allows you to use markers to add metadata to your tests, which can be used to select or skip tests under certain conditions.
+Plugins: pytest has a large ecosystem of plugins that can extend its functionality in various ways.
+If you're using pytest to run unittest tests, remember:
+
+You can mix unittest test cases and pytest-style test functions in the same test suite if needed.
+pytest will automatically recognize and collect unittest.TestCase subclasses and their test_* methods.
+You don't need to change your unittest-style asserts; pytest supports them as is.
+Here's an example of how you might run a unittest.TestCase with pytest:
+
+python
+Copy code
+import unittest
+
+class MyTestCase(unittest.TestCase):
+    def setUp(self):
+        # Setup code
+        pass
+
+    def test_something(self):
+        # Your test code
+        self.assertEqual(1, 1, "Should be equal")
+
+    def tearDown(self):
+        # Teardown code
+        pass
+
+if __name__ == "__main__":
+    unittest.main()
+You can run this test case with pytest simply by executing:
+
+shell
+Copy code
+pytest path/to/your/test_file.py
+pytest will collect and run the MyTestCase.test_something test just like the unittest runner would.
+
+User
+import json
+import time
+import unittest
+from pathlib import Path
+from infra.infra_web.browser_wrapper import BrowserWrapper
+from logic.api_logic.goals_api import GoalsAPI
+from logic.web_logic.goals_web import GoalsWeb
+from logic.web_logic.home_page_pathfinder import PathfinderPage
+from logic.web_logic.login_page import LoginPage
+from logic.web_logic.welcome_page import WelcomePage
+from parameterized import parameterized_class
+from pytest_markers import test_decorator
+
+config_path  = Path(__file__).resolve().parents[2].joinpath("config.json")
+with open(config_path, 'r') as config_file:
+    config = json.load(config_file)
+browser_types = [(browser,) for browser in config["browser_types"]]
+
+@parameterized_class(('browser',), browser_types)
+class TestDeleteGoalAPI(unittest.TestCase):
+    default_browser = 'Chrome'
+    def setUp(self):
+        self.browser_wrapper = BrowserWrapper()
+        self.browser = getattr(self.__class__, 'browser', self.default_browser)
+        self.driver = self.browser_wrapper.get_driver(self.browser)
+
+        self.welcome_page = WelcomePage(self.driver)
+        self.test_cases=[self.test_delete_goal_api]
+        self.goals_api = GoalsAPI()
+        self.welcome_page.click_log_in()
+        self.login_page = LoginPage(self.driver)
+        self.login_page.login_flow("friendola15@gmail.com", "AutomationTester2024")
+        self.pathfinder_page = PathfinderPage(self.driver)
+        self.pathfinder_page.click_on_Goals_page()
+        self.goals_web = GoalsWeb(self.driver)
+        self.goal_name = "Fullstack developer"
+        self.chosen_skills = ["Go", "Java", "CSS"]
+        self.courses_levels = ["Professional", "Beginner", "Beginner"]
+        self.hours_weekly = 8
+        self.goals_web.set_goal_in_web(self.goal_name, self.chosen_skills, self.courses_levels, self.hours_weekly)
+
+    @test_decorator
+    def test_delete_goal_api(self):
+        goal_id_before_deleting=self.goals_api.get_goal_id()
+        self.goals_web.delete_goals(self.goal_name)
+        time.sleep(3)
+        goal_id_after_deleting=self.goals_api.get_goal_id()
+        print(goal_id_before_deleting)
+        self.assertEqual(len(goal_id_before_deleting), 36, "Goal was not created")
+        self.assertEqual(goal_id_after_deleting, None, "Goal was not Deleted")
+
+    def tearDown(self):
+        self.goals_api.delete_goal()
+        self.driver.quit()
+
+import json
+import subprocess
+from pathlib import Path
+
+
+def run_pytest(parallel=False):
+    ui_tests_path = "tests/test_api/test_delete_goal_api.py"
+    reports_dir = Path("tests/test_web/reports")
+    reports_dir.mkdir(parents=True, exist_ok=True)
+
+    # Base command with the path to UI tests
+    base_cmd = ["pytest", ui_tests_path]
+    html_report = str(reports_dir / "report.html")
+
+    if parallel:
+        # Run tests in parallel except those marked as 'serial'
+        parallel_cmd = base_cmd + ["-n", "3", "-m", "not serial", f"--html={html_report}"]
+    else:
+        # Run all tests serially
+        parallel_cmd = base_cmd + [f"--html={html_report}"]
+
+    try:
+        # Run the pytest command with subprocess
+        subprocess.run(parallel_cmd, check=True)
+    except subprocess.CalledProcessError as e:
+        print(f"Tests failed with return code {e.returncode}. Continuing the build...")
+
+
+if __name__ == "__main__":
+    with open('config.json') as f:
+        config = json.load(f)
+
+    # Determine whether to run tests in parallel based on the config
+    is_parallel = config["grid_type"] == "parallel"
+    run_pytest(parallel=is_parallel)
+ PS C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project> pytest tests/test_api/test_delete_goal_api.py
+===================== test session starts =====================
+platform win32 -- Python 3.12.0, pytest-8.1.1, pluggy-1.4.0
+rootdir: C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project
+plugins: xdist-3.5.0
+collected 0 items / 1 error                                    
+
+=========================== ERRORS ============================ 
+___ ERROR collecting tests/test_api/test_delete_goal_api.py ___ 
+ImportError while importing test module 'C:\Users\Alaa Oda\Pycha
+rmProjects\CI_automation_Project\tests\test_api\test_delete_goal_api.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+..\..\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+tests\test_api\test_delete_goal_api.py:5: in <module>
+E   ModuleNotFoundError: No module named 'infra'
+=================== short test summary info ===================
+ERROR tests/test_api/test_delete_goal_api.py
+!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!
+====================== 1 error in 0.11s =======================
+(venv) PS C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project>
+
+
+
+
+
+
+
+ChatGPT
+Yes, you can continue using unittest as your testing framework and pytest as your test runner since pytest can run unittest test cases without any problems. It has built-in support for unittest test case style, so typically no changes are needed for pytest to run your existing unittest test cases.
+
+However, the error you’re seeing (ModuleNotFoundError: No module named 'infra') indicates that when pytest tries to collect the test cases, it's unable to import the module infra. This could be due to a few different issues:
+
+Incorrect PYTHONPATH: Ensure that your PYTHONPATH environment variable includes the directory that contains the infra module. You can do this by setting the PYTHONPATH in your operating system or within a configuration file for your IDE (like PyCharm).
+
+Incorrect Relative Imports: If you're using relative imports in your test_delete_goal_api.py module to import anything from the infra package, ensure that they're correctly specified. Relative imports can be tricky, especially when the directory structure is complex.
+
+Virtual Environment: Ensure that you are running the test from the virtual environment where all dependencies are installed, and that the infra module is installed there. You can check installed packages with pip list.
+
+Project Structure: Ensure that your project's structure is set up correctly as a Python package. This usually involves having an __init__.py file in each directory of your package, including the infra directory. Make sure that the infra directory is in the Python path that pytest is using.
+
+To resolve this issue, verify that the infra directory is correctly placed in your project and that you have initialized it as a package (it should contain an __init__.py file). Also, make sure to run pytest from the root directory of your project, where it can access the infra package. If infra is a separate package that needs to be installed, make sure to install it within your virtual environment using pip.
+
+Additionally, you should check that your Python interpreter is correct. The PYTHON_PATH in your Jenkinsfile points to a system Python installation, which may not have the necessary packages installed. You should be using the Python executable from within your venv. If you activate your venv and then run the test, it should use the packages installed in the venv.
+
+Here's how you can check what's in your Python path at the beginning of your test script:
+
+python
+Copy code
+import sys
+print(sys.path)
+This will print out all locations that Python is searching for modules, which can help you troubleshoot the import error.
+
+User
+ERROR: usage: pytest [options] [file_or_dir] [file_or_dir] [...]
+pytest: error: unrecognized arguments: --html=tests\test_web\reports\report.html
+  inifile: None
+  rootdir: C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project
+import json
+import subprocess
+from pathlib import Path
+
+
+def run_pytest(parallel=False):
+    ui_tests_path = "tests/test_api/test_delete_goal_api.py"
+    reports_dir = Path("tests/test_web/reports")
+    reports_dir.mkdir(parents=True, exist_ok=True)
+
+    # Base command with the path to UI tests
+    base_cmd = ["pytest", ui_tests_path]
+    html_report = str(reports_dir / "report.html")
+
+    if parallel:
+        # Run tests in parallel except those marked as 'serial'
+        parallel_cmd = base_cmd + ["-n", "3", "-m", "not serial", f"--html={html_report}"]
+    else:
+        # Run all tests serially
+        parallel_cmd = base_cmd + [f"--html={html_report}"]
+
+    try:
+        # Run the pytest command with subprocess
+        subprocess.run(parallel_cmd, check=True)
+    except subprocess.CalledProcessError as e:
+        print(f"Tests failed with return code {e.returncode}. Continuing the build...")
+
+
+if __name__ == "__main__":
+    with open('config.json') as f:
+        config = json.load(f)
+
+    # Determine whether to run tests in parallel based on the config
+    is_parallel = config["grid type"] == "parallel"
+    run_pytest(parallel=is_parallel)
+ChatGPT
+The error you're encountering suggests that pytest does not recognize the --html argument, which is used to generate an HTML report for the test results. This functionality is provided by the pytest-html plugin, which needs to be installed separately.
+
+To resolve this issue, you need to install the pytest-html plugin. You can do this by running the following command in your virtual environment:
+
+bash
+Copy code
+pip install pytest-html
+After installing the plugin, the --html argument should be recognized by pytest, and it will generate an HTML report at the specified location.
+
+Additionally, ensure that your script is being run in the correct environment where pytest-html is installed. If you are running this script through an IDE or a different setup, you might need to check that it's using the correct Python interpreter from your virtual environment.
+
+It's also a good practice to check if the plugin is installed correctly by listing the installed pytest plugins:
+
+bash
+Copy code
+pytest --plugins
+This command will list all the plugins available to pytest, and you should see html among them if the installation was successful.
+
+If you're integrating this into a CI/CD pipeline (like Jenkins), make sure that the virtual environment is activated and the necessary dependencies are installed within that environment during the pipeline execution.
+
+User
+__ ERROR collecting tests/test_api/test_delete_goal_api.py __________________________________________ 
+ImportError while importing test module 'C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project\tests\test_api\test_delete_goal_api.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+..\..\anaconda3\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+tests\test_api\test_delete_goal_api.py:5: in <module>
+    from infra.infra_web.browser_wrapper import BrowserWrapper
+E   ModuleNotFoundError: No module named 'infra'
+------- Generated html report: file:///C:/Users/Alaa%20Oda/PycharmProjects/CI_automation_Project/tests/test_web/reports/report.html --------
+========================================================= short test summary info ==========================================================
+ERROR tests/test_api/test_delete_goal_api.py
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+============================================================= 1 error in 0.08s ============================================================= 
+Tests failed with return code 2. Continuing the build...
+PS C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project>
+now this is the problem import json
+import time
+import unittest
+from pathlib import Path
+from infra.infra_web.browser_wrapper import BrowserWrapper
+from logic.api_logic.goals_api import GoalsAPI
+from logic.web_logic.goals_web import GoalsWeb
+from logic.web_logic.home_page_pathfinder import PathfinderPage
+from logic.web_logic.login_page import LoginPage
+from logic.web_logic.welcome_page import WelcomePage
+from parameterized import parameterized_class
+from pytest_markers import test_decorator
+
+config_path  = Path(__file__).resolve().parents[2].joinpath("config.json")
+with open(config_path, 'r') as config_file:
+    config = json.load(config_file)
+browser_types = [(browser,) for browser in config["browser_types"]]
+
+@parameterized_class(('browser',), browser_types)
+class TestDeleteGoalAPI(unittest.TestCase):
+    default_browser = 'Chrome'
+    def setUp(self):
+        self.browser_wrapper = BrowserWrapper()
+        self.browser = getattr(self.__class__, 'browser', self.default_browser)
+        self.driver = self.browser_wrapper.get_driver(self.browser)
+
+        self.welcome_page = WelcomePage(self.driver)
+        self.test_cases=[self.test_delete_goal_api]
+        self.goals_api = GoalsAPI()
+        self.welcome_page.click_log_in()
+        self.login_page = LoginPage(self.driver)
+        self.login_page.login_flow("friendola15@gmail.com", "AutomationTester2024")
+        self.pathfinder_page = PathfinderPage(self.driver)
+        self.pathfinder_page.click_on_Goals_page()
+        self.goals_web = GoalsWeb(self.driver)
+        self.goal_name = "Fullstack developer"
+        self.chosen_skills = ["Go", "Java", "CSS"]
+        self.courses_levels = ["Professional", "Beginner", "Beginner"]
+        self.hours_weekly = 8
+        self.goals_web.set_goal_in_web(self.goal_name, self.chosen_skills, self.courses_levels, self.hours_weekly)
+
+    @test_decorator
+    def test_delete_goal_api(self):
+        goal_id_before_deleting=self.goals_api.get_goal_id()
+        self.goals_web.delete_goals(self.goal_name)
+        time.sleep(3)
+        goal_id_after_deleting=self.goals_api.get_goal_id()
+        print(goal_id_before_deleting)
+        self.assertEqual(len(goal_id_before_deleting), 36, "Goal was not created")
+        self.assertEqual(goal_id_after_deleting, None, "Goal was not Deleted")
+
+    def tearDown(self):
+        self.goals_api.delete_goal()
+        self.driver.quit()
+
+ChatGPT
+The error you're encountering, ModuleNotFoundError: No module named 'infra', indicates that Python cannot locate the infra module when trying to import BrowserWrapper from infra.infra_web.browser_wrapper. This can occur due to several reasons, including incorrect module paths, missing __init__.py files, or issues related to the Python environment.
+
+Here are some steps to troubleshoot and resolve the issue:
+
+Check the Directory Structure: Ensure that the infra directory is structured correctly as a Python package. It should contain an __init__.py file (which can be empty) in both the infra directory and its infra_web subdirectory.
+
+markdown
+Copy code
+CI_automation_Project/
+├── infra/
+│   ├── __init__.py
+│   ├── infra_web/
+│   │   ├── __init__.py
+│   │   ├── browser_wrapper.py
+├── tests/
+│   ├── test_api/
+│   │   ├── test_delete_goal_api.py
+├── venv/
+Verify the Module Import: Check that browser_wrapper.py is present in the expected directory (infra/infra_web/) and contains the BrowserWrapper class.
+
+Python Environment: Ensure that you're running pytest within the correct virtual environment where all necessary packages and dependencies are installed. If infra is a local module (not installed via pip), you need to run the script from the root of your project (CI_automation_Project directory) so that Python can recognize the module's path correctly.
+
+Running the Script: When running pytest, make sure you are in the project's root directory:
+
+bash
+Copy code
+(venv) PS C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project> pytest tests/test_api/test_delete_goal_api.py
+Add to PYTHONPATH: If infra is in a directory that is not naturally recognized as part of the Python path, you can add it manually before running the tests. This can be done in the script with sys.path.append('/path/to/infra') or in the command line by setting the PYTHONPATH environment variable.
+
+Check for Typos: Verify there are no typos in your directory names or import statements.
+
+Refresh the IDE: If you're using an IDE like PyCharm, sometimes the environment needs to be refreshed or the interpreter settings need to be reconfigured for changes to be recognized.
+
+If after these checks the issue still persists, you might want to add diagnostic print statements or use a Python debugger to further investigate the import paths being used at runtime.
+
+User
+what shoule be inside the __init__
+ChatGPT
+The __init__.py file in a Python package can actually be empty, but its presence is what tells Python that the directory should be treated as a package. This allows you to import modules from that package elsewhere in your code.
+
+Here are a few things you might find or include in an __init__.py file:
+
+Nothing (An Empty File): The file can simply exist with no content, and its presence will still denote the directory as a Python package.
+
+Initialization Code: If there's specific code you want to run whenever the package is imported, you can place it in the __init__.py file.
+
+Package Imports: Sometimes, to simplify imports for users of your package, you might import key functions or classes into the package's namespace. For example, if you want from mypackage import MyClass to work, but MyClass is actually defined in mypackage.mymodule, you could have in mypackage/__init__.py a line that says from .mymodule import MyClass.
+
+__all__ List: You can define an __all__ list in your __init__.py file, which is a list of strings defining what symbols will be imported when from mypackage import * is used.
+
+Example of an __init__.py file with imports and an __all__ definition:
+
+python
+Copy code
+from .mymodule import MyClass, my_function
+__all__ = ['MyClass', 'my_function', 'AnotherClass']
+In your case, for the infra and infra_web directories, if you're just using them to structure your code and you don't need any package-wide initialization or specific import behavior, empty __init__.py files will suffice. Just make sure you have these files in both infra and infra_web directories to ensure Python recognizes them as packages.
+
+User
+Uploaded image
+
+ChatGPT
+From the image you've shared, it looks like your project has the following structure:
+
+markdown
+Copy code
+CI_automation_Project/
+│
+├── .venv/
+├── infra/
+│   └── infra_web/
+│       ├── __init__.py
+│       └── browser_wrapper.py
+├── logic/
+│   ├── api_logic/
+│   └── web_logic/
+└── tests/
+    ├── test_api/
+    │   └── test_delete_goal_api.py
+    └── test_web/
+        └── reports/
+            └── report.html
+And you’re seeing an ImportError when running pytest, stating that the module infra is not found.
+
+Here are some steps to troubleshoot and fix the problem:
+
+Running from Root: Make sure you are running the pytest command from the root directory of your project (CI_automation_Project). This ensures that Python includes the current directory (which should contain the infra directory) in the sys.path.
+
+Init Files: Confirm that all necessary __init__.py files are present in the infra directory and any subdirectories that are intended to be Python packages.
+
+Import Path: In your test_delete_goal_api.py, the import statement should work if you are running pytest from the project root. If it still does not work, try changing the import to a relative import as follows:
+
+python
+Copy code
+from ..infra.infra_web.browser_wrapper import BrowserWrapper
+However, be cautious with relative imports as they can be problematic, especially when modules are executed directly as scripts.
+
+PYTHONPATH: If you are still having issues, you can add the root directory to the PYTHONPATH environment variable to explicitly include it. In your command prompt, you can run:
+
+bash
+Copy code
+set PYTHONPATH=%PYTHONPATH%;C:\Users\Alaa Oda\PycharmProjects\CI_automation_Project
+pytest tests/test_api/test_delete_goal_api.py
+IDE Configuration: If you are running the tests from an IDE like PyCharm, make sure that the project interpreter is set correctly, and the working directory for running tests is the project root.
+
+Virtual Environment: Ensure that you have activated the virtual environment (.venv) before running the tests. Sometimes the Python interpreter from the virtual environment may not have the correct path set up.
+
+Module Installation: If infra is a separate package that you've developed, ensure it’s installed in the virtual environment. If it’s not meant to be installed, then adjust the Python path as mentioned above.
+
+Try running the pytest command again after these checks. If you're using an IDE like PyCharm, consider invalidating the caches (File -> Invalidate Caches / Restart) if there's a discrepancy between the IDE's view and the filesystem.
+
+User
+how to run git action on pytho project
+ChatGPT
+To set up a GitHub Actions workflow for a Python project, you'll need to create a YAML configuration file within your repository that tells GitHub how to run your tests and any other steps you want to include. Here’s a basic example of what this configuration might look like:
+
+Create a directory named .github/workflows/ in the root of your repository if it doesn't already exist.
+
+Inside the .github/workflows/ directory, create a file called python-app.yml (you can name it anything, but the extension must be .yml or .yaml).
+
+Edit the python-app.yml file to set up your workflow. Here's a simple example that sets up the environment, installs dependencies, and runs tests with pytest:
+
+yaml
+Copy code
+name: Python application
+
+on: [push, pull_request]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.8'  # Specify the Python version you want to test against
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+    - name: Run Tests
+      run: |
+        pytest
+In this workflow:
+
+on: [push, pull_request]: This tells GitHub to run this action on every push to any branch and on pull requests to any branch within the repository.
+
+jobs: A workflow run is made up of one or more jobs. Jobs run in parallel by default. In this example, there is one job called build.
+
+runs-on: Specifies the type of machine to run the job on. Here, we're specifying the latest version of Ubuntu.
+
+steps: A sequence of tasks that will be executed as part of the job. This includes checking out the code with actions/checkout@v2, setting up Python with actions/setup-python@v2, installing dependencies, and running tests with pytest.
+
+Commit the .github/workflows/python-app.yml file to your repository.
+
+Push the commit to GitHub:
+
+bash
+Copy code
+git add .github/workflows/python-app.yml
+git commit -m "Add GitHub Actions workflow for Python application"
+git push
+After you've done this, GitHub Actions will run the workflow you've defined every time there's a push or a pull request to your repository. You can see the status of the workflows by going to the "Actions" tab of your GitHub repository.
+
+Remember to adjust the python-version and any install commands to suit your specific Python project requirements. If you have a pytest.ini or a setup.cfg file with configuration for pytest, those settings will be used by default.
+
+User
+name: Continuous Integration
+on:
+  push:
+    branches:
+      - '*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      PYTHONPATH: ${{ github.workspace }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install --upgrade html-testRunner
+
+
+      - uses: browser-actions/setup-chrome@latest
+      - run: chrome --version
+
+      - name: Start Selenium Server HUB
+        run: nohup java -jar selenium-server-4.17.0.jar --port 4445 hub & sleep 10
+        shell: bash
+
+      - name: Start Selenium Server nodes
+        run: nohup java -jar selenium-server-4.17.0.jar node & sleep 10
+        shell: bash
+
+      - name: Set up Firefox
+        uses: browser-actions/setup-firefox@latest
+      - run: firefox --version
+
+
+      - name: Run tests
+        run: |
+          python tests_runner.py 
+          
+       
+          
+
+
+      - name: Upload test report
+        uses: actions/upload-artifact@v2
+        with:
+          name: Test Results
+          path: test-reports modify for windows, and give me everythin
+ChatGPT
+To modify the provided GitHub Actions workflow for a Windows environment and provide you with a complete workflow, we can make the following changes:
+
+Change runs-on to windows-latest to use a Windows runner.
+Replace Linux-specific commands (like nohup and &) with Windows equivalents.
+Install Windows-compatible versions of tools, if necessary.
+Adjust the file paths according to Windows path notation.
+Use Windows-specific commands to start the Selenium Server (if applicable).
+Here's how your modified workflow for Windows might look:
+
+yaml
+Copy code
+name: Continuous Integration
+
+on:
+  push:
+    branches:
+      - '*'
+
+jobs:
+  build:
+    runs-on: windows-latest
+    env:
+      PYTHONPATH: ${{ github.workspace }}
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install --upgrade html-testRunner
+
+      - name: Install Selenium Standalone Server and Chrome Driver
+        uses: nanasess/setup-chromedriver@master
+        with:
+          chromedriver-version: 'latest'
+
+      - name: Install GeckoDriver
+        uses: nanasess/setup-geckodriver@master
+        with:
+          geckodriver-version: 'latest'
+
+      - name: Get Chrome version
+        run: chrome --version
+
+      - name: Get Firefox version
+        run: firefox --version
+
+      - name: Start Selenium Server HUB
+        run: Start-Process -NoNewWindow -FilePath "java" -ArgumentList "-jar selenium-server-4.17.0.jar", "--port 4445 hub"
+        shell: pwsh
+
+      - name: Start Selenium Server nodes
+        run: Start-Process -NoNewWindow -FilePath "java" -ArgumentList "-jar selenium-server-4.17.0.jar", "node"
+        shell: pwsh
+
+      - name: Run tests
+        run: |
+          python tests_runner.py
+
+      - name: Upload test report
+        uses: actions/upload-artifact@v2
+        with:
+          name: Test Results
+          path: test-reports/**/*.html
+Some notes:
+
+In Windows runners on GitHub Actions, pwsh (PowerShell) is often the default shell, but I have made it explicit in the defaults section for clarity.
+To start the Selenium server without blocking the script, we use Start-Process in PowerShell, which is similar to using nohup in Unix.
+For artifact uploading, I included **/*.html to capture all HTML files recursively within the test-reports directory. Adjust the path if your HTML reports are generated elsewhere.
+Make sure the selenium-server-4.17.0.jar file is available in your project or downloaded as part of the workflow.
+Paths in the run commands and in the path for uploading artifacts use forward slashes (/), which are also acceptable in Windows PowerShell and are more consistent with GitHub Actions' syntax.
+If you have specific requirements for Chrome or Firefox versions, you may need to adjust those sections accordingly. Additionally, if your repository doesn't contain the necessary Selenium JARs, you might need to add a step to download them.
+
+User
 name: Continuous Integration
 
 on:
@@ -61,3 +3565,80 @@ jobs:
         with:
           name: Test Results
           path: test-reports/**/*.html
+update this to run using pytest so to create a report
+ChatGPT
+Here is your updated GitHub Actions workflow for running your tests with pytest and generating a report on a Windows runner:
+
+yaml
+Copy code
+name: Continuous Integration
+
+on:
+  push:
+    branches:
+      - '*'
+
+jobs:
+  build:
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pytest pytest-html
+
+      - name: Install Selenium Standalone Server and Chrome Driver
+        uses: nanasess/setup-chromedriver@master
+        with:
+          chromedriver-version: 'latest'
+
+      - name: Install GeckoDriver
+        uses: nanasess/setup-geckodriver@master
+        with:
+          geckodriver-version: 'latest'
+
+      - name: Get Chrome version
+        run: chrome --version
+
+      - name: Get Firefox version
+        run: firefox --version
+
+      - name: Start Selenium Server HUB
+        run: Start-Process -NoNewWindow -FilePath "java" -ArgumentList "-jar selenium-server-4.17.0.jar", "--port 4445 hub"
+
+      - name: Start Selenium Server nodes
+        run: Start-Process -NoNewWindow -FilePath "java" -ArgumentList "-jar selenium-server-4.17.0.jar", "node"
+
+      - name: Run tests with pytest and generate HTML report
+        run: |
+          pytest tests/test_api/test_delete_goal_api.py --html=test-reports/report.html --self-contained-html
+
+      - name: Upload test report
+        uses: actions/upload-artifact@v2
+        with:
+          name: Test Results
+          path: test-reports/*.html
+Here's what changed:
+
+pip install pytest pytest-html in the "Install dependencies" step to install pytest and the pytest-html plugin.
+Replaced the "Run tests" step with a
+
+Message ChatGPT…
+
+
+ChatGPT can make mistakes. Consider checking important information.
+
+?
+ChatGPT
