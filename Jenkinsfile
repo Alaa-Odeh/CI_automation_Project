@@ -39,10 +39,9 @@ pipeline {
         stage('Run Tests ') {
             steps {
                 //bat "call venv\\Scripts\\python.exe -m pytest tests\\test_generate_tests --html=${env.TEST_REPORTS}\\report.html --self-contained-html"
-                bat "venv\\Scripts\\python.exe test_runner.py --html=${env.TEST_REPORTS}\\report.html --self-contained-html"
+                bat "call venv\\Scripts\\python.exe -m pytest test_runner.py --html=${env.TEST_REPORTS}\\report.html --self-contained-html"
             }
         }
-
     }
     post {
         success {
