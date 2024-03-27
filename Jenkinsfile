@@ -46,7 +46,7 @@ pipeline {
                 }
             }
         }
-
+    }
     post {
         success {
                 slackSend(channel: 'C06Q6FRSFKJ',color: "good", message: "Build succeeded")
