@@ -59,8 +59,9 @@ pipeline {
                     bat "call venv\\Scripts\\pytest.exe -n ${cpuCount} tests\\test_generate_tests\\ --html=${TEST_REPORTS}\\report.html --self-contained-html"
                 }
             }
-         }
+        }
     }
+}
     post {
         success {
                 slackSend(channel: 'C06Q6FRSFKJ',color: "good", message: "Build succeeded")
