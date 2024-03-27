@@ -37,13 +37,7 @@ pipeline {
 
         stage('Run Tests with Pytest') {
             steps {
-                script {
-                    try {
-                        bat 'call venv\\Scripts\\python.exe test_runner.py"
-                    } catch (Exception e) {
-                        echo "Tests failed, but the build continues."
-                    }
-                }
+                bat "call venv\\Scripts\\python.exe test_runner.py"
             }
         }
     }
