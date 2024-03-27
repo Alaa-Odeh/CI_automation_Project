@@ -3630,15 +3630,4 @@ jobs:
         with:
           name: Test Results
           path: test-reports/*.html
-Here's what changed:
 
-pip install pytest pytest-html in the "Install dependencies" step to install pytest and the pytest-html plugin.
-Replaced the "Run tests" step with a
-
-Message ChatGPT…
-
-
-ChatGPT can make mistakes. Consider checking important information.
-
-?
-ChatGPT
