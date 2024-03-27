@@ -42,9 +42,9 @@ class BrowserWrapper:
                 self._driver = webdriver.Firefox(options=options)
             elif browser_name == 'Edge':
                 self._driver = webdriver.Edge(options=options)
-            self._driver.get(self.url)
-            self._driver.maximize_window()
-            return self._driver
+        self._driver.get(self.url)
+        self._driver.maximize_window()
+        return self._driver
 
     def set_up_capabilities(self, browser_type):
         options = None

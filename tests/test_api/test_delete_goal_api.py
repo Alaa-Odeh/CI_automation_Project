@@ -18,7 +18,7 @@ with open(config_path, 'r') as config_file:
     config = json.load(config_file)
 browser_types = [(browser,) for browser in config["browser_types"]]
 
-@parameterized_class(('browser',), [('Chrome',),])
+@parameterized_class(('browser',), browser_types)
 class TestDeleteGoalAPI(unittest.TestCase):
     default_browser = 'Chrome'
     def setUp(self):
