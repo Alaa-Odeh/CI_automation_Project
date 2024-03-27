@@ -1,30 +1,28 @@
-import concurrent
+import json
+import subprocess
 
 
-def create_test_case(goal_name, skills, levels, hours_per_week):
-    return type(
-        f'TestAPI_{goal_name}',
-        (TestAPITemplate,),
-        {
-            'goal_name': goal_name,
-            'skills': skills,
-            'levels': levels,
-            'hours_per_week': hours_per_week
-        }
-    )
+def run_pytest(parallel=False):
+    ui_tests_path = "tests/test_api"
 
-def run_test_case(test_class):
-    suite = unittest.TestSuite()
-    suite.addTest(unittest.makeSuite(test_class))
-    runner = unittest.TextTestRunner()
-    runner.run(suite)
+    base_cmd = ["pytest", ui_tests_path, "--html=report.html"]
 
-# Test variations
-test_cases = [
-    ('Game developer', ['HTML', 'C#', 'C++'], ['Professional', 'Advanced', 'Intermediate'], 10),
-    ('Frontend developer', ['Python', 'HTML'], ['Beginner', 'Intermediate'], 10),
-]
+    if parallel:
+        # Run tests in parallel except those marked as 'serial'
+        base_cmd.extend(["-n", "4", "-m", "not serial"])
+        subprocess.run(base_cmd)
+    else:
+        # Run all tests serially
+        base_cmd.extend(["--html=report_serial.html"])
 
-# Running tests in parallel
-with concurrent.futures.ThreadPoolExecutor(max_workers=4) as executor:
-    executor.map(run_test_case, [create_test_case(*params) for params in test_cases])
+    subprocess.run(base_cmd)
+
+
+
+if __name__ == "__main__":
+    with open('config.json') as f:
+        config = json.load(f)
+
+    # Determine whether to run tests in parallel based on the config
+    is_parallel = config["grid type"] == "parallel"
+    run_pytest(parallel=is_parallel)

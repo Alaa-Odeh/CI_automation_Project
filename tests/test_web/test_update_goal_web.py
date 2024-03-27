@@ -1,5 +1,9 @@
+import json
 import time
 import unittest
+from pathlib import Path
+
+from parameterized import parameterized_class
 
 from infra.infra_web.browser_wrapper import BrowserWrapper
 from logic.api_logic.goals_api import GoalsAPI
@@ -7,17 +11,20 @@ from logic.web_logic.goals_web import GoalsWeb
 from logic.web_logic.home_page_pathfinder import PathfinderPage
 from logic.web_logic.login_page import LoginPage
 from logic.web_logic.welcome_page import WelcomePage
+from pytest_markers import test_decorator
 
-
+config_path = Path(__file__).resolve().parents[2].joinpath("config.json")
+with open(config_path, 'r') as config_file:
+    config = json.load(config_file)
+browser_types = [(browser,) for browser in config["browser_types"]]
+@parameterized_class(('browser',), browser_types)
 class TestUpdateGoalWeb(unittest.TestCase):
     def setUp(self):
         self.goals_api=GoalsAPI()
-        self.browser = BrowserWrapper()
-        if self.browser.config["grid"]:
-            self.browser.build_cap()
-        else:
-            self.browser.run_single_browser()
-        self.driver=self.browser._driver
+        self.browser_wrapper = BrowserWrapper()
+        default_browser = 'Chrome'
+        self.browser = getattr(self.__class__, 'browser', default_browser)
+        self.driver = self.browser_wrapper.get_driver(browser_name=self.browser)
         self.welcome_page = WelcomePage(self.driver)
         self.welcome_page.click_log_in()
         self.login_page = LoginPage(self.driver)
@@ -30,7 +37,7 @@ class TestUpdateGoalWeb(unittest.TestCase):
         levels = ["Professional", "Advanced","Intermediate","Beginner","Professional"]
         hours_per_week = 10
         self.goals_api.post_new_goal(self.goal_name, skills, levels, hours_per_week)
-
+    @test_decorator
     def test_update_goal_web(self):
         chosen_skills_to_update = ["Go","C++","JavaScript"]
         courses_levels_to_update = ["Intermediate","Beginner","Professional"]
