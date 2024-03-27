@@ -43,10 +43,9 @@ def run_pytest(parallel=False):
 
 
 if __name__ == "__main__":
-    cur_dir = Path(__file__).resolve().parents[3].joinpath("config.json")
-    with open(cur_dir, 'r') as config_file:
-        config = json.load(config_file)
-
+    f = open('config.json')
+    config = json.load(f)
+    f.close()
     is_parallel=config["grid type"]
 
     run_pytest(parallel=is_parallel)
