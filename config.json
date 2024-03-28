@@ -4,7 +4,7 @@
   "description": "Testing website",
   "url": "http://w3schools.com",
   "hub_url": "http://localhost:4445",
-  "grid": true,
+  "grid": false,
   "browser": "Chrome",
   "grid type": "serial",
   "grid size": 6,
@@ -14,24 +14,7 @@
     "Edge"
   ],
   "project_key": "FAP",
-  "user_token": "eyJraWQiOiJQS0tER0N2cFwvdlpVa1NEZDByem9NRTFEbWNDdElFM3o1V2ZmT0RMWWxJTT0iLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJlZjcwOGQxZS0zOTc0LTQzNTctOTkxNy03MGMwOGMyZmNkNWIiLCJjb2duaXRvOmdyb3VwcyI6WyJ1cy1lYXN0LTFfdUc5U0dYN1dkX0dvb2dsZSJdLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMV91RzlTR1g3V2QiLCJ2ZXJzaW9uIjoyLCJjbGllbnRfaWQiOiJkMWdycW1sMGVtaDd2b3RrYjBndHJybjAiLCJ0b2tlbl91c2UiOiJhY2Nlc3MiLCJzY29wZSI6ImF3cy5jb2duaXRvLnNpZ25pbi51c2VyLmFkbWluIG9wZW5pZCIsImF1dGhfdGltZSI6MTcxMTQ0MDY5MywiZXhwIjoxNzExNjQ3MzY1LCJpYXQiOjE3MTE2MDQxNjUsImp0aSI6ImJmYjRhMGYzLWUxMzctNDA5NC05ZTE5LWJkYzI5MWI4MWMyYyIsInVzZXJuYW1lIjoiR29vZ2xlXzExNTU0MjYzNDE3OTA1OTgwMTk4OSJ9.HAV8aOrXVI_2ymIE21zjxf3oAQbpYg1WO6RommNLwlzm9lrN_XR7GR1ulVYzHt8vEPak6pJZbJN7m8M3Neu90WPv0ixUe8e4xjDIJJLBieSGa1YGZWdbqJj166t_JPEkzDhPBc8DECBLIF7eZ0b2QGEqzhTeQlDW6MklO9KTw5R8-Lw1sjlQzEKo4z4iopMXkQwJ9XVZj7qLY6EcuN0hrdowdI4I1EhxykP_EWfE7m4tJATGEDq7rcGGJfNEbtOO8-cBc1w_fj1UUf08BuK3dqthOGi5u16gBZidQUVQ467YtiJFLNyGGRZo7PH0thdyCtQ08o5jL11p38QvdK8yiA", ,
-  "user_cookies":[
-                    {"name": "userSessionMeta",
-                     "value": "eyJpZCI6ImQ4MjdmYjQwLTUyMDgtNGI3ZC1hNzRkLTVkYmYxNjJhNDhjYiIsImlzcyI6MTcxMTE0ODE4OCwiYXRleHAiOjE3MTExOTEwNzksInJ0ZXhwIjoxNzEzNzM5ODg4fQ==",
-                    "domain": ".w3schools.com","path": "/"},
-
-                    {"name": "userSession",
-                     "value": "1",
-                    "domain": ".w3schools.com","path": "/"},
-
-                    {"name": "accessToken", "value": "eyJraWQiOiJQS0tER0N2cFwvdlpVa1NEZDByem9NRTFEbWNDdElFM3o1V2ZmT0RMWWxJTT0iLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJlZjcwOGQxZS0zOTc0LTQzNTctOTkxNy03MGMwOGMyZmNkNWIiLCJjb2duaXRvOmdyb3VwcyI6WyJ1cy1lYXN0LTFfdUc5U0dYN1dkX0dvb2dsZSJdLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMV91RzlTR1g3V2QiLCJ2ZXJzaW9uIjoyLCJjbGllbnRfaWQiOiJkMWdycW1sMGVtaDd2b3RrYjBndHJybjAiLCJ0b2tlbl91c2UiOiJhY2Nlc3MiLCJzY29wZSI6ImF3cy5jb2duaXRvLnNpZ25pbi51c2VyLmFkbWluIG9wZW5pZCIsImF1dGhfdGltZSI6MTcxMTE0ODE4MSwiZXhwIjoxNzExMzkzNjM1LCJpYXQiOjE3MTEzNTA0MzUsImp0aSI6IjJkOGFhODBhLTI2MDgtNGJmNi04NjM5LWJmNzg4MmZkN2ZhYyIsInVzZXJuYW1lIjoiR29vZ2xlXzExNTU0MjYzNDE3OTA1OTgwMTk4OSJ9.fLnC8J1WkMy3q9Y1oPQ90ulRc9zMqEwQRgVZHKUE0jeWL7etvhcFyQT2VNYxqzqw4c6riH5bFyLALfh1A-HxNc02FwLP-s78Oi5St2MSrXHCgbSq4GwQtIrHWRFjczBTZeCYKFAMcAS2i7ruXbns0Snz7LL5Uv2AaCmPX6dFxEafvW_6KNS7e3tl2C6TK35kCj46gTb32_Ky0O0pUOuRIIJTQRfSIBh3qozqzx_hkNtqbNajnfn5SYq9l2jmTeMB_s-vMOHBm2-EU6UpDpOqf4PWSExZ2aOC1LIsvBoYQlyTJm6rIAZi6Ni_kpAZU6y7LJkR9906Wbz7qBMRDtt_Vw",
-                      "domain": ".w3schools.com","path": "/"},
-
-                    {"name": "__c_u_i_1",
-                     "value": "uFWblViMyUyMBViMyYmcpVmbkViMyUiMDViMywmbh1WZlIjMlMTQlIjMvxWY5ATJyITJyMUJyITZtFWasViMyUyMBViMyYmcpVmbk9GbhFTNlQDMn1WYpxmLj9WblIjMlIzQlIjMwxWYuViMyUyMBViMyYmclVWJyITJyMUJyITazNXJyITJzEUM3ETMxQDOxkDMlIzQlIjMu9WVwNXZsxWJyITJzEkZhx2clViMDViMy8VZ4BXJyITJzEUM3EzM3MTO4gDOlcDRQJ3IUJyIjZ",
-                      "domain": ".w3schools.com","path": "/"}
-
-                ]
+  "user_token": "eyJraWQiOiJQS0tER0N2cFwvdlpVa1NEZDByem9NRTFEbWNDdElFM3o1V2ZmT0RMWWxJTT0iLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJlZjcwOGQxZS0zOTc0LTQzNTctOTkxNy03MGMwOGMyZmNkNWIiLCJjb2duaXRvOmdyb3VwcyI6WyJ1cy1lYXN0LTFfdUc5U0dYN1dkX0dvb2dsZSJdLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMV91RzlTR1g3V2QiLCJ2ZXJzaW9uIjoyLCJjbGllbnRfaWQiOiJkMWdycW1sMGVtaDd2b3RrYjBndHJybjAiLCJ0b2tlbl91c2UiOiJhY2Nlc3MiLCJzY29wZSI6ImF3cy5jb2duaXRvLnNpZ25pbi51c2VyLmFkbWluIG9wZW5pZCIsImF1dGhfdGltZSI6MTcxMTQ0MDY5MywiZXhwIjoxNzExNjQ3MzY1LCJpYXQiOjE3MTE2MDQxNjUsImp0aSI6ImJmYjRhMGYzLWUxMzctNDA5NC05ZTE5LWJkYzI5MWI4MWMyYyIsInVzZXJuYW1lIjoiR29vZ2xlXzExNTU0MjYzNDE3OTA1OTgwMTk4OSJ9.HAV8aOrXVI_2ymIE21zjxf3oAQbpYg1WO6RommNLwlzm9lrN_XR7GR1ulVYzHt8vEPak6pJZbJN7m8M3Neu90WPv0ixUe8e4xjDIJJLBieSGa1YGZWdbqJj166t_JPEkzDhPBc8DECBLIF7eZ0b2QGEqzhTeQlDW6MklO9KTw5R8-Lw1sjlQzEKo4z4iopMXkQwJ9XVZj7qLY6EcuN0hrdowdI4I1EhxykP_EWfE7m4tJATGEDq7rcGGJfNEbtOO8-cBc1w_fj1UUf08BuK3dqthOGi5u16gBZidQUVQ467YtiJFLNyGGRZo7PH0thdyCtQ08o5jL11p38QvdK8yiA"
 
 
 
