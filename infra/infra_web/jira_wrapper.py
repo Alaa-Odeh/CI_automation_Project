@@ -10,14 +10,14 @@ load_dotenv()
 
 class JiraWrapper:
     def __init__(self):
-        config_path = Path(__file__).resolve().parents[2].joinpath("config_jira.json")
+        config_path = Path(__file__).resolve().parents[2].joinpath("config_api.json")
         with open(config_path, 'r') as config_file:
             self.config = json.load(config_file)
         load_dotenv()
-        TOKEN = os.getenv("JIRA_TOKEN")
-        JIRA_USER = self.config["jira_user"]
+        token = os.getenv("JIRA_TOKEN")
+        jira_user = self.config["jira_user"]
         jira_url = self.config["jira_server"]
-        self.auth_jira = JIRA(basic_auth=(JIRA_USER, TOKEN), options={"server": jira_url})
+        self.auth_jira = JIRA(basic_auth=(jira_user, token), options={"server": jira_url})
 
     def create_issue(self, summery, description, project_key='FAP',assignee='alaa odeh', issue_type="Bug"):
         issue_dict = {

@@ -5,7 +5,7 @@ import subprocess
 def run_pytest(parallel=False):
     ui_tests_path = "tests/test_api/test_update_goal_api.py"
     python_path = "venv/Scripts/python.exe"
-    base_cmd = [python_path,"-m", "pytest", ui_tests_path, "--html=report.html"]
+    base_cmd = [python_path,"-m", "pytest", ui_tests_path, "--html=report_api.html"]
 
     if parallel:
         # Run tests in parallel except those marked as 'serial'
