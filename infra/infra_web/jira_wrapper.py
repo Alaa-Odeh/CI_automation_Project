@@ -13,7 +13,7 @@ class JiraWrapper:
         config_path = Path(__file__).resolve().parents[2].joinpath("config_api.json")
         with open(config_path, 'r') as config_file:
             self.config = json.load(config_file)
-        load_dotenv()
+        load_dotenv("/infra/infra_web/.env")
         token = os.getenv("JIRA_TOKEN")
         jira_user = self.config["jira_user"]
         jira_url = self.config["jira_server"]
