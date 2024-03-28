@@ -20,7 +20,7 @@ def run_pytest(parallel=False):
 
 
 def test_run():
-    with open('config.json') as f:
+    with open("config.json") as f:
         config = json.load(f)
 
     # Determine whether to run tests in parallel based on the config
