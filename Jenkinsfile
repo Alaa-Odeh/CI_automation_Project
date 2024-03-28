@@ -57,12 +57,12 @@ pipeline {
         stage('Run Generated Tests with Pytest') {
             steps {
                 echo 'Testing Generated tests'
-                bat "call venv\\Scripts\\python.exe -m pytest -n auto tests/test_generate_tests/test_generate_api_test.py --html=Generated_Tests_report.html --self-contained-html"
+                bat "call venv\\Scripts\\python.exe -m pytest -n auto tests/test_generate_tests/test_generate_api_test.py --html=reports/Generated_Tests_report.html --self-contained-html"
             }
         }
         stage('Run API Tests with Pytest ') {
             steps {
-                bat "call venv\\Scripts\\python.exe -m pytest test_runner.py"
+                bat "call venv\\Scripts\\python.exe -m pytest test_runner.py  --html=reports/report_api_tests.html --self-contained-html"
             }
             post {
                 success {
@@ -71,6 +71,24 @@ pipeline {
                 failure {
                     slackSend (color: 'danger', message: "FAILURE: Running Tests stage failed.")
                 }
+            }
+        }
+        stage('Publish HTML Report') {
+            steps {
+                publishHTML([allowMissing: false,
+                             alwaysLinkToLastBuild: true,
+                             keepAll: true,
+                             reportDir: 'reports',
+                             reportFiles: 'Generated_Tests_report.html',
+                             reportName: 'HTML Generated Tests Report',
+                             reportTitles: 'The HTML Generated Tests Report'])
+                publishHTML([allowMissing: false,
+                             alwaysLinkToLastBuild: true,
+                             keepAll: true,
+                             reportDir: 'reports',
+                             reportFiles: 'report_api_tests.html',
+                             reportName: 'HTML API Report',
+                             reportTitles: 'The HTML API Report'])
             }
         }
     }
@@ -83,7 +101,7 @@ pipeline {
             slackSend(channel: 'C06Q6FRSFKJ', color: "danger", message: "Build failed")
         }
         always {
-            archiveArtifacts artifacts: "${env.TEST_REPORTS}/*.html", allowEmptyArchive: true
+            archiveArtifacts artifacts: 'reports/*.html', allowEmptyArchive: true
             echo 'Cleaning up...'
         }
     }

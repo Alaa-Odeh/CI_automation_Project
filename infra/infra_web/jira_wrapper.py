@@ -14,7 +14,7 @@ class JiraWrapper:
         with open(config_path, 'r') as config_file:
             self.config = json.load(config_file)
         load_dotenv("/infra/infra_web/.env")
-        token = os.getenv("JIRA_TOKEN")
+        token = self.config["jira_token"]
         jira_user = self.config["jira_user"]
         jira_url = self.config["jira_server"]
         print("Jira URL: " + jira_url,jira_user,token)
@@ -23,7 +23,7 @@ class JiraWrapper:
     def create_issue(self, summery, description, project_key='FAP',assignee='alaa odeh', issue_type="Bug"):
         issue_dict = {
             'project': {'key': project_key},
-            'summary': f'failed test: {summery}',
+            'summary': f'{summery}',
             'description': description,
             'issuetype': {'name': issue_type},
             'assignee': assignee

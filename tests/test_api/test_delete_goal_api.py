@@ -1,3 +1,4 @@
+import datetime
 import time
 import unittest
 from infra.infra_web.browser_wrapper import BrowserWrapper
@@ -55,7 +56,8 @@ class TestDeleteGoalAPI(unittest.TestCase):
         self.driver.quit()
         self.test_name = self.id().split('.')[-1]
         if self.test_failed:
-            summary = f"Test failed: {self.test_name}"
+            self.current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            summary = f"Test failed: {self.test_name} generated an error at {self.current_time}"
             description = f"{self.error_msg}"
             try:
                 issue_key = self.jira_client.create_issue(summary, description)
