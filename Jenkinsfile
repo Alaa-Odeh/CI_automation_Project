@@ -30,7 +30,7 @@ pipeline {
                 bat "start /B java -jar selenium-server.jar --port 4445 --role hub"
                 bat "ping 127.0.0.1 -n 11 > nul"
             }
-        post {
+            post {
                 success {
                     slackSend (color: 'good', message: "SUCCESS: Setup Selenium Server HUB stage completed successfully.")
                 }
