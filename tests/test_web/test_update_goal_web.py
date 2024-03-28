@@ -1,30 +1,28 @@
 import json
 import time
 import unittest
+import datetime
 from pathlib import Path
 
 from parameterized import parameterized_class
 
 from infra.infra_web.browser_wrapper import BrowserWrapper
+from infra.infra_web.jira_wrapper import JiraWrapper
 from logic.api_logic.goals_api import GoalsAPI
 from logic.web_logic.goals_web import GoalsWeb
 from logic.web_logic.home_page_pathfinder import PathfinderPage
 from logic.web_logic.login_page import LoginPage
 from logic.web_logic.welcome_page import WelcomePage
-from pytest_markers import test_decorator
 
-config_path = Path(__file__).resolve().parents[2].joinpath("config.json")
-with open(config_path, 'r') as config_file:
-    config = json.load(config_file)
-browser_types = [(browser,) for browser in config["browser_types"]]
-@parameterized_class(('browser',), browser_types)
 class TestUpdateGoalWeb(unittest.TestCase):
     def setUp(self):
-        self.goals_api=GoalsAPI()
         self.browser_wrapper = BrowserWrapper()
-        default_browser = 'Chrome'
-        self.browser = getattr(self.__class__, 'browser', default_browser)
-        self.driver = self.browser_wrapper.get_driver(browser_name=self.browser)
+        self.browser_wrapper.run_single_browser()
+        self.driver = self.browser_wrapper._driver
+        self.jira_client = JiraWrapper()
+        self.test_failed = False
+        self.goals_api=GoalsAPI()
+
         self.welcome_page = WelcomePage(self.driver)
         self.welcome_page.click_log_in()
         self.login_page = LoginPage(self.driver)
@@ -37,7 +35,7 @@ class TestUpdateGoalWeb(unittest.TestCase):
         levels = ["Professional", "Advanced","Intermediate","Beginner","Professional"]
         hours_per_week = 10
         self.goals_api.post_new_goal(self.goal_name, skills, levels, hours_per_week)
-    @test_decorator
+
     def test_update_goal_web(self):
         chosen_skills_to_update = ["Go","C++","JavaScript"]
         courses_levels_to_update = ["Intermediate","Beginner","Professional"]
@@ -46,12 +44,27 @@ class TestUpdateGoalWeb(unittest.TestCase):
         self.driver.refresh()
 
         self.sorted_skills, self.sorted_levels = self.goals_web.sort_skills_and_levels(chosen_skills_to_update, courses_levels_to_update)
-        self.goals_web.extract_goal_skills_level(self.goal_name)
-        self.assertEqual(self.goals_web.goal_name_in_my_goals.text, self.goal_name,"Goal name Does Not Exist in My Goals Page")
-        self.assertListEqual(self.goals_web.skills_names, self.sorted_skills, "Missing a skill in the Goal")
-        self.assertListEqual(self.goals_web.matching_level_names, self.sorted_levels, " skill levels dont match")
-
+        skills_names=self.goals_web.extract_goal_skills_level(self.goal_name)
+        print(skills_names)
+        try:
+            self.assertEqual(self.goals_web.goal_name_in_my_goals.text, self.goal_name,"Goal name Does Not Exist in My Goals Page")
+            self.assertListEqual(skills_names, self.sorted_skills, "Missing a skill in the Goal")
+            self.assertListEqual(self.goals_web.matching_level_names, self.sorted_levels, " skill levels dont match")
+        except AssertionError as e:
+            self.test_failed = True
+            self.error_msg = str(e)
+            raise
 
     def tearDown(self):
         self.goals_api.delete_goal()
+        self.test_name = self.id().split('.')[-1]
+        if self.test_failed:
+            self.current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            summary = f"Test failed: {self.test_name} generated an error at {self.current_time}"
+            description = f"{self.error_msg}"
+            try:
+                issue_key = self.jira_client.create_issue(summary, description)
+                print(f"Jira issue created: {issue_key}")
+            except Exception as e:
+                print(f"Failed to create Jira issue: {e}")
 

@@ -19,6 +19,7 @@ class TestDeleteGoalAPI(unittest.TestCase):
         self.driver = self.browser_wrapper._driver
         self.jira_client=JiraWrapper()
         self.test_failed = False
+
         self.welcome_page = WelcomePage(self.driver)
         self.goals_api = GoalsAPI()
         self.welcome_page.click_log_in()
@@ -26,7 +27,6 @@ class TestDeleteGoalAPI(unittest.TestCase):
         self.login_page.login_flow("friendola15@gmail.com", "AutomationTester2024")
         self.pathfinder_page = PathfinderPage(self.driver)
         self.pathfinder_page.click_on_Goals_page()
-
         self.goals_web = GoalsWeb(self.driver)
 
         self.goal_name = "Fullstack developer"

@@ -137,6 +137,7 @@ class GoalsWeb():
             self.skills_names=[self._driver.execute_script('return arguments[0].textContent', elem) for elem in self.skills_elements]
         except TimeoutException:
             self.skills_names= f"skills not found on the page."
+        return self.skills_names
 
     def sort_skills_and_levels(self,skills, levels):
         if len(skills) != len(levels):
