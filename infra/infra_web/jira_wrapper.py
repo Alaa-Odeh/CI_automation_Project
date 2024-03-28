@@ -17,6 +17,7 @@ class JiraWrapper:
         token = os.getenv("JIRA_TOKEN")
         jira_user = self.config["jira_user"]
         jira_url = self.config["jira_server"]
+        print("Jira URL: " + jira_url,jira_user,token)
         self.auth_jira = JIRA(basic_auth=(jira_user, token), options={"server": jira_url})
 
     def create_issue(self, summery, description, project_key='FAP',assignee='alaa odeh', issue_type="Bug"):
