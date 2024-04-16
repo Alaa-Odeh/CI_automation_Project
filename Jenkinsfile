@@ -12,7 +12,6 @@ pipeline {
                 bat "call \"%PYTHON_PATH%\" -m venv venv"
                 bat "call venv\\Scripts\\python.exe -m pip install --upgrade pip"
                 bat "call venv\\Scripts\\pip.exe install -r requirements.txt"
-                bat "call venv\\Scripts\\pip.exe install pytest pytest-html selenium"
             }
             post {
                 success {
