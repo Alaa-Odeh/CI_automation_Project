@@ -65,7 +65,9 @@ pipeline {
                 bat "call venv\\Scripts\\python.exe -m pytest test_runner.py  --html=reports/report_api_tests.html --self-contained-html"
             }
             post {
-
+                success {
+                    slackSend (color: 'good', message: "SUCCESS: Running Tests stage completed successfully.")
+                }
                 failure {
                     slackSend (color: 'danger', message: "FAILURE: Running Tests stage failed.")
                 }
