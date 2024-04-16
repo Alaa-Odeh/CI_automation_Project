@@ -3,7 +3,7 @@ import subprocess
 
 
 def run_pytest(parallel=False):
-    ui_tests_path = "tests/test_api/test_update_goal_api.py"
+    ui_tests_path = "tests/test_api"
     python_path = "venv/Scripts/python.exe"
     base_cmd = [python_path,"-m", "pytest", ui_tests_path]
 
@@ -20,7 +20,7 @@ def run_pytest(parallel=False):
 
 
 def test_run():
-    with open("config.json") as f:
+    with open("config.json",'r') as f:
         config = json.load(f)
 
     # Determine whether to run tests in parallel based on the config
