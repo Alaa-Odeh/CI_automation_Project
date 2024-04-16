@@ -34,11 +34,12 @@ class TestDeleteGoalWeb(unittest.TestCase):
         self.goals_api.post_new_goal(self.goal_name, skills, levels, hours_per_week)
 
     def test_delete_goal(self):
-        self.goals_api.delete_goal()
+        self.goals_api.delete_goal(self.goal_name)
         self.driver.refresh()
-        self.goals_web.extract_goal_skills_level(self.goal_name)
+        goal_name_in_my_goals=self.goals_web.extract_goal_skills_level(self.goal_name)
+
         try:
-            self.assertEqual(self.goals_web.goal_name_in_my_goals,f"Goal name '{self.goal_name}' was not found on the page.","Goal was Not Deleted")
+            self.assertEqual(goal_name_in_my_goals,f"Goal name '{self.goal_name}' was not found on the page.","Goal was Not Deleted")
         except AssertionError as e:
             self.test_failed = True
             self.error_msg = str(e)

@@ -17,7 +17,6 @@ class BrowserWrapper:
             self.config = json.load(config_file)
         self.hub_url = self.config["hub_url"]
         self.url = self.config["url"]
-        self.cookies = self.config["user_cookies"]
         print("Test Start")
 
     def create_options(self, browser_type):

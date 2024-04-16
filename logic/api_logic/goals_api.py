@@ -5,6 +5,8 @@ from logic.api_logic.skills_api import  SkillsAPI
 
 class GoalsAPI:
     def __init__(self):
+        self.cached_data = {}
+        self.internal_counter = 0
         self.api_object = APIWrapper()
         self.skills=SkillsAPI()
         self.new_url = self.api_object.url+"goals-api/goals"
@@ -20,6 +22,8 @@ class GoalsAPI:
     def post_a_goal(self,body):
         self.result = self.api_object.api_post_request(self.new_url,body)
 
+
+
     def update_a_goal(self,new_url,body):
         self.result = self.api_object.api_put_request(new_url,body)
 
@@ -27,8 +31,8 @@ class GoalsAPI:
     def post_new_goal(self,goal_name,skills_name,levels,hours_per_week):
         self.skills.create_body_for_skills(goal_name,skills_name,levels,hours_per_week)
         self.post_a_goal(self.skills.body)
-
-    def get_goal_id(self,):
+        return self.result
+    def get_goal_id(self):
         self.get_goals()
         if self.result != None:
             if  len(self.result.keys())!= 0:
@@ -36,9 +40,11 @@ class GoalsAPI:
         else:
             return "No Goals Exist"
 
-    def delete_goal(self):
-        self.get_goals()
-        goal_id=self.get_goal_id()
+
+
+    def delete_goal(self,goal_id=None):
+        if goal_id != None:
+            goal_id=self.get_goal_id()
         if goal_id is not None:
             delete_url=self.new_url+f'/{goal_id}'
             try:
@@ -51,15 +57,18 @@ class GoalsAPI:
             except Exception as e:
                 # Log the exception or handle it as per your needs
                 return False
-            return False  # Returns false if there was no goal to delete
+        return False  # Returns false if there was no goal to delete
 
     def get_goal_id_by_name(self, goal_name):
         self.get_goals()
         if self.result is not None:
-            for id, details in self.result.items():
-                if 'name' in details and details['name'] == goal_name:
-                    return id
+            for goal_id, goal_details in self.result.items():
+                # Directly check if the goal details is a dictionary with 'name' key
+                if isinstance(goal_details, dict) and 'name' in goal_details:
+                    if goal_details['name'] == goal_name:
+                        return goal_id
         return None
+
     def get_goal_info(self,goal_name):
         goal_id = self.get_goal_id_by_name(goal_name)
         self.new_url = self.new_url + f'/{goal_id}'
@@ -88,3 +97,7 @@ class GoalsAPI:
         goal_id = self.get_goal_id()
         new_url = self.new_url + f'/{goal_id}'
         self.update_a_goal(new_url,self.skills.body)
+
+    def reset_state(self):
+        self.cached_data.clear()
+        self.internal_counter = 0

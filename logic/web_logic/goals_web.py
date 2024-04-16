@@ -119,6 +119,7 @@ class GoalsWeb():
         except TimeoutException:
 
             self.goal_name_in_my_goals= f"Goal name '{goal_name}' was not found on the page."
+            return self.goal_name_in_my_goals
 
         progress_element=self._driver.find_elements(by=By.XPATH, value=f'//p[contains(text(),"{goal_name}")]/ancestor::button/following-sibling::div[3]//p/ancestor::*[3]/div[2]/div[2]')
         self.matching_level_names = []
@@ -137,7 +138,7 @@ class GoalsWeb():
             self.skills_names=[self._driver.execute_script('return arguments[0].textContent', elem) for elem in self.skills_elements]
         except TimeoutException:
             self.skills_names= f"skills not found on the page."
-        return self.skills_names
+        return self.skills_names,self.matching_level_names
 
     def sort_skills_and_levels(self,skills, levels):
         if len(skills) != len(levels):

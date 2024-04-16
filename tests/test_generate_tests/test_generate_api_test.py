@@ -1,5 +1,6 @@
 import datetime
 import json
+import time
 import unittest
 from pathlib import Path
 from ddt import ddt, data, unpack
@@ -27,19 +28,36 @@ class TestGoalsAPIGenerate(unittest.TestCase):
 
     @unpack
     def test_generate_api_test(self, goal_name, skills, levels, hours_per_week):
+        self.goal_id=self.goals_api.get_goal_id_by_name(goal_name)
+        self.goals_api.delete_goal(self.goal_id)
+        time.sleep(2)
         self.goals_api.post_new_goal(goal_name, skills, levels, hours_per_week)
         skill_names, skill_levels, updated_hours_per_week = self.goals_api.get_goal_info(goal_name)
+        errors = []
+
         try:
-            self.assertListEqual( sorted(skill_names) , sorted(skills), "Skills do not match")
-            self.assertListEqual( sorted(skill_levels) , sorted(levels), "Levels do not match")
-            self.assertEqual( updated_hours_per_week , hours_per_week, "Weekly hours not updated")
+            self.assertListEqual(sorted(skill_names), sorted(skills), "Skills do not match")
         except AssertionError as e:
+            errors.append(str(e))
+
+        try:
+            self.assertListEqual(sorted(skill_levels), sorted(levels), "Levels do not match")
+        except AssertionError as e:
+            errors.append(str(e))
+
+        try:
+            self.assertEqual(updated_hours_per_week, hours_per_week, "Weekly hours not updated")
+        except AssertionError as e:
+            errors.append(str(e))
+
+        if errors:
             self.test_failed = True
-            self.error_msg = str(e)
-            raise
+            self.error_msg = "\n".join(errors)
+            raise AssertionError(self.error_msg)
 
 
     def tearDown(self):
+
         self.goals_api.delete_goal()
         self.test_name = self.id().split('.')[-1]
         if self.test_failed:

@@ -51,7 +51,7 @@ class TestDeleteGoalAPI(unittest.TestCase):
             raise
 
     def tearDown(self):
-        self.goals_api.delete_goal()
+        self.goals_api.delete_goal(self.goal_name)
         self.driver.close()
         self.driver.quit()
         self.test_name = self.id().split('.')[-1]

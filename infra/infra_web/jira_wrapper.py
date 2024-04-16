@@ -13,11 +13,10 @@ class JiraWrapper:
         config_path = Path(__file__).resolve().parents[2].joinpath("config_api.json")
         with open(config_path, 'r') as config_file:
             self.config = json.load(config_file)
-        load_dotenv("/infra/infra_web/.env")
-        token = self.config["jira_token"]
+        load_dotenv()
+        token = os.getenv("JIRA_TOKEN")
         jira_user = self.config["jira_user"]
         jira_url = self.config["jira_server"]
-        print("Jira URL: " + jira_url,jira_user,token)
         self.auth_jira = JIRA(basic_auth=(jira_user, token), options={"server": jira_url})
 
     def create_issue(self, summery, description, project_key='FAP',assignee='alaa odeh', issue_type="Bug"):

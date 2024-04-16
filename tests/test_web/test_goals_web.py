@@ -34,19 +34,26 @@ class TestGoalsWeb(unittest.TestCase):
         levels=["Professional","Advanced","Beginner"]
         hours_per_week=8
 
-        sorted_skills,sorted_levels=self.goals_web.sort_skills_and_levels(skills, levels)
 
         self.goals_api.post_new_goal(self.goal_name,skills,levels,hours_per_week)
         self.driver.refresh()
-        self.goals_web.extract_goal_skills_level(self.goal_name)
+        time.sleep(2)
+        skills_names,matching_levels=self.goals_web.extract_goal_skills_level(self.goal_name)
         try:
             self.assertEqual(self.goals_web.goal_name_in_my_goals.text,self.goal_name,"Goal name Does Not Exist in My Goals Page")
-            self.assertListEqual(self.goals_web.skills_names, sorted_skills,"Missing a skill in the Goal")
-            self.assertListEqual(self.goals_web.matching_level_names,sorted_levels,"Missing skill level")
+            self.assertListEqual(sorted(skills_names), sorted(skills),"Missing a skill in the Goal")
+            self.assertListEqual(sorted(matching_levels),sorted(levels),"Missing skill level")
         except AssertionError as e:
             self.test_failed = True
             self.error_msg = str(e)
             raise
+
+
+
+
+
+
+
     def tearDown(self):
         self.goals_web.delete_goals(self.goal_name)
         self.test_name = self.id().split('.')[-1]

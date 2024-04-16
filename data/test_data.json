@@ -1,5 +1,38 @@
 [
-
+    {
+        "goal_name": "Game developer",
+        "skills": [
+            "DSA",
+            "JavaScript",
+            "C++",
+            "C#",
+            "Python"
+        ],
+        "levels": [
+            "Intermediate",
+            "Advanced",
+            "Intermediate",
+            "Advanced",
+            "Professional"
+        ],
+        "hours_per_week": 8
+    },
+    {
+        "goal_name": "Frontend developer",
+        "skills": [
+            "HTML",
+            "JavaScript",
+            "CSS",
+            "Python"
+        ],
+        "levels": [
+            "Advanced",
+            "Beginner",
+            "Intermediate",
+            "Beginner"
+        ],
+        "hours_per_week": 47
+    },
     {
         "goal_name": "Fullstack developer",
         "skills": [
@@ -8,17 +41,17 @@
             "DSA",
             "JavaScript",
             "CSS",
-            "PHP"
+            "Python"
         ],
         "levels": [
-            "Intermediate",
-            "Intermediate",
+            "Professional",
             "Beginner",
-            "Professional",
-            "Professional",
+            "Advanced",
+            "Beginner",
+            "Intermediate",
             "Professional"
         ],
-        "hours_per_week": 51
+        "hours_per_week": 39
     },
     {
         "goal_name": "Game developer",
@@ -27,16 +60,16 @@
             "JavaScript",
             "C++",
             "C#",
-            "Bootstrap 5"
+            "CSS"
         ],
         "levels": [
-            "Intermediate",
-            "Advanced",
             "Beginner",
-            "Professional",
-            "Beginner"
+            "Advanced",
+            "Intermediate",
+            "Intermediate",
+            "Professional"
         ],
-        "hours_per_week": 10
+        "hours_per_week": 43
     },
     {
         "goal_name": "Backend developer",
@@ -45,32 +78,16 @@
             "DSA",
             "Java",
             "C++",
-            "Bootstrap 5"
+            "CSS"
         ],
         "levels": [
-            "Intermediate",
             "Advanced",
+            "Advanced",
+            "Beginner",
             "Professional",
-            "Advanced",
             "Intermediate"
         ],
-        "hours_per_week": 49
-    },
-    {
-        "goal_name": "Frontend developer",
-        "skills": [
-            "HTML",
-            "JavaScript",
-            "CSS",
-            "Bootstrap 5"
-        ],
-        "levels": [
-            "Intermediate",
-            "Professional",
-            "Advanced",
-            "Intermediate"
-        ],
-        "hours_per_week": 6
+        "hours_per_week": 31
     },
     {
         "goal_name": "Artificial Intelligence",
@@ -78,15 +95,32 @@
             "Python",
             "R",
             "SQL",
-            "Bootstrap 5"
+            "CSS"
         ],
         "levels": [
+            "Advanced",
             "Beginner",
-            "Intermediate",
-            "Professional",
+            "Beginner",
             "Intermediate"
         ],
-        "hours_per_week": 41
+        "hours_per_week": 12
+    },
+    {
+        "goal_name": "Game developer",
+        "skills": [
+            "DSA",
+            "JavaScript",
+            "C++",
+            "C#",
+            "W3.CSS"
+        ],
+        "levels": [
+            "Professional",
+            "Professional",
+            "Advanced",
+            "Intermediate",
+            "Beginner"
+        ],
+        "hours_per_week": 6
     }
-
 ]

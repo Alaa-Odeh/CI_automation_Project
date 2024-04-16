@@ -22,6 +22,7 @@ class TestUpdateGoalWeb(unittest.TestCase):
         self.jira_client = JiraWrapper()
         self.test_failed = False
         self.goals_api=GoalsAPI()
+        self.jira_client = JiraWrapper()
 
         self.welcome_page = WelcomePage(self.driver)
         self.welcome_page.click_log_in()
@@ -31,29 +32,30 @@ class TestUpdateGoalWeb(unittest.TestCase):
         self.pathfinder_page.click_on_Goals_page()
         self.goals_web=GoalsWeb(self.driver)
         self.goal_name = "Game developer"
-        skills = ["HTML", "C#","C++","JavaScript","DSA"]
-        levels = ["Professional", "Advanced","Intermediate","Beginner","Professional"]
-        hours_per_week = 10
-        self.goals_api.post_new_goal(self.goal_name, skills, levels, hours_per_week)
+        self.skills = ["HTML", "C#","C++","Java","DSA"]
+        self.levels = ["Professional", "Advanced","Intermediate","Beginner","Professional"]
+        self.hours_per_week = 10
+        self.goals_api.post_new_goal(self.goal_name, self.skills, self.levels, self.hours_per_week)
 
     def test_update_goal_web(self):
-        chosen_skills_to_update = ["Go","C++","JavaScript"]
-        courses_levels_to_update = ["Intermediate","Beginner","Professional"]
+        chosen_skills_to_update = ["Go","JavaScript"]
+        courses_levels_to_update = ["Intermediate","Beginner"]
         hours_weekly = 16
+
         self.goals_api.update_an_existing_goal(self.goal_name, chosen_skills_to_update,courses_levels_to_update,hours_weekly)
         self.driver.refresh()
+        time.sleep(3)
+        skills_names,matching_level_names=self.goals_web.extract_goal_skills_level(self.goal_name)
 
-        self.sorted_skills, self.sorted_levels = self.goals_web.sort_skills_and_levels(chosen_skills_to_update, courses_levels_to_update)
-        skills_names=self.goals_web.extract_goal_skills_level(self.goal_name)
-        print(skills_names)
         try:
             self.assertEqual(self.goals_web.goal_name_in_my_goals.text, self.goal_name,"Goal name Does Not Exist in My Goals Page")
-            self.assertListEqual(skills_names, self.sorted_skills, "Missing a skill in the Goal")
-            self.assertListEqual(self.goals_web.matching_level_names, self.sorted_levels, " skill levels dont match")
+            self.assertListEqual(sorted(skills_names), sorted((chosen_skills_to_update)), "Missing a skill in the Goal")
+            self.assertListEqual(sorted(matching_level_names), sorted(courses_levels_to_update), " skill levels dont match")
         except AssertionError as e:
             self.test_failed = True
             self.error_msg = str(e)
             raise
+
 
     def tearDown(self):
         self.goals_api.delete_goal()

@@ -1,9 +1,7 @@
 import json
 import unittest
 from pathlib import Path
-
 from parameterized import parameterized_class
-
 from infra.infra_web.browser_wrapper import BrowserWrapper
 from logic.api_logic.goals_api import GoalsAPI
 from logic.web_logic.goals_web import GoalsWeb
@@ -47,7 +45,7 @@ class TestUpdateGoalAPI(unittest.TestCase):
 
         self.goals_web.make_changes(self.goal_name,chosen_skills_to_update,courses_levels_to_update,hours_weekly)
 
-        skill_names,skill_levels,hours_per_week= self.goals_api.get_goal_info()
+        skill_names,skill_levels,hours_per_week= self.goals_api.get_goal_info(self.goal_name)
 
         self.assertListEqual(sorted(skill_names), sorted(chosen_skills_to_update+self.chosen_skills), "Skills dont match")
         self.assertListEqual(sorted(skill_levels), sorted(courses_levels_to_update+self.courses_levels), "levels Dont Match")
