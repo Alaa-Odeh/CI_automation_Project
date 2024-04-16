@@ -1,6 +1,6 @@
 [
     {
-        "goal_name": "Game developer",
+        "goal_name": "Backend developer",
         "skills": [
             "DSA",
             "JavaScript",
@@ -72,7 +72,7 @@
         "hours_per_week": 43
     },
     {
-        "goal_name": "Backend developer",
+        "goal_name": "Artificial intelligence",
         "skills": [
             "Python",
             "DSA",
@@ -88,39 +88,5 @@
             "Intermediate"
         ],
         "hours_per_week": 31
-    },
-    {
-        "goal_name": "Artificial Intelligence",
-        "skills": [
-            "Python",
-            "R",
-            "SQL",
-            "CSS"
-        ],
-        "levels": [
-            "Advanced",
-            "Beginner",
-            "Beginner",
-            "Intermediate"
-        ],
-        "hours_per_week": 12
-    },
-    {
-        "goal_name": "Game developer",
-        "skills": [
-            "DSA",
-            "JavaScript",
-            "C++",
-            "C#",
-            "W3.CSS"
-        ],
-        "levels": [
-            "Professional",
-            "Professional",
-            "Advanced",
-            "Intermediate",
-            "Beginner"
-        ],
-        "hours_per_week": 6
     }
 ]
